@@ -6,11 +6,10 @@
 -->
 
 <template>
-  <div id="header">
+  <div id="mix-header">
     <div class="header-container">
       <div :class="['header-brand', {'widthoutSibrbar': !hasSidebar}]">
         <a href="/">
-          <span class="logo"></span>
           <span class="mi-logo"></span>
         </a>
         <slot></slot>
@@ -88,7 +87,7 @@
 </script>
 
 <style lang="scss">
-  #header{
+  #mix-header{
     //background-color: #ddd;
     background-color: hsla(0,0%,100%,.95);
     -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
@@ -106,49 +105,30 @@
     //background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
   }
   .mi-logo{
-      
-      width: 32px;
-      height: 32px;
-      background: rgba(240, 130, 76, 0.8) url('../assets/mi-logo.png') no-repeat center; // #ff6700
-      background-size: contain;
-      border-radius: 2px;
-      vertical-align: middle;
-      &:hover{
-        //background-color: #ff6700;
-      }
+    width: 32px;
+    height: 32px;
+    background: rgba(240, 130, 76, 0.8) url('../assets/mi-logo.png') no-repeat center; // #ff6700
+    background-size: contain;
+    border-radius: 2px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 10px;
+    &:hover{
+      background-color: #ff6700;
+    }
   }
 
   .header-brand{
     height: 48px;
     line-height: 48px;
     margin-left: -20px;
-    width: 200px;
-    text-align: center;
+    width: 184px;
     overflow: hidden;
-    //padding-left: 20px;
-    //float: left;
-    
+    padding-left: 16px;
+    color: #fff;
     transition: width .3s;
-    .logo{
-      display: inline-block;
-      height: 48px;
-      width: 200px;
-      //background: url('../assets/logo.jpg') no-repeat center;
-      background-size: contain;
-    }
     .mi-logo{
-      display: none;
-    }
-  }
-
-  .widthoutSibrbar{
-    width: inherit;
-    margin-left: inherit;
-    .logo{
-      display: none;
-    }
-    .mi-logo{
-      display: inline-block;
+      // display: none;
     }
   }
 
@@ -172,7 +152,7 @@
 
   .layout-sidebar{
     .header-brand{
-      background-color: #495060;
+      background-color: #304567;
       box-shadow: 2px 0 6px rgba(0,0,0,.15);
       //background: rgb(0, 33, 64);
       //background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
@@ -239,6 +219,18 @@
     }
     .fa{
       font-size: 20px;
+    }
+  }
+
+  // 不带侧边栏 头部样式
+  .widthoutSibrbar{
+    width: inherit;
+    margin-left: inherit;
+    .logo{
+      display: none;
+    }
+    .mi-logo{
+      display: inline-block;
     }
   }
 </style>

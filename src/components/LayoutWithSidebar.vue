@@ -6,7 +6,7 @@
 -->
 <template>
   <div id="mix-layout" :class="['mix-layout-has-sidebar', {'sidebar-collapse': $store.state.sidebar.collapse}]">
-    <layout-header class="layout-sidebar"></layout-header>
+    <layout-header class="layout-sidebar">Vue Element Pro</layout-header>
 
     <div id="mix-content" class="mix-layout-content">
       <el-scrollbar class="content-scrollbar" wrapClass="scrollbar-wrapper">
@@ -197,12 +197,19 @@
     //padding: 0;
   }
 
+  .el-tag a{
+    text-decoration: none;
+  }
+
+  .el-card{
+    // margin-bottom: 20px;
+  }
+
+
+  // 侧边栏折叠时 样式
   .sidebar-collapse{
     .header-brand{
-      width: 64px;
-      .logo{
-        display: none;
-      }
+      width: 48px;
       .mi-logo{
         display: inline-block;
       }
@@ -218,13 +225,5 @@
         transform: rotateZ(-90deg);
       }
     }
-  }
-
-  .el-tag a{
-    text-decoration: none;
-  }
-
-  .el-card{
-    // margin-bottom: 20px;
   }
 </style>
