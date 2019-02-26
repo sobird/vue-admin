@@ -15,17 +15,10 @@
       text-color="#fff"
       active-text-color="rgba(255, 255, 255, 1)">
 
-      <el-submenu v-for="(item, index) in navMenus" :index="index+''" :key="index">
-        <template slot="title">
-          <i v-if="item.meta.icon" :class="item.meta.icon"></i>
-          <span>{{item.meta.title}}</span>
-        </template>
-
-        <el-menu-item v-for="child in item.children" :index="item.path + ( child.path ? '/' + child.path : '')">
-          <i v-if="child.meta.icon" :class="child.meta.icon"></i>
-          <span slot="title">{{child.meta.title}}</span>
+      <el-menu-item index="/comment">
+          <i class="fa fa-product-hunt"></i>
+          <span slot="title">我的项目</span>
         </el-menu-item>
-      </el-submenu>
     </el-menu>
   </el-scrollbar>
 </template>
