@@ -4,12 +4,14 @@ import Home from './views/Home.vue';
 
 Vue.use(Router);
 
+import LayoutWithSidebar from '@/components/LayoutWithSidebar';
+
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: LayoutWithSidebar,
     },
     {
       path: '/about',
