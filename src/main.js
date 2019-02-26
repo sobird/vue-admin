@@ -13,6 +13,7 @@ import './assets/fontawesome/css/all.css';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
+import i18n from './lang';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -23,7 +24,7 @@ Vue.use(ElementUI, {
   size: 'mini', // set element-ui default size
   zIndex: 3000,
   // manual set to compatible vue-i18n
-  // i18n: (key, value) => i18n.t(key, value)
+  i18n: (key, value) => i18n.t(key, value)
 });
 
 new Vue({
