@@ -27,6 +27,15 @@ Vue.use(ElementUI, {
   i18n: (key, value) => i18n.t(key, value)
 });
 
+// 定义一个全局指令
+Vue.directive('view-title', function(el, binding) {
+  document.title = binding.value || 'Vue Element Pro';
+});
+
+// 注册全局组件
+import LayoutViewHeader from '@/components/LayoutViewHeader.vue';
+Vue.component('LayoutViewHeader', LayoutViewHeader);
+
 new Vue({
   router,
   store,

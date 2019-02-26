@@ -13,9 +13,9 @@
       :collapse="sidebar.collapse"
       background-color="#001529"
       text-color="#fff"
-      active-text-color="rgba(255, 255, 255, 1)">
+      active-text-color="rgba(240, 130, 76, 0.8)">
 
-      <el-menu-item index="/comment">
+      <el-menu-item index="/project">
           <i class="fa fa-product-hunt"></i>
           <span slot="title">我的项目</span>
         </el-menu-item>
@@ -70,7 +70,14 @@
       }
       .is-active{
         box-shadow: rgba(0,0,0,.85) 0 1px 0, inset rgba(255,255,255,.1) 0 1px 0;
-        background-color: #1890ff !important;
+        &:before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          border-right: 2px solid rgba(240, 130, 76, 0.8);
+        }
       }
     }
   }

@@ -9,9 +9,19 @@ import LayoutWithSidebar from '@/components/LayoutWithSidebar';
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: '/project',
+      name: 'project',
       component: LayoutWithSidebar,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/project/list.vue'),
+          meta: {
+            title: '我的项目',
+            icon: 'fa fa-product-hunt'
+          }
+        }
+      ]
     },
     {
       path: '/about',
