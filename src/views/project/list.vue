@@ -20,25 +20,19 @@
           :data="projectList"
           style="width: 100%">
         <el-table-column
-          prop="moduleName"
-          label="模块名称">
+          prop="projectName"
+          label="项目名称">
         </el-table-column>
 
         <el-table-column
           prop="moduleDesc"
-          label="模块描述">
+          label="项目描述">
         </el-table-column>
 
         <el-table-column
-          prop="interfaceTypeText"
-          label="接口类型">
+          prop="createTime"
+          label="创建时间">
         </el-table-column>
-
-        <el-table-column
-          prop="sourceText"
-          label="数据来源">
-        </el-table-column>
-
 
         <el-table-column
           label="操作"
@@ -127,7 +121,7 @@
   	  	this.$refs[formName].validate((valid) => {
           if (valid) {
             projectCreate(this.projectFormModel).then(res => {
-              
+
             });
           } else {
             return false;
