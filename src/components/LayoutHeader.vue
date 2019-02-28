@@ -107,14 +107,14 @@
   .mi-logo{
     width: 32px;
     height: 32px;
-    background: rgba(240, 130, 76, 0.8) url('../assets/mi-logo.png') no-repeat center; // #ff6700
+    background: #fff url('../assets/logo.png') no-repeat center; // #ff6700
     background-size: contain;
     border-radius: 2px;
     vertical-align: middle;
     display: inline-block;
     margin-right: 10px;
     &:hover{
-      background-color: #ff6700;
+      
     }
   }
 

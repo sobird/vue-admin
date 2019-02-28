@@ -15,10 +15,20 @@
       text-color="#fff"
       active-text-color="rgba(240, 130, 76, 0.8)">
 
-      <el-menu-item index="/project">
-          <i class="fa fa-product-hunt"></i>
-          <span slot="title">我的项目</span>
+      <el-submenu index="0">
+        <template slot="title">
+          <i class="fa fa-dashboard"></i>
+          <span>控制台</span>
+        </template>
+
+        <el-menu-item index="/project">
+          <span slot="title">分析页</span>
         </el-menu-item>
+      </el-submenu>
+      <el-menu-item index="/project">
+        <i class="fa fa-product-hunt"></i>
+        <span slot="title">我的项目</span>
+      </el-menu-item>
     </el-menu>
   </el-scrollbar>
 </template>

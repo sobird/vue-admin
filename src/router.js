@@ -9,6 +9,17 @@ import LayoutWithSidebar from '@/components/LayoutWithSidebar';
 export default new Router({
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: LayoutWithSidebar,
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/Home.vue'),
+        }
+      ]
+    },
+    {
       path: '/project',
       name: 'project',
       component: LayoutWithSidebar,
