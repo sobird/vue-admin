@@ -21,7 +21,7 @@
           <span>控制台</span>
         </template>
 
-        <el-menu-item index="/project">
+        <el-menu-item index="/">
           <span slot="title">分析页</span>
         </el-menu-item>
       </el-submenu>

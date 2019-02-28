@@ -17,7 +17,7 @@ module.exports = {
   pluginOptions: {},
 
   devServer: {
-    port: 3000,
+    port: 8080,
   	before(app){
       for(var key in rewrite){
         (function(key){
