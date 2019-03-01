@@ -8,7 +8,7 @@
 import axios from '../utils/axios';
 
 export function userInfo() {
-  return axios.get('/userinfo', {
+  return axios.get('/userinfo.json', {
     message: ''
   });
 };

@@ -10,7 +10,7 @@
     <el-row :gutter="15">
       <el-col :span="6">
       	<el-card shadow="never" class="card-charts">
-      	  <div slot="header" class="clearfix">
+      	  <div slot="header">
       	  	<span>总销售额</span>
       	  	<el-tooltip content="指标说明" placement="top">
       	  	<i class="fa fa-info-circle fa-pull-right"></i>
@@ -32,7 +32,7 @@
       </el-col>
       <el-col :span="6">
       	<el-card shadow="never" class="card-charts">
-      	  <div slot="header" class="clearfix">
+      	  <div slot="header">
       	  	<span>访问量</span>
       	  	<el-tooltip content="指标说明" placement="top">
       	  	<i class="fa fa-info-circle fa-pull-right"></i>
@@ -51,7 +51,7 @@
       </el-col>
       <el-col :span="6">
       	<el-card shadow="never" class="card-charts">
-      	  <div slot="header" class="clearfix">
+      	  <div slot="header">
       	  	<span>支付笔数</span>
       	  	<el-tooltip content="指标说明" placement="top">
       	  	<i class="fa fa-info-circle fa-pull-right"></i>
@@ -70,7 +70,7 @@
       </el-col>
       <el-col :span="6">
       	<el-card shadow="never" class="card-charts">
-      	  <div slot="header" class="clearfix">
+      	  <div slot="header">
       	  	<span>运营活动效果</span>
       	  	<el-tooltip content="指标说明" placement="top">
       	  	<i class="fa fa-info-circle fa-pull-right"></i>
@@ -89,14 +89,33 @@
     </el-row>
 
     <el-row>
-      <el-card shadow="never">
-      	  <div slot="header" class="clearfix">
-      	  	<span>运营活动效果</span>
+      <el-card shadow="never" class="card-charts">
+      	  <div slot="header">
+      	  	<el-tabs
+              v-model="activeTabName"
+              @tab-click="tabSalesType">
+              <el-tab-pane label="销售额" name="salesVolume"></el-tab-pane>
+              <el-tab-pane label="访问量" name="visitVolume"></el-tab-pane>
+            </el-tabs>
       	  	<el-tooltip content="指标说明" placement="top">
       	  	<i class="fa fa-info-circle fa-pull-right"></i>
       	    </el-tooltip>
       	  </div>
-          dd
+          
+          <div class="card-charts-body">
+            <el-carousel
+              ref="salesCarousel"
+              indicator-position="node"
+              :autoplay="false"
+              arrow="never">
+              <el-carousel-item name="salesVolume">
+                <div ref="salesVolumeTrendEcharts" style="height: 300px;"></div>
+              </el-carousel-item>
+              <el-carousel-item name="visitVolume">
+                <div ref="visitVolumeEcharts"></div>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
       	</el-card>
     </el-row>
   </div>
@@ -107,13 +126,25 @@
 
   export default {
     name: 'home',
+    data() {
+      return {
+        activeTabName: 'salesVolume'
+      }
+    },
     components: {
     },
     mounted() {
       this.visitEcharts();
       this.paymentEcharts();
+
+      this.$nextTick(() => {
+        this.salesVolumeTrendEcharts();
+      });
     },
     methods: {
+      tabSalesType(tab, event) {
+        this.$refs.salesCarousel.setActiveItem(tab.name);
+      },
       visitEcharts(data) {
         const myEcharts = echarts.init(this.$refs.visitEcharts);
         const option = {
@@ -223,6 +254,71 @@
           }]
         };
         myEcharts.setOption(option);
+      },
+
+      salesVolumeTrendEcharts(data) {
+        const myEcharts = echarts.init(this.$refs.salesVolumeTrendEcharts);
+        const option = {
+          title : {
+              text: '销售趋势',
+              subtext: '销售趋势图',
+              x:'center'
+          },
+          tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'none',
+              label: {
+                backgroundColor: '#6a7985'
+              }
+            },
+            formatter: function (params) {
+              return params[0].axisValue  + '：' + params[0].value;
+            }
+          },
+          grid: {
+            left: '2%',
+            right: '2%',
+            bottom: '2%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          },
+          yAxis: {
+            type: 'value',
+          },
+
+          legend: {
+              type: 'scroll',
+              orient: 'vertical',
+              right: 10,
+              top: 20,
+              bottom: 20,
+              data: ['22', '2233'],
+
+              //selected: data.selected
+          },
+          series: [{
+            type: 'bar',
+            data: [820, 932, 901, 934, 1290, 1330, 1520],
+            
+            smooth: true,
+            showSymbol: false,
+            lineStyle: {
+              color: '#975FE4',
+            },
+            itemStyle: {
+              color: '#975FE4',
+            },
+            areaStyle: {
+              color: '#975FE4',
+              opacity: 1
+            }
+          }]
+        };
+        myEcharts.setOption(option);
       }
     }
   };
@@ -254,6 +350,14 @@
     }
     .el-progress__text{
       font-size: 30px !important;
+    }
+    .el-tabs__item{
+      font-size: 16px;
+    }
+    .el-tabs__nav-wrap{
+      &:after{
+        height: 1px;
+      }
     }
   }
 
