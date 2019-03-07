@@ -56,7 +56,7 @@
               </el-radio-group>
             </el-form-item>
 
-            <el-form-item label="活动形式">
+            <el-form-item label="活动形式" prop="desc">
               <el-input type="textarea" v-model="basicFormModel.desc"></el-input>
             </el-form-item>
 
