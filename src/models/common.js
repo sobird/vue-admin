@@ -13,6 +13,12 @@ export function userInfo() {
   });
 };
 
+export function submitForm(data) {
+  return axios.post('/submit.json', data, {
+  	message: '提交成功！'
+  });
+}
+
 export function analysisEcharts() {
   return axios.get('/charts/analysis.json', {
     message: ''

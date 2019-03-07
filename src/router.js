@@ -20,6 +20,25 @@ export default new Router({
       ]
     },
     {
+      path: '/form',
+      name: 'form',
+      component: LayoutWithSidebar,
+      meta: {
+        title: '表单页',
+        icon: 'fa fa-wpforms'
+      },
+      children: [
+        {
+          path: '',
+          component: () => import('@/views/form/basic.vue'),
+          meta: {
+            title: '基础表单',
+            icon: 'fa fa-wpforms'
+          }
+        }
+      ]
+    },
+    {
       path: '/project',
       name: 'project',
       component: LayoutWithSidebar,

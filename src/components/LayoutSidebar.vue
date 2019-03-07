@@ -25,6 +25,18 @@
           <span slot="title">分析页</span>
         </el-menu-item>
       </el-submenu>
+
+      <el-submenu index="/form">
+        <template slot="title">
+          <i class="fa fa-wpforms"></i>
+          <span>表单页</span>
+        </template>
+
+        <el-menu-item index="/form">
+          <span slot="title">基础表单</span>
+        </el-menu-item>
+      </el-submenu>
+
       <el-menu-item index="/project">
         <i class="fa fa-product-hunt"></i>
         <span slot="title">我的项目</span>
