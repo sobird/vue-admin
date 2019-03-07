@@ -57,9 +57,12 @@ axios.interceptors.response.use((response) => {
       // todo nothing
   }
 
-  if (data.code == 0 || data.code == 200) {
+  if (data.code == 0 || data.code == undefined ) {
     // todo something
     data.msg && Message.success(data.msg);
+    if(data.code == undefined) {
+      return Promise.resolve(data);
+    }
     return Promise.resolve(data.data);
   }
 

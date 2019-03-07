@@ -18,7 +18,7 @@
       	  </div>
           
           <div class="card-charts-body">
-          	<h4>¥ 126,560</h4>
+          	<h4>¥126,560</h4>
           	<div class="trend-charts">
           		<div class="trend-item">周同比 12% <i class="fa fa-sort-up" style="color: red;"></i></div>
               <div class="trend-item">日同比 11% <i class="fa fa-sort-down" style="color: green"></i></div>
@@ -105,14 +105,14 @@
           <div class="card-charts-body">
             <el-carousel
               ref="salesCarousel"
-              indicator-position="node"
+              indicator-position="none"
               :autoplay="false"
               arrow="never">
               <el-carousel-item name="salesVolume">
                 <div ref="salesVolumeTrendEcharts" style="height: 300px;"></div>
               </el-carousel-item>
               <el-carousel-item name="visitVolume">
-                <div ref="visitVolumeEcharts"></div>
+                <div ref="visitVolumeEcharts" style="height: 300px;"></div>
               </el-carousel-item>
             </el-carousel>
           </div>
@@ -123,6 +123,7 @@
 
 <script>
   import echarts from 'echarts';
+  import { analysisEcharts } from '@/models/common';
 
   export default {
     name: 'home',
@@ -134,12 +135,19 @@
     components: {
     },
     mounted() {
+      analysisEcharts().then(res => {
+        const { salesData, visitData } = res;
+
+
+        this.$nextTick(() => {
+          this.salesVolumeTrendEcharts(salesData);
+          this.visitVolumeTrendEcharts(visitData);
+        });
+      });
       this.visitEcharts();
       this.paymentEcharts();
 
-      this.$nextTick(() => {
-        this.salesVolumeTrendEcharts();
-      });
+      
     },
     methods: {
       tabSalesType(tab, event) {
@@ -256,12 +264,20 @@
         myEcharts.setOption(option);
       },
 
+      // 月销售额趋势
       salesVolumeTrendEcharts(data) {
+        const xAxisData = [];
+        const yAxisData = [];
+        data.forEach((item) => {
+          xAxisData.push(item.x);
+          yAxisData.push(item.y);
+        });
+
         const myEcharts = echarts.init(this.$refs.salesVolumeTrendEcharts);
         const option = {
           title : {
-              text: '销售趋势',
-              subtext: '销售趋势图',
+              text: '月销售趋势',
+              subtext: '月销售趋势图',
               x:'center'
           },
           tooltip : {
@@ -284,25 +300,75 @@
           },
           xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: xAxisData
           },
           yAxis: {
             type: 'value',
           },
+          series: [{
+            type: 'bar',
+            data: yAxisData,
+            
+            smooth: true,
+            showSymbol: false,
+            lineStyle: {
+              color: '#975FE4',
+            },
+            itemStyle: {
+              color: '#975FE4',
+            },
+            areaStyle: {
+              color: '#975FE4',
+              opacity: 1
+            }
+          }]
+        };
+        myEcharts.setOption(option);
+      },
 
-          legend: {
-              type: 'scroll',
-              orient: 'vertical',
-              right: 10,
-              top: 20,
-              bottom: 20,
-              data: ['22', '2233'],
+      visitVolumeTrendEcharts(data) {
+        const xAxisData = [];
+        const yAxisData = [];
+        data.forEach((item) => {
+          xAxisData.push(item.x);
+          yAxisData.push(item.y);
+        });
 
-              //selected: data.selected
+        const myEcharts = echarts.init(this.$refs.visitVolumeEcharts);
+        const option = {
+          title : {
+              text: '日访问量趋势',
+              subtext: '日访问量趋势图',
+              x:'center'
+          },
+          tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'none',
+              label: {
+                backgroundColor: '#6a7985'
+              }
+            },
+            formatter: function (params) {
+              return params[0].axisValue  + '：' + params[0].value;
+            }
+          },
+          grid: {
+            left: '2%',
+            right: '2%',
+            bottom: '2%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            data: xAxisData
+          },
+          yAxis: {
+            type: 'value',
           },
           series: [{
             type: 'bar',
-            data: [820, 932, 901, 934, 1290, 1330, 1520],
+            data: yAxisData,
             
             smooth: true,
             showSymbol: false,

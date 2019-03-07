@@ -12,3 +12,9 @@ export function userInfo() {
     message: ''
   });
 };
+
+export function analysisEcharts() {
+  return axios.get('/charts/analysis.json', {
+    message: ''
+  });
+};
