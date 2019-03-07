@@ -35,6 +35,14 @@ export default new Router({
             title: '基础表单',
             icon: 'fa fa-wpforms'
           }
+        },
+        {
+          path: 'step',
+          component: () => import('@/views/form/step.vue'),
+          meta: {
+            title: '分步表单',
+            icon: 'fa fa-wpforms'
+          }
         }
       ]
     },
