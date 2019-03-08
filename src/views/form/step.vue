@@ -57,7 +57,14 @@
 
             <el-form-item>
               <el-button type="primary" @click="() => {
-                stepNum = 1;
+                
+                $refs['stepForm'].validate((valid) => {
+                  if (valid) {
+                    stepNum = 1;
+                  } else {
+                    return false;
+                  }
+                });
               }">下一步</el-button>
             </el-form-item>
             </div>
@@ -95,6 +102,43 @@
                   stepNum = 0;
                 }">上一步</el-button>
               </el-form-item>
+            </div>
+
+            <div v-if="stepNum == 2" class="form-result">
+              <i class="el-icon-success"></i>
+              <h4>操作成功</h4>
+              <p>预计2小时到账</p>
+
+              <el-card shadow="never" class="form-card">
+                <el-form-item label="付款账户" prop="paymentAccount">
+                  {{stepFormModel.paymentAccount}}
+                </el-form-item>
+
+                <el-form-item label="收款账户" prop="receiptAccount">
+                  {{stepFormModel.receiptAccount}}
+                </el-form-item>
+
+                <el-form-item label="收款人姓名" prop="receiptName">
+                  {{stepFormModel.receiptName}}
+                </el-form-item>
+
+                <el-form-item label="转账金额" prop="transferAmount">
+                  {{stepFormModel.transferAmount}}
+                </el-form-item>
+
+                <el-form-item label="备注信息" prop="remark">
+                  {{stepFormModel.remark}}
+                </el-form-item>
+              </el-card>
+
+              <div class="form-action">
+                <el-button type="primary">再转一笔</el-button>
+
+                <el-button @click="() => {
+                 
+                }">查看账单</el-button>
+              </el-form-item>
+              </div>
             </div>
           </el-form>
         </el-col>
@@ -156,3 +200,30 @@
     }
   };
 </script>
+
+<style lang="scss" scoped>
+  .form-result{
+    text-align: center;
+    .el-icon-success{
+      color: #52c41a;
+      font-size: 70px;
+    }
+    h4{
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    p{
+      font-size: 14px;
+      color: #bbb;
+    }
+    .form-card{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border: none;
+      background: #fafafa;
+      .el-form-item{
+        margin-bottom: 10px;
+      }
+    }
+  }
+</style>
