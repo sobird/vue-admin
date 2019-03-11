@@ -9,7 +9,7 @@
     <layout-header class="layout-sidebar">Vue Element Pro</layout-header>
 
     <div id="mix-content" class="mix-layout-content">
-      <el-scrollbar class="content-scrollbar" wrapClass="scrollbar-wrapper">
+      <el-scrollbar ref="contentScrollbar" class="content-scrollbar" wrapClass="scrollbar-wrapper">
         <layout-sidebar />
         
         <div class="main-content">
@@ -44,8 +44,11 @@
         
       }
     },
-    created() {
-      //console.log(this.$route);
+    watch: {
+      '$route': function(newValue, oldValue) {
+        var el = this.$refs['contentScrollbar'].$refs['wrap'];
+        el.scrollTop = 0;
+      }
     }
   };
 </script>
