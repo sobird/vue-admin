@@ -46,8 +46,14 @@
     },
     watch: {
       '$route': function(newValue, oldValue) {
-        var el = this.$refs['contentScrollbar'].$refs['wrap'];
-        el.scrollTop = 0;
+        var wrap = this.$refs['contentScrollbar'].$refs['wrap'];
+        var resize = this.$refs['contentScrollbar'].$refs['resize'];
+
+        wrap.scrollTop = 0;
+
+        this.$nextTick(()=> {
+          this.$refs['contentScrollbar'].update();
+        });
       }
     }
   };
