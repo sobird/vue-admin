@@ -88,7 +88,11 @@
         margin-right: 5px;
         width: 15px;
       }
+      .el-submenu{
+        position: relative;
+      }
       .el-menu-item{
+        position: relative;
         margin-bottom: 1px;
         height: 40px;
         line-height: 40px;
