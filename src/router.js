@@ -43,6 +43,14 @@ export default new Router({
             title: '分步表单',
             icon: 'fa fa-wpforms'
           }
+        },
+        {
+          path: 'advanced',
+          component: () => import('@/views/form/advanced.vue'),
+          meta: {
+            title: '高级表单',
+            icon: 'fa fa-wpforms'
+          }
         }
       ]
     },

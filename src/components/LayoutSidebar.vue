@@ -38,6 +38,9 @@
         <el-menu-item index="/form/step">
           <span slot="title">分步表单</span>
         </el-menu-item>
+        <el-menu-item index="/form/advanced">
+          <span slot="title">高级表单</span>
+        </el-menu-item>
       </el-submenu>
 
       <el-menu-item index="/project">
