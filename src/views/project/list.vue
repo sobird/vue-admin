@@ -20,12 +20,12 @@
           :data="projectList"
           style="width: 100%">
         <el-table-column
-          prop="projectName"
+          prop="name"
           label="项目名称">
         </el-table-column>
 
         <el-table-column
-          prop="moduleDesc"
+          prop="description"
           label="项目描述">
         </el-table-column>
 
@@ -39,13 +39,13 @@
           width="150">
           <template slot-scope="scope">
             <el-button type="text" @click="() => {
-                moduleFormVisible = true;
-                moduleFormType = 'update'
+                projectFormVisible = true;
+                projectFormType = 'update'
 
-                Object.assign(moduleFormModel, scope.row)
+                Object.assign(projectFormModel, scope.row)
               }">编辑</el-button>
 
-            <el-button @click="moduleDelete(scope.row.id)" type="text">删除</el-button>
+            <el-button @click="projectDelete(scope.row.id)" type="text">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -53,7 +53,7 @@
 
 
     <el-dialog 
-      title="添加项目" 
+      :title="projectFormType == 'create' ? '添加项目' : '更新项目'" 
       :visible.sync="projectFormVisible"
       @closed="$refs['projectForm'].resetFields()">
       <el-form 
@@ -62,10 +62,10 @@
         :model="projectFormModel"
         :rules="projectFormRules" >
         <el-form-item 
-          prop="projectName"
+          prop="name"
           label="项目名称" >
           <el-input 
-            v-model="projectFormModel.projectName" 
+            v-model="projectFormModel.name" 
             auto-complete="off"
             placeholder="输入项目名">
             <i slot="prefix" class="fa fa-product-hunt"></i>
@@ -73,15 +73,15 @@
         </el-form-item>
 
         <el-form-item 
-          prop="desc"
+          prop="description"
           label="项目描述" >
-          <el-input type="textarea" v-model="projectFormModel.desc"></el-input>
+          <el-input type="textarea" v-model="projectFormModel.description"></el-input>
         </el-form-item>
 
       </el-form>
 
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogCreateProjectVisible = false">取 消</el-button>
+        <el-button @click="projectFormVisible = false">取 消</el-button>
         <el-button type="primary" @click="submitForm('projectForm')">确 定</el-button>
       </div>
     </el-dialog>
@@ -89,7 +89,7 @@
 </template>
 
 <script type="text/javascript">
-  import { projectCreate, projectQuery} from '@/models/project';
+  import { projectCreate, projectQuery, projectUpdate, projectDelete} from '@/models/project';
 
   export default {
   	data() {
@@ -97,11 +97,14 @@
   	  	projectList: [],
 
   	  	projectFormVisible: false,
+        projectFormType: 'create',
+
   	  	projectFormModel: {
-  	  	  projectName: ''
+  	  	  name: '',
+          description: ''
   	  	},
   	  	projectFormRules: {
-          projectName: [
+          name: [
             { required: true, message: '请输入项目名称', trigger: 'blur' },
             { min: 1, max: 20, message: '长度在 1 到 20 个字符', trigger: 'blur' },
             { pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+$/, message: '不允许输入空格等特殊符号' }
@@ -112,17 +115,37 @@
   	created() {
   	  const query = Object.assign({}, this.$route.query);
   	  projectQuery(query).then(res => {
-  	  	console.log(res);
+  	  	this.projectList = res.list;
   	  });
   	},
 
   	methods: {
+      projectDelete(id) {
+        this.$confirm('确定要删除该项目吗？', '提示信息').then(res => {
+          projectDelete({
+            id
+          }).then(res => {
+            this.$store.dispatch('refreshView');
+          });
+        }).catch(res => {
+
+        });
+      },
   	  submitForm(formName) {
   	  	this.$refs[formName].validate((valid) => {
           if (valid) {
-            projectCreate(this.projectFormModel).then(res => {
-
-            });
+            if(this.projectFormType == 'create') {
+              projectCreate(this.projectFormModel).then(res => {
+                this.$store.dispatch('refreshView');
+                this.projectFormVisible = false;
+              });
+            } else {
+              projectUpdate(this.projectFormModel).then(res => {
+                this.$store.dispatch('refreshView');
+                this.projectFormVisible = false;
+              });
+            }
+            
           } else {
             return false;
           }

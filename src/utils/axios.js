@@ -42,7 +42,7 @@ axios.interceptors.request.use((request) => {
 axios.interceptors.response.use((response) => {
   const { config, data } = response;
   data.responseTiming = new Date().getTime() - config.requestTimeStamp;
-console.log(config);
+
   if(config.message != undefined) {
     data.msg = config.message;
   }
