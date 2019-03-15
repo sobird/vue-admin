@@ -8,7 +8,7 @@
 import axios from '../utils/axios';
 
 export function projectCreate(data) {
-  return axios.post('/project/create', data, {
+  return axios.post('/project/create.json', data, {
     message: ''
   });
 };
@@ -26,13 +26,13 @@ export function projectQuery(data) {
 }
 
 export function projectUpdate(data) {
-  return axios.post('/project/update', data, {
+  return axios.post('/project/update.json', data, {
     message: '更新项目成功'
   });
 };
 
 export function projectDelete(data) {
-  return axios.post('/project/delete', data, {
+  return axios.post('/project/delete.json', data, {
     message: '删除项目成功'
   });
 };
