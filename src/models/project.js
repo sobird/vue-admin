@@ -9,7 +9,7 @@ import axios from '../utils/axios';
 
 export function projectCreate(data) {
   return axios.post('/project/create.json', data, {
-    message: ''
+    //message: ''
   });
 };
 

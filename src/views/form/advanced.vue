@@ -87,7 +87,7 @@
             <el-checkbox label="厨房"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
-        <el-form-item label="房屋配置" prop="resource">
+        <el-form-item label="房屋配置">
           <el-checkbox-group v-model="advancedFormModel.detailPoint">
             <el-checkbox label="床" name="type"></el-checkbox>
             <el-checkbox label="衣柜" name="type"></el-checkbox>
@@ -174,11 +174,11 @@
           totalFloor: '',
           featureTag: [],
           detailPoint: [],
-          date: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          servicePoint: [],
+          monthRent: '',
+          rentStartDate: false,
+          districtName: [],
+          aroundDesc: '',
         },
         advancedFormRules: {
           name: [

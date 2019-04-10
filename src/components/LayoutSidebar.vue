@@ -17,7 +17,7 @@
 
       <el-submenu index="0">
         <template slot="title">
-          <i class="fa fa-dashboard"></i>
+          <i class="fa fa-tachometer-alt"></i>
           <span>控制台</span>
         </template>
 
@@ -28,7 +28,7 @@
 
       <el-submenu index="/form">
         <template slot="title">
-          <i class="fa fa-wpforms"></i>
+          <i class="fab fa-wpforms"></i>
           <span>表单页</span>
         </template>
 
@@ -43,8 +43,19 @@
         </el-menu-item>
       </el-submenu>
 
+      <el-submenu index="/component">
+        <template slot="title">
+          <i class="fa fa-plug"></i>
+          <span>组件</span>
+        </template>
+
+        <el-menu-item index="/component/cascader">
+          <span slot="title">级联选择器</span>
+        </el-menu-item>
+      </el-submenu>
+
       <el-menu-item index="/project">
-        <i class="fa fa-product-hunt"></i>
+        <i class="fab fa-product-hunt"></i>
         <span slot="title">我的项目</span>
       </el-menu-item>
     </el-menu>
@@ -85,7 +96,7 @@
     transition: width .3s;
     .el-menu{
       border-right: 0;
-      .fa, .fas{
+      .fa, .fab, .fas{
         position: relative;
         top: -1px;
         margin-right: 5px;

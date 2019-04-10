@@ -26,7 +26,6 @@
       </el-scrollbar>
     </div>
   </div>
-</el-container>
 </template>
 
 <script>

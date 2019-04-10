@@ -54,6 +54,27 @@ export default new Router({
         }
       ]
     },
+
+    {
+      path: '/component',
+      name: 'component',
+      component: LayoutWithSidebar,
+      meta: {
+        title: '表单页',
+        icon: 'fa fa-wpforms'
+      },
+      children: [
+        {
+          path: 'cascader',
+          component: () => import('@/views/component/cascader.vue'),
+          meta: {
+            title: '级联选择器',
+            icon: 'fa fa-chevron-circle-down'
+          }
+        },
+      ]
+    },
+
     {
       path: '/project',
       name: 'project',

@@ -8,7 +8,7 @@
 import Vue from 'vue';
 import 'normalize.css';
 
-import './assets/fontawesome/css/font-awesome.css';
+import './assets/fontawesome/css/all.css';
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
