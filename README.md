@@ -3,7 +3,7 @@
 
 预览地址：
 
-[https://github.com/yangjunlong/vue-element-pro](https://github.com/yangjunlong/vue-element-pro)
+[https://yangjunlong.github.io/vue-element-pro/](https://yangjunlong.github.io/vue-element-pro/)
 
 ## Project setup
 ```
