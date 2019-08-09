@@ -3,7 +3,7 @@
 
 预览地址：
 
-[http://vue-element-pro.yangjunlong.t.pt.miui.com](http://vue-element-pro.yangjunlong.t.pt.miui.com)
+[https://github.com/yangjunlong/vue-element-pro](https://github.com/yangjunlong/vue-element-pro)
 
 ## Project setup
 ```
