@@ -5,6 +5,8 @@
  * @version $Id$
  */
 
+const rewrites = require('./rewrites.config');
+
 module.exports = {
   publicPath: "",
   outputDir: "dist",
@@ -15,7 +17,18 @@ module.exports = {
   devServer: {
     port: 8080,
     open: true,
-    hot: true
+    hot: true,
+
+    before: function(app, server) {
+      for(let path in rewrites) {
+        app.get(path, function(req, res) {
+          res.sendFile(rewrites[path], {root: __dirname});
+        });
+        app.post(path, function(req, res) {
+          res.sendFile(rewrites[path], {root: __dirname});
+        });
+      }
+    }
   },
   lintOnSave: false
 };

@@ -28,7 +28,6 @@ axios.defaults.baseURL = BASEURL;
 axios.interceptors.request.use(
   request => {
     request.requestTimeStamp = new Date().getTime();
-
     // 是否序列化数据
     if (request.serialize) {
       request.data = querystring.stringify(request.data);
@@ -55,6 +54,7 @@ axios.interceptors.response.use(
     // 项目全局错误码逻辑处理
     switch (data.code) {
       case -1:
+        // 跳转登录
         window.location.href = `${BASEURL}/login?from=${encodeURIComponent(window.location.href)}`;
         return;
       // break;
@@ -62,21 +62,23 @@ axios.interceptors.response.use(
       // todo nothing
     }
 
-    if (data.code == 0 || data.code == undefined) {
+    // 数据请求成功结果
+    if (data.code == 0) {
+      console.log(config);
       // todo something
-      data.msg && Message.success(data.msg);
+      config.message && Message.success(config.message);
       if (data.code == undefined) {
         return Promise.resolve(data);
       }
       return Promise.resolve(data.data);
     }
 
-    Message.error(data.msg);
+    Message.error(data.message);
 
     // 业务级错误信息
     return Promise.reject({
       code: data.code,
-      message: data.msg
+      message: data.message
     });
   },
   error => {
