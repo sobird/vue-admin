@@ -10,14 +10,14 @@
     <layout-view-header>表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。</layout-view-header>
 
     <el-card shadow="never" style="border: none;">
-      <el-row>
-        <el-col :span="6">&nbsp;</el-col>
+      <el-row type="flex">
         <el-col :span="12">
           <el-form
             ref="basicForm"
             :model="basicFormModel"
             :rules="basicFormRules"
-            label-width="80px">
+            label-width="80px"
+          >
             <el-form-item label="活动名称" prop="name">
               <el-input v-model="basicFormModel.name"></el-input>
             </el-form-item>
@@ -29,13 +29,13 @@
             </el-form-item>
             <el-form-item label="活动时间" prop="date">
               <el-date-picker
-              v-model="basicFormModel.date"
-              type="daterange"
-              value-format="timestamp"
-              range-separator="至"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期">
-              </el-date-picker>
+                v-model="basicFormModel.date"
+                type="daterange"
+                value-format="timestamp"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+              ></el-date-picker>
             </el-form-item>
 
             <el-form-item label="即时配送" prop="delivery">
@@ -62,56 +62,57 @@
 
             <el-form-item>
               <el-button type="primary" @click="submitForm('basicForm')">立即创建</el-button>
-              <el-button @click="() => {
+              <el-button
+                @click="() => {
                 $refs.basicForm.resetFields();
-              }">取消</el-button>
+              }"
+              >取消</el-button>
             </el-form-item>
           </el-form>
         </el-col>
-        <el-col :span="6">&nbsp;</el-col>
       </el-row>
     </el-card>
   </div>
 </template>
 
 <script>
-  import { submitForm } from '@/models/common';
+import { submit } from "@/models/common";
 
-  export default {
-    data() {
-      return {
-        basicFormModel: {
-          name: '',
-          region: '',
-          date: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        basicFormRules: {
-          name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
-          ],
+export default {
+  data() {
+    return {
+      basicFormModel: {
+        name: "",
+        region: "",
+        date: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: ""
+      },
+      basicFormRules: {
+        name: [
+          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ],
+        region: [
+          { required: true, message: "请选择活动区域", trigger: "change" }
+        ]
+      }
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          submit(this.basicFormModel).then(res => {
+            console.log(res);
+          });
+        } else {
+          return false;
         }
-      }
-    },
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            submitForm(this.basicFormModel).then(res => {
-              console.log(res);
-            });
-          } else {
-            return false;
-          }
-        });
-      }
+      });
     }
-  };
+  }
+};
 </script>

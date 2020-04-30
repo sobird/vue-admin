@@ -17,7 +17,7 @@
 
       <el-submenu index="0">
         <template slot="title">
-          <i class="fa fa-tachometer-alt"></i>
+          <i class="iconfont icon-dashboard"></i>
           <span>控制台</span>
         </template>
 
@@ -28,7 +28,7 @@
 
       <el-submenu index="/form">
         <template slot="title">
-          <i class="fab fa-wpforms"></i>
+          <i class="iconfont icon-form"></i>
           <span>表单页</span>
         </template>
 
@@ -45,7 +45,7 @@
 
       <el-submenu index="/component">
         <template slot="title">
-          <i class="fa fa-plug"></i>
+          <i class="iconfont icon-component"></i>
           <span>组件</span>
         </template>
 
@@ -55,7 +55,7 @@
       </el-submenu>
 
       <el-menu-item index="/project">
-        <i class="fab fa-product-hunt"></i>
+        <i class="iconfont icon-product-hunt"></i>
         <span slot="title">我的项目</span>
       </el-menu-item>
     </el-menu>
@@ -96,9 +96,9 @@
     transition: width .3s;
     .el-menu{
       border-right: 0;
-      .fa, .fab, .fas{
+      .iconfont{
         position: relative;
-        top: -1px;
+        top: -2px;
         margin-right: 5px;
         width: 15px;
       }

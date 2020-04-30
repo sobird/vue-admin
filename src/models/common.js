@@ -13,8 +13,8 @@ export function userInfo() {
   });
 }
 
-export function submitForm(data) {
-  return axios.post("/submit.json", data, {
+export function submit(data) {
+  return axios.post("/submit", data, {
     message: "提交成功！"
   });
 }
