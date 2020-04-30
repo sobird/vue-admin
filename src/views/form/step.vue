@@ -21,16 +21,16 @@
   		  <el-step title="完成"></el-step>
   	  </el-steps>
 
-      <el-row>
-        <el-col :span="6">&nbsp;</el-col>
+      <el-row type="flex">
+        <el-col :span="6"></el-col>
         <el-col :span="12">
           <el-form
             ref="stepForm"
             :model="stepFormModel"
             :rules="stepFormRules"
-            label-width="100px">
+            label-width="110px">
             <div v-if="stepNum == 0">
-            <el-form-item label="付款账户" prop="paymentAccount">
+            <el-form-item label="付款账户：" prop="paymentAccount">
               <el-select
                 v-model="stepFormModel.paymentAccount"
                 placeholder="请选择付款账户"
@@ -39,19 +39,19 @@
               </el-select>
             </el-form-item>
 
-            <el-form-item label="收款账户" prop="receiptAccount">
+            <el-form-item label="收款账户：" prop="receiptAccount">
               <el-input v-model="stepFormModel.receiptAccount"></el-input>
             </el-form-item>
 
-            <el-form-item label="收款人姓名" prop="receiptName">
+            <el-form-item label="收款人姓名：" prop="receiptName">
               <el-input v-model="stepFormModel.receiptName"></el-input>
             </el-form-item>
 
-            <el-form-item label="转账金额" prop="transferAmount">
+            <el-form-item label="转账金额：" prop="transferAmount">
               <el-input v-model.number="stepFormModel.transferAmount"><template slot="prepend">￥</template></el-input>
             </el-form-item>
 
-            <el-form-item label="备注信息" prop="remark">
+            <el-form-item label="备注信息：" prop="remark">
               <el-input type="textarea" v-model="stepFormModel.remark"></el-input>
             </el-form-item>
 
@@ -69,30 +69,36 @@
             </el-form-item>
             </div>
 
-            <div v-if="stepNum == 1">
+            <div v-if="stepNum == 1" class="form-confirm">
               <el-alert
                 title="确认转账后，资金将直接打入对方账户，无法退回。"
                 type="warning" style="margin-bottom: 20px;"
                 show-icon>
               </el-alert>
-              <el-form-item label="付款账户" prop="paymentAccount">
+              <el-form-item label="付款账户：" prop="paymentAccount">
                 {{stepFormModel.paymentAccount}}
               </el-form-item>
 
-              <el-form-item label="收款账户" prop="receiptAccount">
+              <el-form-item label="收款账户：" prop="receiptAccount">
                 {{stepFormModel.receiptAccount}}
               </el-form-item>
 
-              <el-form-item label="收款人姓名" prop="receiptName">
+              <el-form-item label="收款人姓名：" prop="receiptName">
                 {{stepFormModel.receiptName}}
               </el-form-item>
 
-              <el-form-item label="转账金额" prop="transferAmount">
-                {{stepFormModel.transferAmount}}
+              <el-form-item label="转账金额：" prop="transferAmount">
+                <span class="amount">{{stepFormModel.transferAmount}}</span> 元
               </el-form-item>
 
-              <el-form-item label="备注信息" prop="remark">
+              <el-form-item label="备注信息：" prop="remark">
                 {{stepFormModel.remark}}
+              </el-form-item>
+
+              <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
+
+              <el-form-item label="支付密码：" prop="remark" class="payment-password">
+                <el-input v-model="stepFormModel.paymentPassword" show-password></el-input>
               </el-form-item>
 
               <el-form-item>
@@ -107,32 +113,35 @@
             <div v-if="stepNum == 2" class="form-result">
               <i class="el-icon-success"></i>
               <h4>操作成功</h4>
-              <p>预计2小时到账</p>
+              <p>预计2小时内到账</p>
 
               <el-card shadow="never" class="form-card">
-                <el-form-item label="付款账户" prop="paymentAccount">
+                <el-form-item label="付款账户：" prop="paymentAccount">
                   {{stepFormModel.paymentAccount}}
                 </el-form-item>
 
-                <el-form-item label="收款账户" prop="receiptAccount">
+                <el-form-item label="收款账户：" prop="receiptAccount">
                   {{stepFormModel.receiptAccount}}
                 </el-form-item>
 
-                <el-form-item label="收款人姓名" prop="receiptName">
+                <el-form-item label="收款人姓名：" prop="receiptName">
                   {{stepFormModel.receiptName}}
                 </el-form-item>
 
-                <el-form-item label="转账金额" prop="transferAmount">
-                  {{stepFormModel.transferAmount}}
+                <el-form-item label="转账金额：" prop="transferAmount">
+                  <span class="amount">{{stepFormModel.transferAmount}}</span> 元
                 </el-form-item>
 
-                <el-form-item label="备注信息" prop="remark">
+                <el-form-item label="备注信息：" prop="remark">
                   {{stepFormModel.remark}}
                 </el-form-item>
               </el-card>
 
               <div class="form-action">
-                <el-button type="primary">再转一笔</el-button>
+                <el-button type="primary" @click="() => {
+                   stepNum = 0;
+                   $refs.stepForm.resetFields();
+                  }">再转一笔</el-button>
 
                 <el-button @click="() => {
                  
@@ -142,14 +151,14 @@
             </div>
           </el-form>
         </el-col>
-        <el-col :span="6">&nbsp;</el-col>
+        <el-col :span="6"></el-col>
       </el-row>
   	</el-card>
   </div>
 </template>
 
 <script>
-  import { submitForm } from '@/models/common';
+  import { submit } from '@/models/common';
 
   export default {
     data() {
@@ -157,11 +166,12 @@
         stepNum: 0,
 
         stepFormModel: {
-          paymentAccount: '',
-          receiptAccount: '',
-          receiptName: '',
-          transferAmount: '',
-          desc: ''
+          paymentAccount: 'i@sobird.me',
+          receiptAccount: 'test@example.com',
+          receiptName: 'Test',
+          transferAmount: 200,
+          paymentPassword: '',
+          remark: ''
         },
         stepFormRules: {
           paymentAccount: [
@@ -189,7 +199,7 @@
 
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            submitForm(this.stepFormModel).then(res => {
+            submit(this.stepFormModel).then(res => {
               this.stepNum = 2;
             });
           } else {
@@ -206,11 +216,12 @@
     text-align: center;
     .el-icon-success{
       color: #52c41a;
-      font-size: 70px;
+      font-size: 60px;
     }
     h4{
-      font-size: 24px;
-      margin-bottom: 15px;
+      font-size: 20px;
+      margin: 15px 0;
+      font-weight: 400;
     }
     p{
       font-size: 14px;
@@ -221,8 +232,27 @@
       margin-bottom: 20px;
       border: none;
       background: #fafafa;
+      text-align: left;
       .el-form-item{
         margin-bottom: 10px;
+      }
+    }
+    .amount{
+      font-size: 18px;
+    }
+  }
+
+  .form-confirm{
+    .el-form-item {
+      margin-bottom: 10px;
+    }
+    .amount{
+      font-size: 18px;
+    }
+    .payment-password{
+      margin: 10px 0 30px;
+      .el-input{
+        width: 200px;
       }
     }
   }

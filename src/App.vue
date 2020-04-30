@@ -44,4 +44,8 @@ body {
     }
   }
 }
+
+.el-form .el-form-item {
+  
+}
 </style>
