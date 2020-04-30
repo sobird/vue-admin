@@ -20,7 +20,7 @@ export function submitForm(data) {
 }
 
 export function analysisEcharts() {
-  return axios.get("/charts/analysis.json", {
+  return axios.get("/charts/analysis", {
     message: ""
   });
 }

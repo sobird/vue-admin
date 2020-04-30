@@ -6,4 +6,5 @@
 
 module.exports = {
   '/api/userinfo': '/public/api/userinfo.json',
+  '/api/charts/analysis': '/public/api/charts/analysis.json',
 }
