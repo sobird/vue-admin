@@ -15,8 +15,8 @@ import axios from "axios";
 import store from "@/store";
 import querystring from "querystring";
 import { Message } from "element-ui";
-import { remove } from 'lodash';
-import crypto from 'crypto';
+import { remove } from "lodash";
+import crypto from "crypto";
 
 const BASEURL = process.env.VUE_APP_API_ADDRESS;
 
@@ -86,7 +86,7 @@ axios.interceptors.response.use(
 );
 
 // 常用方法
-const METHODS = ['get', 'post', 'delete'];
+const METHODS = ["get", "post", "delete"];
 
 let _axios = {};
 let _cache = {};
@@ -97,17 +97,17 @@ METHODS.forEach(method => {
     // get 参数唯一性
     url = md5(url + querystring.stringify(data.params));
 
-    if(urls.indexOf(url) === -1){
-      urls.push(url)
+    if (urls.indexOf(url) === -1) {
+      urls.push(url);
     }
     clearTimeout(_timer);
     _timer = setTimeout(() => {
       urls.forEach(url => {
         _cache[url] = null;
-        remove(urls, url)
-      })
+        remove(urls, url);
+      });
     }, 1000);
-    if(_cache[url]) {
+    if (_cache[url]) {
       return _cache[url];
     }
     _cache[url] = axios[method](...arguments);
@@ -118,7 +118,7 @@ METHODS.forEach(method => {
 
 function md5(str) {
   let hash = crypto.createHash("md5");
-  return hash.update(str).digest('hex');
+  return hash.update(str).digest("hex");
 }
 
 export default Object.assign({}, axios, _axios);
