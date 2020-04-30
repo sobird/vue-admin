@@ -23,33 +23,37 @@ export default new Router({
       path: '/form',
       name: 'form',
       component: LayoutWithSidebar,
+      redirect: { name: 'basicForm' },
       meta: {
         title: '表单页',
-        icon: 'fa fa-wpforms'
+        icon: 'form'
       },
       children: [
         {
           path: '',
+          name: 'basicForm',
           component: () => import('@/views/form/basic.vue'),
           meta: {
             title: '基础表单',
-            icon: 'fa fa-wpforms'
+            icon: 'form'
           }
         },
         {
           path: 'step',
+          name: 'stepsForm',
           component: () => import('@/views/form/step.vue'),
           meta: {
             title: '分步表单',
-            icon: 'fa fa-wpforms'
+            icon: 'form'
           }
         },
         {
           path: 'advanced',
+          name: 'advancedForm',
           component: () => import('@/views/form/advanced.vue'),
           meta: {
             title: '高级表单',
-            icon: 'fa fa-wpforms'
+            icon: 'form'
           }
         }
       ]
@@ -59,17 +63,19 @@ export default new Router({
       path: '/component',
       name: 'component',
       component: LayoutWithSidebar,
+      redirect: { name: 'cascaderComponent' },
       meta: {
-        title: '表单页',
-        icon: 'fa fa-wpforms'
+        title: '组件',
+        icon: 'component'
       },
       children: [
         {
           path: 'cascader',
+          name: 'cascaderComponent',
           component: () => import('@/views/component/cascader.vue'),
           meta: {
             title: '级联选择器',
-            icon: 'fa fa-chevron-circle-down'
+            icon: 'component'
           }
         },
       ]
