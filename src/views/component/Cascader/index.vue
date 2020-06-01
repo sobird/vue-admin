@@ -12,6 +12,7 @@
   	<el-card shadow="never" style="border: none;">
   	  <el-cascader
 	    :options="options"
+		:props="{ expandTrigger: 'hover' }"
 	    @active-item-change="handleChange">
 	  </el-cascader>
   	</el-card>
@@ -19,9 +20,8 @@
 </template>
 
 <script>
-  import pcaa from 'area-data';
-
-  console.log(pcaa.pca);
+  // https://github.com/guaneagler/area-puppeteer
+  import pcaa from './pcaa';
 
   export default {
   	data() {
@@ -32,8 +32,6 @@
 
   	created() {
   	  let res = this.formatAreaData(86, pcaa);
-
-  	  console.log(res);
 
   	  this.options = res;
   	},
@@ -46,36 +44,22 @@
   	  	//console.log(data);
   	  	if(!data) {
   	  	  return;
-  	  	}
-  	  	let i = 1;
-        for (const p in data) {
+  	  	}	
+		
+        for (let code in data) {
           let item = {
-            value: p,
-            label: data[p],
-            //children: []
-          };
+            value: code,
+            label: data[code],
+		  };
 
-          let children = this.formatAreaData(p, areaData);
+          let children = this.formatAreaData(code, areaData);
           if(children) {
           	item.children = children;
 
           }
 
-
-
-          res.push(item);
-
-          // if(i == 3) {
-          // 	return res;
-          // }
-
-          i++;
-
-          
+          res.push(item);          
         }
-
-
-
         return res;
   	  },
 

@@ -35,7 +35,8 @@
               <ul>
                 <li>{{userinfo.realname}}</li>
                 <li class="divided"></li>
-                <li><a @click="logout">退出 <i class="fa fa-sign-out pull-right"></i></a></li>
+                <li @click="setting">设置 <i class="iconfont icon-setting pull-right"></i></li>
+                <li><a @click="logout">退出 <i class="iconfont icon-logout pull-right"></i></a></li>
               </ul>
             </div>
             <span class="userinfo" slot="reference">{{(userinfo.realname&&(userinfo.realname.substr(0, 1)).toUpperCase())}}</span>
@@ -81,6 +82,10 @@
       },
       toggleSideBar() {
         this.$store.dispatch('toggleSideBarCollapse');
+      },
+
+      setting() {
+        console.log('setting');
       }
     }
   };

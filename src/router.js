@@ -72,9 +72,9 @@ export default new Router({
         {
           path: 'cascader',
           name: 'cascaderComponent',
-          component: () => import('@/views/component/cascader.vue'),
+          component: () => import('@/views/component/Cascader'),
           meta: {
-            title: '级联选择器',
+            title: '省市级联选择',
             icon: 'component'
           }
         },
