@@ -55,6 +55,15 @@ export default new Router({
             title: '高级表单',
             icon: 'form'
           }
+        },
+        {
+          path: 'complex',
+          name: 'complexForm',
+          component: () => import('@/views/form/complex.vue'),
+          meta: {
+            title: '复杂表单',
+            icon: 'form'
+          }
         }
       ]
     },

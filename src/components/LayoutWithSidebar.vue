@@ -43,6 +43,9 @@
         
       }
     },
+    mounted() {
+      console.log(this.$store, 'store');
+    },
     watch: {
       '$route': function(newValue, oldValue) {
         var wrap = this.$refs['contentScrollbar'].$refs['wrap'];
@@ -79,6 +82,10 @@
   }
   .pull-right{
     float: right;
+  }
+
+  .iconfont{
+    display: inline-block;
   }
 
   .el-dropdown-menu{
@@ -229,7 +236,7 @@
       margin-left: 64px;
     }
     .hamburger{
-      .fa{
+      .iconfont{
         transform: rotateZ(-90deg);
       }
     }

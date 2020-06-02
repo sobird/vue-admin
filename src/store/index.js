@@ -34,7 +34,7 @@
 
 import Vue from "vue";
 import Vuex from "vuex";
-
+import * as types from "./mutation-types";
 import VueCookie from "@/utils/cookie";
 
 Vue.use(Vuex);
@@ -103,7 +103,7 @@ const store = new Vuex.Store({
     REFRESH_VIEW(state) {
       state.viewkey = +new Date();
     },
-    TOGGLE_SIDEBAR_COLLAPSE: state => {
+    [types.TOGGLE_SIDEBAR]: state => {
       if (state.sidebar.collapse) {
         VueCookie.set("sidebarStatus", 0);
       } else {
@@ -115,6 +115,10 @@ const store = new Vuex.Store({
       setTimeout(() => {
         window.dispatchEvent(new Event("resize"));
       }, 300);
+    },
+    [types.CLOSE_SIDEBAR]: state => {
+      VueCookie.set("sidebarStatus", 0);
+      state.sidebar.collapse = false
     },
     SET_USERINFO: (state, payload) => {
       state.userinfo = payload;
@@ -147,10 +151,10 @@ const store = new Vuex.Store({
    */
   actions: {
     refreshView({ commit }) {
-      commit("REFRESH_VIEW");
+      commit(types.TOGGLE_SIDEBAR);
     },
     toggleSideBarCollapse({ commit, state }) {
-      commit("TOGGLE_SIDEBAR_COLLAPSE");
+      commit(types.TOGGLE_SIDEBAR);
     },
     setUserInfo({ commit }, payload) {
       commit("SET_USERINFO", payload);
