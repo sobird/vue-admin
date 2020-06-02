@@ -10,13 +10,14 @@
 
 import Cookies from "js-cookie";
 
-// https://github.com/js-cookie/js-cookie/wiki/Design-Patterns-To-Use-With-JavaScript-Cookie
 export default {
-  install: function(Vue) {
+  install: function(Vue, options) {
+    // 添加示例方法
     Vue.prototype.$cookie = this;
+    delete this.install;
+    // 添加全局方法
     Vue.cookie = this;
   },
-
   get: function(name) {
     return Cookies.get(name);
   },
@@ -25,5 +26,8 @@ export default {
   },
   remove: function(name, attributes) {
     Cookies.remove(name, attributes);
+  },
+  getJSON: function(name) {
+    return Cookies.getJSON(name);
   }
 };
