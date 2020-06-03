@@ -42,6 +42,7 @@ Vue.use(Vuex);
 // 组件中载入$cookie
 Vue.use(VueCookie);
 
+
 const store = new Vuex.Store({
   /**
    * State
@@ -57,10 +58,11 @@ const store = new Vuex.Store({
    * }
    */
   state: {
-    viewkey: +new Date(),
+    routerViewKey: +new Date(),
     sidebar: {
       collapse: VueCookie.get("sidebarStatus") == 1 ? true : false
     },
+    // 账户登录相关state
     userinfo: {}
   },
   /**
@@ -100,9 +102,10 @@ const store = new Vuex.Store({
    * 在组件中通过mapMutations将store中的mutation映射到组件的methods对象
    */
   mutations: {
-    REFRESH_VIEW(state) {
-      state.viewkey = +new Date();
+    [types.REFRESH_ROUTE_VIEW]: state => {
+      state.routerViewKey = +new Date();
     },
+    
     [types.TOGGLE_SIDEBAR]: state => {
       if (state.sidebar.collapse) {
         VueCookie.set("sidebarStatus", 0);
@@ -120,7 +123,7 @@ const store = new Vuex.Store({
       VueCookie.set("sidebarStatus", 0);
       state.sidebar.collapse = false
     },
-    SET_USERINFO: (state, payload) => {
+    [types.SET_USERINFO]: (state, payload) => {
       state.userinfo = payload;
     }
   },
@@ -150,14 +153,14 @@ const store = new Vuex.Store({
    * 在组件中可以通过mapActions将组件的methods映射为store.dispatch调用
    */
   actions: {
-    refreshView({ commit }) {
-      commit(types.TOGGLE_SIDEBAR);
+    refreshRouteView({ commit }) {
+      commit(types.REFRESH_ROUTE_VIEW);
     },
     toggleSideBarCollapse({ commit, state }) {
       commit(types.TOGGLE_SIDEBAR);
     },
     setUserInfo({ commit }, payload) {
-      commit("SET_USERINFO", payload);
+      commit(types.SET_USERINFO, payload);
     }
   },
 

@@ -11,6 +11,9 @@ export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
 // 关闭左侧菜单栏
 export const CLOSE_SIDEBAR = "CLOSE_SIDEBAR";
 
-// 刷新<router-view :key="" />提供的视图
-export const REFRESH_VIEW = "REFRESH_VIEW";
+// 刷新路由视图 <router-view :key="" />
+export const REFRESH_ROUTE_VIEW = "REFRESH_ROUTE_VIEW";
+
+// 设置用户信息
+export const SET_USERINFO = "SET_USERINFO";
 

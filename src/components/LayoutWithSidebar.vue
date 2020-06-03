@@ -44,7 +44,7 @@
       }
     },
     mounted() {
-      console.log(this.$store, 'store');
+      // todo something
     },
     watch: {
       '$route': function(newValue, oldValue) {
@@ -87,6 +87,14 @@
   .iconfont{
     display: inline-block;
   }
+
+  button {
+    .iconfont{
+      font-size: 12px;
+    }
+  }
+
+
 
   .el-dropdown-menu{
     // min-width: 150px;
