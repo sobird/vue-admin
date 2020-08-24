@@ -46,6 +46,15 @@ export default [
         }
       },
       {
+        path: "dynamic",
+        name: "dynamicForm",
+        component: () => import("@/views/form/dynamic.vue"),
+        meta: {
+          title: "动态表单",
+          icon: "form"
+        }
+      },
+      {
         path: "complex",
         name: "complexForm",
         component: () => import("@/views/form/complex.vue"),

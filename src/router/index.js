@@ -7,6 +7,7 @@ import LayoutWithSidebar from "@/components/LayoutWithSidebar";
 import NavMenuRouter from "./NavMenuRouter";
 
 const router = new Router({
+  test: [],
   routes: [
     {
       path: "/",
@@ -33,5 +34,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   next();
 });
+
+console.log(router);
 
 export default router;

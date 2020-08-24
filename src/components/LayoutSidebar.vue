@@ -41,6 +41,9 @@
         <el-menu-item index="/form/advanced">
           <span slot="title">高级表单</span>
         </el-menu-item>
+        <el-menu-item index="/form/dynamic">
+          <span slot="title">动态表单</span>
+        </el-menu-item>
       </el-submenu>
 
       <el-submenu index="/component">
