@@ -6,7 +6,7 @@
 
 <template>
   <div>
-    <layout-view-header>动态表单是根据后端数据模型渲染出来的表单，可以由后端动态的控制表单输入项以及简单的控制部分UI。</layout-view-header>
+    <layout-view-header>动态表单是根据<a href="http://json-schema.org/" target="_blank">JSON Schema</a> 后端数据模型渲染出来的表单，可以由后端动态的控制表单输入项以及简单的控制部分UI。</layout-view-header>
 
     <el-card shadow="never" style="border: none;">
       <el-form
