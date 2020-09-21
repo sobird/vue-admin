@@ -23,6 +23,7 @@ html {
 body {
   background-color: #f3f9fb;
   height: 100%;
+  font-size: 14px;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

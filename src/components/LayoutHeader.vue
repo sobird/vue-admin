@@ -16,36 +16,48 @@
       </div>
 
       <div class="header-navbar">
-        <el-button v-if="hasSidebar" type="text" class="hamburger" @click="toggleSidebar">
-          <i class="iconfont icon-bars"></i>
-        </el-button>
+        <el-row type="flex">
+          <el-col :span="12">
+            <el-button v-if="hasSidebar" type="text" class="hamburger" @click="toggleSidebar">
+              <i class="iconfont icon-bars"></i>
+            </el-button>
+          </el-col>
+          <el-col :span="12" style="text-align: right;">
+            <Environment />
 
-        <ul class="navbar-right">
-          <li v-if="userinfo.username">
-            <el-popover popper-class="user-dropdown-menu" v-cloak width="250" trigger="click">
-              <div>
-                <ul>
-                  <li>{{userinfo.realname}}</li>
-                  <li class="divided"></li>
-                  <li @click="setting">
-                    设置
-                    <i class="iconfont icon-setting pull-right"></i>
-                  </li>
-                  <li>
-                    <a @click="logout">
-                      退出
-                      <i class="iconfont icon-logout pull-right"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <span
-                class="userinfo"
-                slot="reference"
-              >{{(userinfo.realname&&(userinfo.realname.substr(0, 1)).toUpperCase())}}</span>
-            </el-popover>
-          </li>
-        </ul>
+            <ul class="navbar-right">
+              <li>
+                <a href="https://github.com/yangjunlong/vue-element-pro">
+                  <i class="iconfont icon-git"></i>
+                </a>
+              </li>
+              <li v-if="userinfo.username" class="userinfo">
+                <el-popover popper-class="user-dropdown-menu" v-cloak width="250" trigger="hover">
+                  <div>
+                    <ul>
+                      <li>{{userinfo.realname}}</li>
+                      <li class="divided"></li>
+                      <li @click="setting">
+                        设置
+                        <i class="iconfont icon-setting pull-right"></i>
+                      </li>
+                      <li>
+                        <a @click="logout">
+                          退出
+                          <i class="iconfont icon-logout pull-right"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <span
+                    class="avatar"
+                    slot="reference"
+                  >{{(userinfo.realname&&(userinfo.realname.substr(0, 1)).toUpperCase())}}</span>
+                </el-popover>
+              </li>
+            </ul>
+          </el-col>
+        </el-row>
       </div>
     </div>
   </div>
@@ -55,9 +67,13 @@
 import { mapState, mapMutations } from "vuex";
 import { TOGGLE_SIDEBAR } from "@/store/mutation-types";
 import { userInfo } from "../models/common";
+import Environment from "@/components/Environment.vue";
 
 export default {
   name: "LayoutHeader",
+  components: {
+    Environment
+  },
   data() {
     return {};
   },
@@ -149,13 +165,23 @@ export default {
 }
 
 .navbar-right {
-  float: right;
+  display: inline-block;
   margin: 0;
   list-style: none;
   li {
     display: inline-block;
     margin: 0 5px;
-    cursor: default;
+    a {
+      color: #000;
+      height: 48px;
+      display: inline-block;
+      padding: 0 10px;
+
+      &:hover {
+        color: #333;
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
   }
 }
 
@@ -172,6 +198,10 @@ export default {
 }
 
 .userinfo {
+  margin-left: 10px;
+}
+
+.avatar {
   background-color: #3da8f5;
   width: 36px;
   height: 36px;
@@ -186,9 +216,9 @@ export default {
   color: #fff;
 
   font-weight: bold;
-
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   &:hover {
-    box-shadow: 0px 0px 0px 4px #eee;
+    box-shadow: 0px 0px 5px 2px #eee;
     cursor: pointer;
   }
 }
@@ -221,6 +251,7 @@ export default {
 
 .hamburger {
   height: 48px;
+  line-height: 48px;
   padding: 0 10px;
   color: inherit !important;
   &:hover {
