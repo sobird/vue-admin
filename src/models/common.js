@@ -8,7 +8,7 @@
 import axios from "../utils/axios";
 
 export function userInfo() {
-  return axios.get("/userinfo", {
+  return axios.get("/user/info.json", {
     message: ""
   });
 }
@@ -20,7 +20,7 @@ export function submit(data) {
 }
 
 export function analysisEcharts() {
-  return axios.get("/charts/analysis", {
+  return axios.get("/stat/analysis.json", {
     message: ""
   });
 }

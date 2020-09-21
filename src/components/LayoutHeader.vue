@@ -27,7 +27,7 @@
 
             <ul class="navbar-right">
               <li>
-                <a href="https://github.com/yangjunlong/vue-element-pro">
+                <a title="项目地址" href="https://github.com/yangjunlong/vue-element-pro">
                   <i class="iconfont icon-git"></i>
                 </a>
               </li>
