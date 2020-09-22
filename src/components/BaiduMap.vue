@@ -12,7 +12,9 @@
 import jsonp from "jsonp";
 const ACCESS_KEY = "WtfiDziaW2086WpToN3NQ08H";
 const BMAP_API =
-  "https://api.map.baidu.com/api?v=1.0&&type=webgl&ak=" + ACCESS_KEY;
+  "https://api.map.baidu.com/api?v=3.0&ak=" + ACCESS_KEY;
+const BMAPGL_API =
+  "https://api.map.baidu.com/api?v=1.0&type=webgl&ak=" + ACCESS_KEY;
 
 export default {
   data() {
@@ -36,25 +38,27 @@ export default {
 
     // 初始化地图容器
     jsonp(BMAP_API, () => {
-      let map = new BMapGL.Map(ditu);
-      let geocoder = new BMapGL.Geocoder();
-      let point = new BMapGL.Point(116.404, 39.915);
+      // 设置命名空间
+      let BMap = window.BMap;
+
+      let map = new BMap.Map(ditu);
+      let geocoder = new BMap.Geocoder();
+      let point = new BMap.Point(116.404, 39.915);
 
       // 添加比例尺控件
-      let scaleCtrl = new BMapGL.ScaleControl();
-      map.addControl(scaleCtrl);
-      // 添加缩放控件
-      let zoomCtrl = new BMapGL.ZoomControl();
-      map.addControl(zoomCtrl);
+      map.addControl(new BMap.ScaleControl());
+      // 添加平移缩放控件
+      map.addControl(new BMap.NavigationControl({type: BMAP_NAVIGATION_CONTROL_SMALL} ));
+      //map.addControl(new BMap.MapTypeControl());
 
       // 创建标注
-      var marker = new BMapGL.Marker(point);
+      var marker = new BMap.Marker(point, {
+          enableDragging: true,
+      });
       map.addOverlay(marker);
       // 可拖拽
-      marker.enableDragging();
-      marker.addEventListener("dragend", e => {
-        console.log(e);
-
+      // marker.enableDragging();
+      marker.addEventListener("dragend", (e, t) => {
         geocoder.getLocation(e.point, res => {
             console.log(res);
         })

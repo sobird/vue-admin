@@ -123,13 +123,13 @@
         </el-form-item>
 
         <el-form-item label="起租时间" prop="rentStartDate">
-          <el-date-picker v-model="advancedFormModel.rentStartDate" type="date" placeholder="选择日期"></el-date-picker>
+          <el-date-picker v-model="advancedFormModel.rentStartDate" type="date" placeholder="选择日期" style="width: 300px;"></el-date-picker>
 
           <span>请填写房屋可以出租的日期，可在起租日期前发布。</span>
         </el-form-item>
 
         <el-form-item label="所在城市">
-          <el-input placeholder="请选择城市" v-model="advancedFormModel.districtName"></el-input>
+          <city-select></city-select>
         </el-form-item>
 
         <el-form-item label="小区名称">
@@ -145,7 +145,7 @@
         </el-form-item>
 
         <el-form-item label="房间描述">
-          <el-input type="textarea" placeholder="请输入房屋的情况介绍" v-model="advancedFormModel.aroundDesc"></el-input>
+          <el-input type="textarea" placeholder="请输入房屋的情况介绍" v-model="advancedFormModel.aroundDesc" style="width: 800px;"></el-input>
         </el-form-item>
 
         <el-form-item>
@@ -160,11 +160,13 @@
 </template>
 
 <script>
+import CitySelect from "@/components/CitySelect";
 import BaiduMap from "@/components/BaiduMap";
 import { submitForm } from "@/models/common";
 
 export default {
   components: {
+    CitySelect,
     BaiduMap,
   },
   data() {

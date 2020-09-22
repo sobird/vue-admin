@@ -77,15 +77,15 @@ export default [
       icon: "component"
     },
     children: [
-      {
-        path: "cascader",
-        name: "cascaderComponent",
-        component: () => import("@/views/component/Cascader"),
-        meta: {
-          title: "省市级联选择",
-          icon: "component"
-        }
-      }
+      // {
+      //   path: "cascader",
+      //   name: "cascaderComponent",
+      //   component: () => import("@/views/component/Cascader"),
+      //   meta: {
+      //     title: "省市级联选择",
+      //     icon: "component"
+      //   }
+      // }
     ]
   },
 
