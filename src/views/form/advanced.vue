@@ -14,71 +14,70 @@
         ref="advancedForm"
         :model="advancedFormModel"
         :rules="advancedFormRules"
-        label-width="80px">
+        label-width="80px"
+      >
         <el-form-item label="出租方式" prop="rentType">
           <el-radio-group v-model="advancedFormModel.rentType">
-			      <el-radio :label="1">整套出租</el-radio>
-			      <el-radio :label="2">单间出租</el-radio>
-			    </el-radio-group>
+            <el-radio :label="1">整套出租</el-radio>
+            <el-radio :label="2">单间出租</el-radio>
+          </el-radio-group>
         </el-form-item>
-        
+
         <el-form-item label="房屋户型">
-          <el-input class="short-ipt" v-model="advancedFormModel.bedRoomNum">
-			      <template slot="append">室</template>
-			    </el-input>
+          <el-input clearable class="short-ipt" v-model="advancedFormModel.bedRoomNum">
+            <template slot="append">室</template>
+          </el-input>
 
-			    <el-input class="short-ipt" v-model="advancedFormModel.livingRoomNum">
-			      <template slot="append">厅</template>
-			   </el-input>
+          <el-input class="short-ipt" v-model="advancedFormModel.livingRoomNum">
+            <template slot="append">厅</template>
+          </el-input>
 
-			    <el-input class="short-ipt" v-model="advancedFormModel.toiletNum">
-			      <template slot="append">卫</template>
-			    </el-input>
+          <el-input class="short-ipt" v-model="advancedFormModel.toiletNum">
+            <template slot="append">卫</template>
+          </el-input>
 
-			    <el-input v-if="advancedFormModel.rentType == 1" class="short-ipt" v-model="advancedFormModel.totalArea">
-			      <template slot="append">平米</template>
-			    </el-input>
+          <el-input
+            v-if="advancedFormModel.rentType == 1"
+            class="short-ipt"
+            v-model="advancedFormModel.totalArea"
+          >
+            <template slot="append">平米</template>
+          </el-input>
         </el-form-item>
         <el-form-item label="楼层">
           <el-input class="short-ipt" v-model="advancedFormModel.houseFloor">
             <template slot="prepend">第</template>
-  			    <template slot="append">层</template>
-  			  </el-input>
+            <template slot="append">层</template>
+          </el-input>
 
-  			  <el-input class="short-ipt" v-model="advancedFormModel.totalFloor">
-  			  	<template slot="prepend">共</template>
-  			    <template slot="append">层</template>
-  			  </el-input>
+          <el-input class="short-ipt" v-model="advancedFormModel.totalFloor">
+            <template slot="prepend">共</template>
+            <template slot="append">层</template>
+          </el-input>
         </el-form-item>
-        
+
         <el-form-item v-if="advancedFormModel.rentType == 2" label="出租间" prop="delivery">
           <el-input class="short-ipt" v-model="advancedFormModel.rentRoomArea">
-			      <template slot="append">平米</template>
-			    </el-input>
+            <template slot="append">平米</template>
+          </el-input>
 
-			    <el-select v-model="value" placeholder="请选择卧室类型">
-			      <el-option
-			        label="主卧"
-			        value="1">
-			      </el-option>
-			      <el-option
-			        label="次卧"
-			        value="2">
-			      </el-option>
-			    </el-select>
+          <el-select v-model="advancedFormModel.rentRoomArea" placeholder="请选择卧室类型">
+            <el-option label="主卧" value="1"></el-option>
+            <el-option label="次卧" value="2"></el-option>
+          </el-select>
 
-  			  <el-select v-model="value" placeholder="请选择卧室朝向">
-  			    <el-option label="东" value="1"></el-option>
-  			    <el-option label="南" value="2"></el-option>
-  			    <el-option label="西" value="3"></el-option>
-  			    <el-option label="北" value="4"></el-option>
-  			    <el-option label="东南" value="5"></el-option>
-  			    <el-option label="东北" value="6"></el-option>
-  			    <el-option label="西南" value="7"></el-option>
-  			    <el-option label="西北" value="8"></el-option>
-  			  </el-select>
+          <el-select v-model="advancedFormModel.faceToType" placeholder="请选择卧室朝向">
+            <el-option label="东" value="1"></el-option>
+            <el-option label="南" value="2"></el-option>
+            <el-option label="西" value="3"></el-option>
+            <el-option label="北" value="4"></el-option>
+            <el-option label="东南" value="5"></el-option>
+            <el-option label="东北" value="6"></el-option>
+            <el-option label="西南" value="7"></el-option>
+            <el-option label="西北" value="8"></el-option>
+          </el-select>
         </el-form-item>
-        
+
         <el-form-item label="房屋标签">
           <el-checkbox-group v-model="advancedFormModel.featureTag">
             <el-checkbox label="离地铁近"></el-checkbox>
@@ -119,31 +118,34 @@
 
         <el-form-item label="租金" prop="monthRent">
           <el-input class="short-ipt" v-model="advancedFormModel.monthRent">
-			      <template slot="append">元/月</template>
-			    </el-input>
+            <template slot="append">元/月</template>
+          </el-input>
         </el-form-item>
 
         <el-form-item label="起租时间" prop="rentStartDate">
-          <el-date-picker
-			      v-model="advancedFormModel.rentStartDate"
-			      type="date"
-			      placeholder="选择日期">
-			     </el-date-picker>
+          <el-date-picker v-model="advancedFormModel.rentStartDate" type="date" placeholder="选择日期"></el-date-picker>
 
-			     <span>请填写房屋可以出租的日期，可在起租日期前发布。</span>
+          <span>请填写房屋可以出租的日期，可在起租日期前发布。</span>
+        </el-form-item>
+
+        <el-form-item label="所在城市">
+          <el-input placeholder="请选择城市" v-model="advancedFormModel.districtName"></el-input>
         </el-form-item>
 
         <el-form-item label="小区名称">
           <el-input
             placeholder="请填写小区名称"
-            style="width: 300px;" v-model="advancedFormModel.districtName"></el-input>
+            style="width: 300px;"
+            v-model="advancedFormModel.districtName"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="位置标注">
+          <baidu-map></baidu-map>
         </el-form-item>
 
         <el-form-item label="房间描述">
-          <el-input
-            type="textarea"
-            placeholder="请输入房屋的情况介绍"
-            v-model="advancedFormModel.aroundDesc"></el-input>
+          <el-input type="textarea" placeholder="请输入房屋的情况介绍" v-model="advancedFormModel.aroundDesc"></el-input>
         </el-form-item>
 
         <el-form-item>
@@ -158,64 +160,90 @@
 </template>
 
 <script>
-  import { submitForm } from '@/models/common';
+import BaiduMap from "@/components/BaiduMap";
+import { submitForm } from "@/models/common";
 
-  export default {
-    data() {
-      return {
-        advancedFormModel: {
-          rentType: 1,
-          bedRoomNum: '',
-          livingRoomNum: '',
-          toiletNum: '',
-          totalArea: '',
-
-          houseFloor: '',
-          totalFloor: '',
-          featureTag: [],
-          detailPoint: [],
-          servicePoint: [],
-          monthRent: '',
-          rentStartDate: false,
-          districtName: [],
-          aroundDesc: '',
-        },
-        advancedFormRules: {
-          name: [
-            { required: true, message: '请输入活动名称', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
-          ],
+export default {
+  components: {
+    BaiduMap,
+  },
+  data() {
+    return {
+      advancedFormModel: {
+        // 出租方式
+        rentType: 1,
+        // 室
+        bedRoomNum: "",
+        // 厅
+        livingRoomNum: "",
+        // 卫
+        toiletNum: "",
+        // 房屋面积
+        totalArea: "",
+        // 卧室面积
+        rentRoomArea: "",
+        // 卧室类型
+        bedRoomType: "",
+        // 卧室朝向
+        faceToType: "",
+        // 楼层
+        houseFloor: "",
+        // 总楼层
+        totalFloor: "",
+        // 房屋标签
+        featureTag: [],
+        // 房屋配置
+        detailPoint: [],
+        // 配套服务
+        servicePoint: [],
+        // 月租金
+        monthRent: "",
+        // 起租日期
+        rentStartDate: false,
+        // 所属城市
+        cityCode: "",
+        // 小区名称
+        districtName: [],
+        // 房屋描述
+        aroundDesc: ""
+      },
+      advancedFormRules: {
+        name: [
+          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ],
+        region: [
+          { required: true, message: "请选择活动区域", trigger: "change" }
+        ]
+      }
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          submitForm(this.advancedFormModel).then(res => {
+            console.log(res);
+          });
+        } else {
+          return false;
         }
-      }
-    },
-    methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            submitForm(this.advancedFormModel).then(res => {
-              console.log(res);
-            });
-          } else {
-            return false;
-          }
-        });
-      }
+      });
     }
-  };
+  }
+};
 </script>
 
 <style lang="scss">
-  .short-ipt{
-  	width: inherit;
-  	.el-input__inner{
-  	  text-align: center;
-  	  width: 80px;
-  	}
-  	.el-input-group__append, .el-input-group__prepend{
-  	  padding: 0 10px;
-  	}
+.short-ipt {
+  width: inherit;
+  .el-input__inner {
+    text-align: center;
+    width: 80px;
   }
+  .el-input-group__append,
+  .el-input-group__prepend {
+    padding: 0 10px;
+  }
+}
 </style>
