@@ -23,7 +23,7 @@
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="房屋户型">
+        <el-form-item label="房屋户型" prop="bedRoomNum">
           <el-input clearable class="short-ipt" v-model="advancedFormModel.bedRoomNum">
             <template slot="append">室</template>
           </el-input>
@@ -127,21 +127,28 @@
 
           <span>请填写房屋可以出租的日期，可在起租日期前发布。</span>
         </el-form-item>
-
         <el-form-item label="所在城市">
-          <city-select></city-select>
+          <city-select v-model="advancedFormModel.cityCode"></city-select>
         </el-form-item>
 
         <el-form-item label="小区名称">
           <el-input
             placeholder="请填写小区名称"
-            style="width: 300px;"
+            style="width: 500px;"
             v-model="advancedFormModel.districtName"
           ></el-input>
         </el-form-item>
 
+        <el-form-item label="详细地址">
+          <el-input
+            placeholder="请填写详细地址"
+            style="width: 500px;"
+            v-model="advancedFormModel.address"
+          ></el-input>
+        </el-form-item>
+
         <el-form-item label="位置标注">
-          <baidu-map></baidu-map>
+          <baidu-map :vmodel="advancedFormModel"></baidu-map>
         </el-form-item>
 
         <el-form-item label="房间描述">
@@ -203,9 +210,11 @@ export default {
         // 起租日期
         rentStartDate: false,
         // 所属城市
-        cityCode: "",
+        cityCode: [],
         // 小区名称
-        districtName: [],
+        districtName: '',
+        // 房屋坐标
+        coords: {},
         // 房屋描述
         aroundDesc: ""
       },
@@ -214,8 +223,8 @@ export default {
           { required: true, message: "请输入活动名称", trigger: "blur" },
           { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
         ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
+        bedRoomNum: [
+          { required: true, message: "请填房屋卧室数量", trigger: "change" }
         ]
       }
     };

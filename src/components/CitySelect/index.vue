@@ -6,21 +6,44 @@
 -->
 
 <template>
+<div>
   <el-cascader
+    v-model="vmodel"
+	clearable
+    ref="cityCascader"
     :options="options"
-    :props="{ expandTrigger: 'hover' }"
-    @active-item-change="handleChange"
-	style="width: 300px;"
+    :props="{ checkStrictly: true, expandTrigger: 'hover' }"
+    @change="change"
+    style="width: 300px;"
   ></el-cascader>
+  </div>
 </template>
 
 <script>
 // https://github.com/guaneagler/area-puppeteer
 import pcaa from "./pcaa";
 
+// 遍历获取级联选择器对象
+function getCascaderObj(val, opt) {
+  return val.map(function(value, index, array) {
+    for (var item of opt) {
+      if (item.value == value) {
+        opt = item.children;
+        const { value, label } = item;
+        return {
+          value,
+          label
+        };
+      }
+    }
+    return null;
+  });
+}
+
 export default {
   data() {
     return {
+      vmodel: [],
       options: []
     };
   },
@@ -63,7 +86,12 @@ export default {
       return res;
     },
 
-    handleChange(value) {}
+    change(value) {
+      let cascaderObjs = getCascaderObj(value, this.options);
+
+      this.$emit("input", cascaderObjs);
+      this.$refs.cityCascader.dropDownVisible = false;
+    }
   }
 };
 </script>
