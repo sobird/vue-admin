@@ -11,6 +11,7 @@ BIN=node_modules/.bin
 npm run build
 
 git checkout ${BRANCH}
+git rm -rf api static
 cp -r ${DIST}/* ./
 
 if (( $THIS_BRANCH == master ))
