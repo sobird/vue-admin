@@ -13,7 +13,7 @@ export function userInfo() {
   });
 }
 
-export function submit(data) {
+export function submitForm(data) {
   return axios.post("/submit", data, {
     message: "提交成功！"
   });
