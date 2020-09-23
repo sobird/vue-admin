@@ -5,8 +5,11 @@
  * @version $Id$
  */
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const rewrites = require('./rewrites.config');
 
+// 生产环境判断
+const isProd = process.env.NODE_ENV === 'production';
 module.exports = {
   // 配置webpack
   configureWebpack: config => {
@@ -17,6 +20,10 @@ module.exports = {
       threshold: 10240,
       minRatio: 0.8
     }));
+
+    config.plugins.push(new MonacoWebpackPlugin({
+			languages: ['javascript', 'json']
+		}));
   },
 
   publicPath: "",
