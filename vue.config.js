@@ -16,12 +16,12 @@ module.exports = {
   // 配置webpack
   configureWebpack: config => {
     // 开启gzip压缩
-    isProd && config.plugins.push(new CompressionWebpackPlugin({
-      algorithm: 'gzip',
-      test: /\.js$|\.html$|\.json$|\.css/,
-      threshold: 10240,
-      minRatio: 0.8
-    }));
+    // isProd && config.plugins.push(new CompressionWebpackPlugin({
+    //   algorithm: 'gzip',
+    //   test: /\.js$|\.html$|\.json$|\.css/,
+    //   threshold: 10240,
+    //   minRatio: 0.8
+    // }));
 
     config.plugins.push(new MonacoWebpackPlugin({
       languages: ['typescript', 'javascript', 'css']
