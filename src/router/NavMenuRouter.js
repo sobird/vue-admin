@@ -46,11 +46,11 @@ export default [
         }
       },
       {
-        path: "dynamic",
-        name: "dynamicForm",
-        component: () => import("@/views/form/dynamic.vue"),
+        path: "schema",
+        name: "schemaForm",
+        component: () => import("@/views/form/schema.vue"),
         meta: {
-          title: "动态表单",
+          title: "Schema表单",
           icon: "form"
         }
       },

@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { submit } from "@/models/common";
+import { submitForm } from "@/models/common";
 
 export default {
   data() {
@@ -105,7 +105,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          submit(this.basicFormModel).then(res => {
+          submitForm(this.basicFormModel).then(res => {
             console.log(res);
           });
         } else {

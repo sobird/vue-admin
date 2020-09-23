@@ -1,5 +1,7 @@
 /**
- * Description
+ * vue.config.js
+ * 
+ * @see https://cli.vuejs.org/zh/config/
  *
  * @author  Yang,junlong at 2019-02-25 20:46:28 build.
  * @version $Id$
@@ -22,8 +24,8 @@ module.exports = {
     }));
 
     config.plugins.push(new MonacoWebpackPlugin({
-			languages: ['javascript', 'json']
-		}));
+      languages: ['typescript', 'javascript', 'css']
+    }));
   },
 
   publicPath: "",
@@ -37,13 +39,13 @@ module.exports = {
     open: true,
     hot: true,
 
-    before: function(app, server) {
-      for(let path in rewrites) {
-        app.get(path, function(req, res) {
-          res.sendFile(rewrites[path], {root: __dirname});
+    before: function (app, server) {
+      for (let path in rewrites) {
+        app.get(path, function (req, res) {
+          res.sendFile(rewrites[path], { root: __dirname });
         });
-        app.post(path, function(req, res) {
-          res.sendFile(rewrites[path], {root: __dirname});
+        app.post(path, function (req, res) {
+          res.sendFile(rewrites[path], { root: __dirname });
         });
       }
     }

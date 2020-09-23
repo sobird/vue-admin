@@ -1,0 +1,92 @@
+<!--
+ - 动态表单
+ - 
+ - sobird<i@sobird.me> at 2020/07/10 15:26:36 created.
+-->
+
+<template>
+  <div>
+    <layout-view-header>
+      Schema表单是根据
+      <a href="http://json-schema.org/" target="_blank">JSON Schema</a> 后端数据模型渲染出来的表单，可以由后端动态的控制表单输入项以及简单的控制部分UI。
+    </layout-view-header>
+    {{formVmodel}}
+    <el-card shadow="never" style="border: none;">
+      <el-row type="flex" :gutter="20">
+        <el-col :span="12">
+          <el-form :model="formVmodel" label-width="100px">
+            <schema-form v-model="formVmodel.vmodel" :schema="formVmodel.schema" />
+          </el-form>
+        </el-col>
+        <el-col :span="12">
+          <div ref="monaco" class="monaco" style="height: 600px; border: 1px solid #ccc"></div>
+        </el-col>
+      </el-row>
+    </el-card>
+  </div>
+</template>
+
+<script>
+import * as monaco from "monaco-editor";
+
+import { schemaForm } from "./model";
+import SchemaForm from "./components/SchemaForm";
+
+export default {
+  components: {
+    SchemaForm
+  },
+  data() {
+    return {
+      formVmodel: {
+        schema: {},
+        vmodel: {},
+        vrules: {}
+      }
+    };
+  },
+
+  mounted() {
+    schemaForm().then(schema => {
+      console.log(schema);
+
+      this.$set(this.formVmodel, "schema", schema);
+
+      // 初始化代码编辑器
+      this.initMonacoEditor(schema);
+    });
+  },
+
+  methods: {
+    initMonacoEditor(content) {
+      let monacoEditor = monaco.editor.create(this.$refs.monaco, {
+        value: JSON.stringify(content, null, 2),
+        language: "javascript",
+        //lineNumbers: "on",
+        // 禁用右键菜单
+        contextmenu: false
+      });
+
+      monacoEditor.onDidChangeModelContent(event => {
+        console.log(event);
+      });
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+fieldset {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  // background: #ecf5ff;
+  //box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
+  legend {
+    font-weight: 500;
+    font-size: 13px;
+    padding: 0 5px;
+  }
+}
+</style>

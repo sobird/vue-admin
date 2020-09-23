@@ -158,7 +158,7 @@
 </template>
 
 <script>
-  import { submit } from '@/models/common';
+  import { submitForm } from '@/models/common';
 
   export default {
     data() {
@@ -199,7 +199,7 @@
 
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            submit(this.stepFormModel).then(res => {
+            submitForm(this.stepFormModel).then(res => {
               this.stepNum = 2;
             });
           } else {
