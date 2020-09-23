@@ -10,6 +10,8 @@ module.exports = {
     "no-trailing-spaces": ["error", { ignoreComments: true }]
   },
   parserOptions: {
+    ecmaVersion: 6,
+    sourceType: "module",
     parser: "babel-eslint"
   }
 };
