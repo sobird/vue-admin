@@ -10,13 +10,20 @@
       Schema表单是根据
       <a href="http://json-schema.org/" target="_blank">JSON Schema</a> 后端数据模型渲染出来的表单，可以由后端动态的控制表单输入项以及简单的控制部分UI。
     </layout-view-header>
-    {{formVmodel}}
     <el-card shadow="never" style="border: none;">
       <el-row type="flex" :gutter="20">
         <el-col :span="12">
-          <el-form :model="formVmodel" label-width="100px">
+          <el-form ref="schemaForm" :model="formVmodel" label-width="100px">
             <schema-form v-model="formVmodel.vmodel" :schema="formVmodel.schema" />
+
+            <el-form-item>
+              <el-button type="primary" @click="submitForm('schemaForm')">提交</el-button>
+              <el-button @click="$refs.schemaForm.resetFields()">重置</el-button>
+            </el-form-item>
           </el-form>
+
+          <h2>数据模型/Model</h2>
+          <pre>{{formVmodel.vmodel}}</pre>
         </el-col>
         <el-col :span="12">
           <div ref="monaco" class="monaco" style="height: 600px; border: 1px solid #ccc"></div>
@@ -29,6 +36,7 @@
 <script>
 import * as monaco from "monaco-editor";
 
+import { submitForm } from "@/models/common";
 import { schemaForm } from "./model";
 import SchemaForm from "./components/SchemaForm";
 
@@ -68,7 +76,27 @@ export default {
       });
 
       monacoEditor.onDidChangeModelContent(event => {
-        console.log(event);
+        let schema = monacoEditor.getValue();
+        try {
+          console.log(schema);
+          schema = JSON.parse(schema);
+          this.$set(this.formVmodel, "schema", schema);
+        } catch (e) {
+          // todo
+          console.log(e);
+        }
+      });
+    },
+
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          submitForm(this.formVmodel.vmodel).then(res => {
+            // todo
+          });
+        } else {
+          return false;
+        }
       });
     }
   }
