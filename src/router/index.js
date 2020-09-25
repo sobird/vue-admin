@@ -3,7 +3,7 @@ import Router from "vue-router";
 
 Vue.use(Router);
 
-import LayoutWithSidebar from "@/components/LayoutWithSidebar";
+import EntryWithAside from "@/components/Layout/EntryWithAside";
 import NavMenuRouter from "./NavMenuRouter";
 
 const router = new Router({
@@ -12,7 +12,7 @@ const router = new Router({
     {
       path: "/",
       name: "home",
-      component: LayoutWithSidebar,
+      component: EntryWithAside,
       children: [
         {
           path: "",

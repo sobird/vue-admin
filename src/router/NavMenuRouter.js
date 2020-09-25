@@ -4,14 +4,14 @@
  * sobird<i@sobird.me> at 2020/06/01 16:30:54 created.
  */
 
-import LayoutWithSidebar from "@/components/LayoutWithSidebar";
+import EntryWithAside from "@/components/Layout/EntryWithAside";
 
 export default [
   // 表单路由
   {
     path: "/form",
     name: "form",
-    component: LayoutWithSidebar,
+    component: EntryWithAside,
     redirect: { name: "basicForm" },
     meta: {
       title: "表单页",
@@ -70,7 +70,7 @@ export default [
   {
     path: "/component",
     name: "component",
-    component: LayoutWithSidebar,
+    component: EntryWithAside,
     redirect: { name: "cascaderComponent" },
     meta: {
       title: "组件",
@@ -93,7 +93,7 @@ export default [
   {
     path: "/project",
     name: "project",
-    component: LayoutWithSidebar,
+    component: EntryWithAside,
     children: [
       {
         path: "",

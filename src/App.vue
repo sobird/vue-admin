@@ -5,15 +5,23 @@
 </template>
 
 <script type="text/javascript">
-  import { userInfo } from '@/models/common';
+import { mapActions } from 'vuex';
+import { userInfo } from '@/models/common';
 
-  export default {
-    created() {
-      userInfo().then(userinfo => {
-        this.$store.dispatch('setUserInfo', userinfo);
-      });
-    }
-  };
+export default {
+  created() {
+    userInfo().then(res => {
+      this.userInfo(res);
+    });
+  },
+
+  methods: {
+    ...mapActions([
+      // 将 `this.userInfo()` 映射为 `this.$store.dispatch('userInfo')`
+      'userInfo',
+    ]),
+  },
+};
 </script>
 
 <style lang="scss">
@@ -34,19 +42,5 @@ body {
   height: 100%;
   width: 100%;
   overflow-y: hidden;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-
-.el-form .el-form-item {
-  
 }
 </style>

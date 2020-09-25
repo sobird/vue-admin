@@ -6,26 +6,28 @@
 -->
 
 <template>
-  <div id="mix-header">
-    <div class="header-container">
-      <div :class="['header-brand', {'widthoutSibrbar': !hasSidebar}]">
-        <a href="/">
-          <span class="mi-logo"></span>
+  <header id="header">
+    <div class="container">
+      <div :class="['header-brand', {'with-aside': withAside}]">
+        <a href="/" title="Vue-Element-Pro">
+          <span class="logo"></span>
+          <span class="text">
+            <slot></slot>
+          </span>
         </a>
-        <slot></slot>
       </div>
 
-      <div class="header-navbar">
+      <div class="header-bread">
         <el-row type="flex">
           <el-col :span="12">
-            <el-button v-if="hasSidebar" type="text" class="hamburger" @click="toggleSidebar">
+            <el-button v-if="withAside" type="text" class="hamburger" @click="toggleAside">
               <i class="iconfont icon-bars"></i>
             </el-button>
           </el-col>
           <el-col :span="12" style="text-align: right;">
             <Environment />
 
-            <ul class="navbar-right">
+            <ul class="nav-main">
               <li>
                 <a title="项目地址" href="https://github.com/yangjunlong/vue-element-pro">
                   <i class="iconfont icon-git"></i>
@@ -39,12 +41,12 @@
                       <li class="divided"></li>
                       <li @click="setting">
                         设置
-                        <i class="iconfont icon-setting pull-right"></i>
+                        <i class="iconfont icon-setting"></i>
                       </li>
                       <li>
                         <a @click="logout">
                           退出
-                          <i class="iconfont icon-logout pull-right"></i>
+                          <i class="iconfont icon-logout"></i>
                         </a>
                       </li>
                     </ul>
@@ -60,33 +62,33 @@
         </el-row>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-import { TOGGLE_SIDEBAR } from "@/store/mutation-types";
-import { userInfo } from "../models/common";
-import Environment from "@/components/Environment.vue";
+import { mapState, mapMutations } from 'vuex';
+import { TOGGLE_ASIDE } from '@/store/mutation-types';
+import { userInfo } from '@/models/common';
+import Environment from '@/components/Environment.vue';
 
 export default {
-  name: "LayoutHeader",
+  name: 'LayoutHeader',
   components: {
-    Environment
+    Environment,
   },
   data() {
     return {};
   },
 
   props: {
-    hasSidebar: {
+    withAside: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
   computed: {
-    ...mapState(["userinfo"])
+    ...mapState(['userinfo']),
   },
 
   created() {
@@ -95,25 +97,23 @@ export default {
   methods: {
     logout() {
       var baseURL = this.$axios.defaults.baseURL;
-      window.location.href = `${baseURL}/logout?from=${encodeURIComponent(
-        window.location.href
-      )}`;
+      window.location.href = `${baseURL}/logout?from=${encodeURIComponent(window.location.href)}`;
     },
 
     setting() {
-      console.log("setting");
+      console.log('setting');
     },
 
     ...mapMutations({
-      // 将 `this.toggleSidebar()` 映射为 `this.$store.commit(TOGGLE_SIDEBAR)`
-      toggleSidebar: TOGGLE_SIDEBAR
-    })
-  }
+      // 将 `this.toggleAside()` 映射为 `this.$store.commit(TOGGLE_ASIDE)`
+      toggleAside: TOGGLE_ASIDE,
+    }),
+  },
 };
 </script>
 
 <style lang="scss">
-#mix-header {
+#header {
   //background-color: #ddd;
   background-color: hsla(0, 0%, 100%, 0.95);
   -webkit-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
@@ -121,26 +121,25 @@ export default {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   position: relative;
   z-index: 100;
+  .container {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    flex-basis: auto;
+    box-sizing: border-box;
+    //background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
+  }
 }
-.header-container {
-  padding: 0 20px;
-  display: flex;
-  flex-direction: row;
-  flex-basis: auto;
-  box-sizing: border-box;
-  //background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
-}
-.mi-logo {
+
+.logo {
   width: 32px;
   height: 32px;
-  background: #fff url("../assets/logo.png") no-repeat center; // #ff6700
+  background: #fff url('../../assets/logo.png') no-repeat center; // #ff6700
   background-size: contain;
   border-radius: 2px;
   vertical-align: middle;
   display: inline-block;
   margin-right: 10px;
-  &:hover {
-  }
 }
 
 .header-brand {
@@ -152,19 +151,26 @@ export default {
   padding-left: 16px;
   color: #fff;
   transition: width 0.3s;
-  .mi-logo {
+  .logo {
     // display: none;
   }
 }
+// 侧边栏 头部样式
+.with-aside {
+  background-color: rgb(0, 21, 41);
+  .text {
+    color: #fff;
+  }
+}
 
-.header-navbar {
+.header-bread {
   flex: 1;
   flex-basis: auto;
   height: 48px;
   line-height: 48px;
 }
 
-.navbar-right {
+.nav-main {
   display: inline-block;
   margin: 0;
   list-style: none;
@@ -185,41 +191,29 @@ export default {
   }
 }
 
-.layout-sidebar {
-  .header-brand {
-    background-color: #304567;
-    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.15);
-    //background: rgb(0, 33, 64);
-    //background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
-    a {
-      color: #fff;
-    }
-  }
-}
-
 .userinfo {
   margin-left: 10px;
-}
+  .avatar {
+    background-color: #3da8f5;
+    width: 36px;
+    height: 36px;
+    display: inline-block;
 
-.avatar {
-  background-color: #3da8f5;
-  width: 36px;
-  height: 36px;
-  display: inline-block;
+    border-radius: 50%;
 
-  border-radius: 50%;
+    text-align: center;
+    line-height: 36px;
+    font-size: 20px;
 
-  text-align: center;
-  line-height: 36px;
-  font-size: 20px;
+    color: #fff;
 
-  color: #fff;
-
-  font-weight: bold;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-  &:hover {
-    box-shadow: 0px 0px 5px 2px #eee;
-    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+    vertical-align: middle;
+    &:hover {
+      box-shadow: 0px 0px 5px 2px #eee;
+      cursor: pointer;
+    }
   }
 }
 
@@ -259,18 +253,6 @@ export default {
   }
   .iconfont {
     font-size: 20px;
-  }
-}
-
-// 不带侧边栏 头部样式
-.widthoutSibrbar {
-  width: inherit;
-  margin-left: inherit;
-  .logo {
-    display: none;
-  }
-  .mi-logo {
-    display: inline-block;
   }
 }
 </style>

@@ -59,8 +59,8 @@ const store = new Vuex.Store({
    */
   state: {
     routerViewKey: +new Date(),
-    sidebar: {
-      collapse: VueCookie.get("sidebarStatus") == 1 ? true : false
+    aside: {
+      collapse: VueCookie.get("asideStatus") == 1 ? true : false
     },
     // 账户登录相关state
     userinfo: {}
@@ -79,8 +79,8 @@ const store = new Vuex.Store({
    * mapGetters 可以将store中的getter映射到局部计算属性
    */
   getters: {
-    sidebar: function(state) {
-      return state.sidebar;
+    aside: function(state) {
+      return state.aside;
     },
     userinfo: state => state.userinfo
   },
@@ -106,24 +106,24 @@ const store = new Vuex.Store({
       state.routerViewKey = +new Date();
     },
     
-    [types.TOGGLE_SIDEBAR]: state => {
-      if (state.sidebar.collapse) {
-        VueCookie.set("sidebarStatus", 0);
+    [types.TOGGLE_ASIDE]: state => {
+      if (state.aside.collapse) {
+        VueCookie.set("asideStatus", 0);
       } else {
-        VueCookie.set("sidebarStatus", 1);
+        VueCookie.set("asideStatus", 1);
       }
-      state.sidebar.collapse = !state.sidebar.collapse;
+      state.aside.collapse = !state.aside.collapse;
 
       // 主动触发window.resize事件
       setTimeout(() => {
         window.dispatchEvent(new Event("resize"));
       }, 300);
     },
-    [types.CLOSE_SIDEBAR]: state => {
-      VueCookie.set("sidebarStatus", 0);
-      state.sidebar.collapse = false
+    [types.CLOSE_ASIDE]: state => {
+      VueCookie.set("asideStatus", 0);
+      state.aside.collapse = false
     },
-    [types.SET_USERINFO]: (state, payload) => {
+    [types.USERINFO]: (state, payload) => {
       state.userinfo = payload;
     }
   },
@@ -156,11 +156,12 @@ const store = new Vuex.Store({
     refreshRouteView({ commit }) {
       commit(types.REFRESH_ROUTE_VIEW);
     },
-    toggleSideBarCollapse({ commit, state }) {
-      commit(types.TOGGLE_SIDEBAR);
+    toggleAside({ commit, state }) {
+      commit(types.TOGGLE_ASIDE);
     },
-    setUserInfo({ commit }, payload) {
-      commit(types.SET_USERINFO, payload);
+    // 设置用户信息
+    userInfo({ commit }, payload) {
+      commit(types.USERINFO, payload);
     }
   },
 

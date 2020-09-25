@@ -4,14 +4,14 @@ import Home from './views/Home.vue';
 
 Vue.use(Router);
 
-import LayoutWithSidebar from '@/components/LayoutWithSidebar';
+import EntryWithAside from '@/components/EntryWithAside';
 
 export default new Router({
   routes: [
     {
       path: '/',
       name: 'home',
-      component: LayoutWithSidebar,
+      component: EntryWithAside,
       children: [
         {
           path: '',
@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/form',
       name: 'form',
-      component: LayoutWithSidebar,
+      component: EntryWithAside,
       redirect: { name: 'basicForm' },
       meta: {
         title: '表单页',
@@ -71,7 +71,7 @@ export default new Router({
     {
       path: '/component',
       name: 'component',
-      component: LayoutWithSidebar,
+      component: EntryWithAside,
       redirect: { name: 'cascaderComponent' },
       meta: {
         title: '组件',
@@ -93,7 +93,7 @@ export default new Router({
     {
       path: '/project',
       name: 'project',
-      component: LayoutWithSidebar,
+      component: EntryWithAside,
       children: [
         {
           path: '',

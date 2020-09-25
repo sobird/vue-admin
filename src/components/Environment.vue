@@ -24,15 +24,15 @@
 <script>
 const envs = [
   {
-    value: "github",
-    label: "线上",
-    url: "//yangjunlong.github.io/"
+    value: 'github',
+    label: '线上',
+    url: '//yangjunlong.github.io/',
   },
   {
-    value: "dev",
-    label: "线下",
-    url: "//sobird.me/"
-  }
+    value: 'dev',
+    label: '线下',
+    url: '//sobird.me/',
+  },
 ];
 
 export default {
@@ -40,12 +40,12 @@ export default {
     return {
       // 当前环境, 默认为本地开发环境
       env: {
-        value: "local",
-        label: "本地环境"
+        value: 'local',
+        label: '本地环境',
       },
 
       // 环境列表
-      envs: []
+      envs: [],
     };
   },
   mounted() {
@@ -61,7 +61,7 @@ export default {
     });
 
     this.envs = _envs;
-  }
+  },
 };
 </script>
 

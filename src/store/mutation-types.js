@@ -7,13 +7,13 @@
  */
 
  // 左侧菜单折叠展开mutation
-export const TOGGLE_SIDEBAR = "TOGGLE_SIDEBAR";
+export const TOGGLE_ASIDE = "TOGGLE_ASIDE";
 // 关闭左侧菜单栏
-export const CLOSE_SIDEBAR = "CLOSE_SIDEBAR";
+export const CLOSE_ASIDE = "CLOSE_ASIDE";
 
 // 刷新路由视图 <router-view :key="" />
 export const REFRESH_ROUTE_VIEW = "REFRESH_ROUTE_VIEW";
 
 // 设置用户信息
-export const SET_USERINFO = "SET_USERINFO";
+export const USERINFO = "USERINFO";
 

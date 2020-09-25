@@ -10,11 +10,14 @@ import 'normalize.css';
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import '@/themes/default.scss';
 
 import i18n from './lang';
-import App from './App.vue';
 import router from './router';
 import store from './store';
+import '@/components';
+
+import App from './App.vue';
 
 Vue.config.productionTip = false;
 
@@ -29,10 +32,6 @@ Vue.use(ElementUI, {
 Vue.directive('view-title', function(el, binding) {
   document.title = binding.value || 'Vue Element Pro';
 });
-
-// 注册全局组件
-import LayoutViewHeader from '@/components/LayoutViewHeader.vue';
-Vue.component('LayoutViewHeader', LayoutViewHeader);
 
 new Vue({
   router,
