@@ -9,27 +9,12 @@
 <p align="center">基于Vue+ElementUI的后台管理系统框架</p>
 <p align="center"><a href="https://yangjunlong.github.io/vue-element-pro/">预览</a></p>
 
-## Project setup
+## 快速开始
 ```
-npm install
+// 安装依赖
+npm i
+
+// 启动项目
+npm start
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
