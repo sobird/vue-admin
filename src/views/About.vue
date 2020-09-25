@@ -5,21 +5,18 @@
 </template>
 
 <script>
-  export default {
-  	data() {
-  	  return {
-  	  	name: 'foo'
-  	  }
-  	},
+export default {
+  data() {
+    return {
+      name: 'foo',
+    };
+  },
 
-
-  	mounted() {
-  	  this.$on('test', function(name) {
-  	  	this.name = name;
-  	  });
-  	  this.$emit('test', 'bar');
-
-  	  console.log(this.$parent);
-  	},
-  };
+  mounted() {
+    this.$on('test', function(name) {
+      this.name = name;
+    });
+    this.$emit('test', 'bar');
+  },
+};
 </script>

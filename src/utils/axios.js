@@ -64,7 +64,6 @@ axios.interceptors.response.use(
 
     // 数据请求成功结果
     if (data.code == 0) {
-      console.log(config);
       // todo something
       config.message && Message.success(config.message);
       if (data.code == undefined) {
@@ -95,7 +94,7 @@ let _cache = {};
 let urls = [];
 METHODS.forEach(method => {
   let _timer = null;
-  _axios[method] = function(url, data = {}) {
+  _axios[method] = function (url, data = {}) {
     // get 参数唯一性
     url = md5(url + querystring.stringify(data.params));
 

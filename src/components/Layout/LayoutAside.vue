@@ -80,9 +80,7 @@ export default {
     },
   },
   created() {},
-  mounted() {
-    console.log(this.$router);
-  },
+  mounted() {},
 };
 </script>
 

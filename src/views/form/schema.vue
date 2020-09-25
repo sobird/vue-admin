@@ -34,31 +34,29 @@
 </template>
 
 <script>
-import * as monaco from "monaco-editor";
+import * as monaco from 'monaco-editor';
 
-import { submitForm } from "@/models/common";
-import { schemaForm } from "./model";
-import SchemaForm from "./components/SchemaForm";
+import { submitForm } from '@/models/common';
+import { schemaForm } from './model';
+import SchemaForm from './components/SchemaForm';
 
 export default {
   components: {
-    SchemaForm
+    SchemaForm,
   },
   data() {
     return {
       formVmodel: {
         schema: {},
         vmodel: {},
-        vrules: {}
-      }
+        vrules: {},
+      },
     };
   },
 
   mounted() {
     schemaForm().then(schema => {
-      console.log(schema);
-
-      this.$set(this.formVmodel, "schema", schema);
+      this.$set(this.formVmodel, 'schema', schema);
 
       // 初始化代码编辑器
       this.initMonacoEditor(schema);
@@ -69,21 +67,19 @@ export default {
     initMonacoEditor(content) {
       let monacoEditor = monaco.editor.create(this.$refs.monaco, {
         value: JSON.stringify(content, null, 2),
-        language: "javascript",
+        language: 'javascript',
         //lineNumbers: "on",
         // 禁用右键菜单
-        contextmenu: false
+        contextmenu: false,
       });
 
       monacoEditor.onDidChangeModelContent(event => {
         let schema = monacoEditor.getValue();
         try {
-          console.log(schema);
           schema = JSON.parse(schema);
-          this.$set(this.formVmodel, "schema", schema);
+          this.$set(this.formVmodel, 'schema', schema);
         } catch (e) {
           // todo
-          console.log(e);
         }
       });
     },
@@ -98,8 +94,8 @@ export default {
           return false;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

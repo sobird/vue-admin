@@ -76,43 +76,39 @@
 </template>
 
 <script>
-import { submitForm } from "@/models/common";
+import { submitForm } from '@/models/common';
 
 export default {
   data() {
     return {
       basicFormModel: {
-        name: "",
-        region: "",
-        date: "",
+        name: '',
+        region: '',
+        date: '',
         delivery: false,
         type: [],
-        resource: "",
-        desc: ""
+        resource: '',
+        desc: '',
       },
       basicFormRules: {
         name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
         ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
-        ]
-      }
+        region: [{ required: true, message: '请选择活动区域', trigger: 'change' }],
+      },
     };
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          submitForm(this.basicFormModel).then(res => {
-            console.log(res);
-          });
+          submitForm(this.basicFormModel).then(res => {});
         } else {
           return false;
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>

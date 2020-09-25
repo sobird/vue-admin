@@ -103,8 +103,6 @@ export default {
       // 地理逆编码
       this.getLocation = function(point, callback) {
         geocoder.getLocation(address, address => {
-          console.log(address);
-
           callback(map);
         });
       };

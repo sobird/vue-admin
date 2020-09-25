@@ -326,7 +326,6 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           submitForm(this.advancedFormModel).then(res => {
-            console.log(res);
           });
         } else {
           return false;

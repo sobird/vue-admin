@@ -59,7 +59,6 @@ export default {
       let data = areaData[areaCode];
       let res = [];
 
-      //console.log(data);
       if (!data) {
         return;
       }

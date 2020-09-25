@@ -91,18 +91,14 @@ export default {
     ...mapState(['userinfo']),
   },
 
-  created() {
-    console.log(this, 1212);
-  },
+  created() {},
   methods: {
     logout() {
       var baseURL = this.$axios.defaults.baseURL;
       window.location.href = `${baseURL}/logout?from=${encodeURIComponent(window.location.href)}`;
     },
 
-    setting() {
-      console.log('setting');
-    },
+    setting() {},
 
     ...mapMutations({
       // 将 `this.toggleAside()` 映射为 `this.$store.commit(TOGGLE_ASIDE)`
