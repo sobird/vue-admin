@@ -33,6 +33,11 @@
                   <i class="iconfont icon-git"></i>
                 </a>
               </li>
+              <li>
+                <a>
+                <Fullscreen />
+                </a>
+              </li>
               <li v-if="userinfo.username" class="userinfo">
                 <el-popover popper-class="user-dropdown-menu" v-cloak width="250" trigger="hover">
                   <div>
@@ -70,11 +75,13 @@ import { mapState, mapMutations } from 'vuex';
 import { TOGGLE_ASIDE } from '@/store/mutation-types';
 import { userInfo } from '@/models/common';
 import Environment from '@/components/Environment.vue';
+import Fullscreen from '@/components/Fullscreen.vue';
 
 export default {
   name: 'LayoutHeader',
   components: {
     Environment,
+    Fullscreen,
   },
   data() {
     return {};
@@ -172,12 +179,14 @@ export default {
   list-style: none;
   li {
     display: inline-block;
-    margin: 0 5px;
+    .iconfont {
+      font-size: 18px;
+    }
     a {
       color: #000;
       height: 48px;
       display: inline-block;
-      padding: 0 10px;
+      padding: 0 8px;
 
       &:hover {
         color: #333;
@@ -191,21 +200,20 @@ export default {
   margin-left: 10px;
   .avatar {
     background-color: #3da8f5;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     display: inline-block;
 
     border-radius: 50%;
 
     text-align: center;
-    line-height: 36px;
-    font-size: 20px;
+    line-height: 32px;
+    font-size: 18px;
 
     color: #fff;
 
     font-weight: bold;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-    vertical-align: middle;
     &:hover {
       box-shadow: 0px 0px 5px 2px #eee;
       cursor: pointer;

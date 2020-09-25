@@ -19,6 +19,7 @@
     "monaco-editor": "^0.21.0",
     "monaco-editor-webpack-plugin": "^2.0.0",
     "normalize.css": "^8.0.1",
+    "screenfull": "^5.0.2",
     "vue": "^2.6.12",
     "vue-i18n": "^8.21.1",
     "vue-router": "^3.4.3",
