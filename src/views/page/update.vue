@@ -42,7 +42,7 @@ export default {
     submit(vmodel) {
       updatePage(vmodel).then(res => {
         this.$router.push({
-          name: 'myapp',
+          name: 'myApp',
         });
       });
     },

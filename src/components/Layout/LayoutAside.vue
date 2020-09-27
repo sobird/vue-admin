@@ -33,7 +33,7 @@
             <span>应用管理</span>
           </template>
 
-          <el-menu-item index="/application/myapp">
+          <el-menu-item index="/application/my">
             <span slot="title">我的应用</span>
           </el-menu-item>
 

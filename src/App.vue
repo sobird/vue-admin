@@ -43,7 +43,11 @@ body {
   width: 100%;
   overflow-y: hidden;
 }
+
 .iconfont{
   font-size: 12px;
+}
+.el-input-group__append, .el-input-group__prepend {
+  padding: 0 10px;
 }
 </style>

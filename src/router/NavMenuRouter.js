@@ -19,9 +19,9 @@ export default [
     },
     children: [
       {
-        path: "myapp",
-        name: "myapp",
-        component: () => import("@/views/application/myapp.vue"),
+        path: "my",
+        name: "myApp",
+        component: () => import("@/views/application/my.vue"),
         meta: {
           title: "我的应用",
           icon: "application"

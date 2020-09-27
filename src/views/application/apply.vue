@@ -32,7 +32,7 @@ export default {
     submit(vmodel) {
       applyApp(vmodel).then(res => {
         this.$router.push({
-          name: 'myapp',
+          name: 'myApp',
         });
       });
     },

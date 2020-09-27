@@ -22,10 +22,10 @@
     <el-form-item label="页面标题" prop="title">
       <el-input clearable v-model="pageFormModel.title" placeholder="请填写页面标题"></el-input>
     </el-form-item>
-    <el-form-item label="所属应用" prop="appDomain">
+    <el-form-item label="所属应用" prop="appName">
       <el-select
         clearable
-        v-model="pageFormModel.appDomain"
+        v-model="pageFormModel.appName"
         placeholder="请选择页面所属应用"
         style="width: 100%;"
       >
@@ -40,7 +40,7 @@
         placeholder="请输入页面路径"
         v-model="pageFormModel.path"
       >
-        <template slot="prepend">http://example.com/{{pageFormModel.appDomain}}</template>
+        <template slot="prepend">http://example.com/app/{{ pageFormModel.appName ?  pageFormModel.appName : '{appName}'}}</template>
       </el-input>
     </el-form-item>
 
@@ -67,7 +67,7 @@
         @click="
           () => {
             $router.push({
-              name: 'myapp',
+              name: 'myPage',
             });
           }
         "
@@ -85,7 +85,7 @@ export default {
       pageFormModel: {
         name: '',
         title: '',
-        appDomain: '',
+        appName: '',
         path: '',
         access: '',
         description: '',
@@ -155,7 +155,7 @@ export default {
           Object.assign(this.pageFormModel, vmodel);
         }
       },
-      deep: true
+      deep: true,
     },
   },
 };

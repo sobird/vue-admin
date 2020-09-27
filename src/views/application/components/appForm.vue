@@ -18,8 +18,8 @@
         应用名一旦申请不可修改，请确认后提交
       </span>
     </el-form-item>
-    <el-form-item label="中文名" prop="cname">
-      <el-input v-model="appFormModel.cname" placeholder="请填写应用中文名"></el-input>
+    <el-form-item label="中文名" prop="title">
+      <el-input v-model="appFormModel.title" placeholder="请填写应用中文名"></el-input>
     </el-form-item>
     <el-form-item label="所属团队" prop="teamId">
       <el-select
@@ -31,20 +31,32 @@
         <el-option label="上海团队" value="shanghai"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="访问链接" prop="domain">
+    <el-form-item label="访问链接" prop="slug">
       <el-input
-        :disabled="mode == 'update'"
-        placeholder="请输入应用域"
-        v-model="appFormModel.domain"
+        disabled
+        placeholder="应用路径"
+        v-model="appFormModel.name"
       >
-        <template slot="prepend">http://example.com/</template>
+        <template slot="prepend">http://example.com/app/</template>
       </el-input>
+    </el-form-item>
+
+    <el-form-item label="域名" prop="domain">
+      <el-input
+        v-model="appFormModel.domain"
+        placeholder="请填写域名"
+        @input="nameChange"
+      ></el-input>
+      <span class="item-tip">
+        <i class="el-icon-info"></i>
+        填写域名后，访问以上链接，应用将会跳转到该地址
+      </span>
     </el-form-item>
 
     <el-form-item label="访问权限" prop="access">
       <el-radio-group v-model="appFormModel.access">
-        <el-radio label="公开"></el-radio>
-        <el-radio label="私有"></el-radio>
+        <el-radio label="PUBLIC">公开</el-radio>
+        <el-radio label="PRIVATE">私有</el-radio>
       </el-radio-group>
     </el-form-item>
 
@@ -64,7 +76,7 @@
         @click="
           () => {
             $router.push({
-              name: 'myapp',
+              name: 'myApp',
             });
           }
         "
@@ -81,10 +93,10 @@ export default {
     return {
       appFormModel: {
         name: '',
-        cname: '',
+        title: '',
         teamId: '',
         domain: '',
-        access: '',
+        access: 'PUBLIC',
         description: '',
       },
       appFormRules: {
@@ -97,18 +109,7 @@ export default {
           },
           { min: 1, max: 32, message: '总长不超过32个字符', trigger: 'change' },
         ],
-
-        domain: [
-          { required: true, message: '请输入应用域', trigger: 'blur' },
-          {
-            pattern: /(^[A-Za-z0-9_]+$)/,
-            message: '由数字下划线或小写字母组成',
-            trigger: 'change',
-          },
-          { min: 1, max: 32, message: '总长不超过32个字符', trigger: 'change' },
-        ],
-
-        cname: [{ required: true, message: '请填写应用中文名', trigger: 'blur' }],
+        title: [{ required: true, message: '请填写应用中文名', trigger: 'blur' }],
         teamId: [{ required: true, message: '请选择应用所属团队', trigger: 'blur' }],
 
         description: [
@@ -142,9 +143,6 @@ export default {
   mounted() {},
 
   methods: {
-    nameChange(name) {
-      this.$set(this.appFormModel, 'domain', name);
-    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {

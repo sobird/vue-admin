@@ -11,7 +11,7 @@ import axios from "@/utils/axios";
  * 
  * @param {Object} data 
  */
-export function myapp(data = {}) {
+export function myApp(data = {}) {
   return axios.get("/app/my.json", {
     params: data,
     message: ""

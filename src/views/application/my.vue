@@ -26,14 +26,13 @@
       </template>
     </layout-view-header>
 
-    <el-table :data="appPaginationModel.list" style="width: 100%">
+    <el-table :data="appPaginationModel.items" style="width: 100%">
       <el-table-column prop="name" label="应用名称"></el-table-column>
+      <el-table-column prop="title" label="应用中文名"></el-table-column>
 
-      <el-table-column prop="cname" label="应用中文名"></el-table-column>
+      <el-table-column prop="teamId" label="所属团队"></el-table-column>
 
-      <el-table-column prop="createTime" label="所属团队"></el-table-column>
-
-      <el-table-column prop="createTime" label="是否公共服务"></el-table-column>
+      <el-table-column prop="accessLabel" label="访问权限"></el-table-column>
 
       <el-table-column prop="owner" label="负责人"></el-table-column>
 
@@ -67,7 +66,7 @@
 </template>
 
 <script type="text/javascript">
-import { myapp } from './model';
+import { myApp } from './model';
 
 export default {
   data() {
@@ -76,7 +75,7 @@ export default {
       appPaginationModel: {
         pt: 0,
         pn: 1,
-        list: [],
+        items: [],
       },
       projectList: [],
 
@@ -112,7 +111,7 @@ export default {
 
   methods: {
     onPaginationChange(query) {
-      myapp(query).then(res => {
+      myApp(query).then(res => {
         this.appPaginationModel = res;
       });
     },

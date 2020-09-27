@@ -100,7 +100,7 @@
 
 <script type="text/javascript">
 import { myPage } from './model';
-import { myapp } from '@/views/application/model';
+import { myApp } from '@/views/application/model';
 
 import debounce from 'lodash/debounce';
 
@@ -138,7 +138,7 @@ export default {
     this.onPaginationChange(query);
 
     // 加载所属应用列表
-    // myapp().then(res => {
+    // myApp().then(res => {
     //   this.appOptions = res;
     // });
   },
