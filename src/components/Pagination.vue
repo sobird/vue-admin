@@ -53,10 +53,10 @@ export default {
   },
   created() {
     const { query } = this.$route;
-    this.pn = Number(query.page);
-    this.ps = Number(query.limit) || Number(Cookies.get('ps')) || this.ps;
+    this.pn = Number(query.pn);
+    this.ps = Number(query.ps) || Number(Cookies.get('ps')) || this.ps;
 
-    query.limit = this.ps;
+    query.ps = this.ps;
   },
   methods: {
     // 页码变化

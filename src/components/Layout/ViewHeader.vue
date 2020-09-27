@@ -68,6 +68,7 @@ export default {
   h2 {
     .iconfont {
       margin-right: 5px;
+      font-size: inherit;
     }
   }
   .el-tabs {

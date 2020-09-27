@@ -8,4 +8,6 @@ module.exports = {
   '/api/userinfo': '/public/api/userinfo.json',
   '/api/charts/analysis': '/public/api/charts/analysis.json',
   '/api/submit': '/public/api/submit.json',
+
+  '/api/app/apply.json': '/public/api/app/apply.json',
 }

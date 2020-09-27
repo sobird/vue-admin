@@ -27,6 +27,17 @@
           </el-menu-item>
         </el-submenu>
 
+        <el-submenu index="/application">
+          <template slot="title">
+            <i class="iconfont icon-application"></i>
+            <span>应用管理</span>
+          </template>
+
+          <el-menu-item index="/application/myapp">
+            <span slot="title">我的应用</span>
+          </el-menu-item>
+        </el-submenu>
+
         <el-submenu index="/form">
           <template slot="title">
             <i class="iconfont icon-form"></i>
@@ -80,7 +91,9 @@ export default {
     },
   },
   created() {},
-  mounted() {},
+  mounted() {
+    console.log(this.$router.options);
+  },
 };
 </script>
 

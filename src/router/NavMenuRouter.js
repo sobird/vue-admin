@@ -7,6 +7,46 @@
 import EntryWithAside from "@/components/Layout/EntryWithAside";
 
 export default [
+  // 应用管理
+  {
+    path: "/application",
+    name: "application",
+    component: EntryWithAside,
+    redirect: { name: "basicForm" },
+    meta: {
+      title: "应用管理",
+      icon: "application"
+    },
+    children: [
+      {
+        path: "myapp",
+        name: "myapp",
+        component: () => import("@/views/application/myapp.vue"),
+        meta: {
+          title: "我的应用",
+          icon: "application"
+        }
+      },
+      {
+        path: "apply",
+        name: "applyApp",
+        component: () => import("@/views/application/apply.vue"),
+        meta: {
+          title: "申请新应用",
+          icon: "application"
+        }
+      },
+      {
+        path: "amend",
+        name: "amendApp",
+        component: () => import("@/views/application/amend.vue"),
+        meta: {
+          title: "修改应用",
+          icon: "application"
+        }
+      }
+    ]
+  },
   // 表单路由
   {
     path: "/form",

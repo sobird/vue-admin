@@ -31,7 +31,7 @@ import LayoutHeader from './LayoutHeader';
 import LayoutAside from './LayoutAside';
 
 export default {
-  name: 'Layout',
+  name: 'EntryWithAside',
   components: {
     LayoutHeader,
     LayoutAside,
@@ -41,18 +41,6 @@ export default {
   },
   mounted() {
     // todo something
-  },
-  watch: {
-    $route: function(newValue, oldValue) {
-      var wrap = this.$refs['contentScrollbar'].$refs['wrap'];
-      var resize = this.$refs['contentScrollbar'].$refs['resize'];
-
-      wrap.scrollTop = 0;
-
-      this.$nextTick(() => {
-        this.$refs['contentScrollbar'].update();
-      });
-    },
   },
 };
 </script>
