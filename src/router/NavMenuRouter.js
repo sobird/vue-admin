@@ -47,6 +47,48 @@ export default [
       }
     ]
   },
+
+  // 页面管理
+  {
+    path: "/page",
+    name: "page",
+    component: EntryWithAside,
+    redirect: { name: "myPage" },
+    meta: {
+      title: "页面管理",
+      icon: "page"
+    },
+    children: [
+      {
+        path: "my",
+        name: "myPage",
+        component: () => import("@/views/page/my.vue"),
+        meta: {
+          title: "我的页面",
+          icon: "page"
+        }
+      },
+      {
+        path: "create",
+        name: "createPage",
+        component: () => import("@/views/page/create.vue"),
+        meta: {
+          title: "新建页面",
+          icon: "page"
+        }
+      },
+      {
+        path: "update",
+        name: "updatePage",
+        component: () => import("@/views/page/update.vue"),
+        meta: {
+          title: "更新页面",
+          icon: "page"
+        }
+      }
+    ]
+  },
+
   // 表单路由
   {
     path: "/form",

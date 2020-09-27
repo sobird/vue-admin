@@ -10,4 +10,5 @@ module.exports = {
   '/api/submit': '/public/api/submit.json',
 
   '/api/app/apply.json': '/public/api/app/apply.json',
+  '/api/page/create.json': '/public/api/page/create.json',
 }

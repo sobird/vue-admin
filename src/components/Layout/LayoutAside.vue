@@ -36,6 +36,10 @@
           <el-menu-item index="/application/myapp">
             <span slot="title">我的应用</span>
           </el-menu-item>
+
+          <el-menu-item index="/page/my">
+            <span slot="title">我的页面</span>
+          </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/form">
