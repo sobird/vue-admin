@@ -42,8 +42,7 @@ const presetenv = require('@babel/preset-env');
 
 function js() {
   return src('src/*.js', { sourcemaps: true })
-    //.pipe(concat('all.js'))
-    .pipe(dest('output', { sourcemaps: true }))
+  .pipe(dest('output', { sourcemaps: true }));
 }
 
 function toFunction(code) {
@@ -98,7 +97,7 @@ function vue() {
       return stream;
     })())
     .pipe(src('src/App.vue'))
-    .pipe(through2.obj(function (file, enc, cb) {
+    .pipe(through2.obj(async function (file, enc, cb) {
       if (file.isBuffer()) {
         let content = file.contents.toString();
 
@@ -137,25 +136,41 @@ function vue() {
             }]],
           });
 
+          // const bundle = await rollup.rollup({
+          //   input: babelResult.code,
+          //   plugins: [
+          //     rollupTypescript()
+          //   ]
+          // });
+
+          // // generate code and a sourcemap
+          // const { code, map } = await bundle.generate(outputOptions);
+
           //console.log(babelResult.code);
-          file.contents = Buffer.from(babelResult.code)
+          file.contents = Buffer.from(sfcDescriptor.script.content)
         }
 
 
 
       }
 
-      // file.extname = '.jsx';
+      file.extname = '.js';
       cb(null, file);
     }))
     .pipe(dest('output', { sourcemaps: true }))
+    .pipe(js())
+    .pipe(through2.obj(function (file, enc, cb) {
+      console.log(file.path);
+
+      cb(null, file);
+    }))
 }
 
-watch('src/**/*.vue', vue);
+//watch('src/**/*.vue', vue);
 
-gulp.task('build', async function () {
+gulp.task('build', async () => {
   const bundle = await rollup.rollup({
-    input: './src/gulp/main.ts',
+    input: './output/App.js',
     plugins: [
       rollupTypescript()
     ]

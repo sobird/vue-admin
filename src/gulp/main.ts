@@ -4,10 +4,14 @@
  * sobird<i@sobird.me> at 2020/09/29 16:29:35 created.
  */
 
-class main {
+import Vue from 'vue';
+
+console.log(Vue);
+
+class Test {
   constructor() {}
 }
 
-let m = new main();
+let t = new Test();
 
-console.log(m);
+console.log(t);
