@@ -50,3 +50,9 @@ body {
   padding: 0 10px;
 }
 </style>
+
+<style lang="less" scoped>
+.test {
+  color: red;
+}
+</style>

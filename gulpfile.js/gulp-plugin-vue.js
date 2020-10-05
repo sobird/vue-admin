@@ -7,6 +7,10 @@
 const through = require('through2');
 const compiler = require('vue-template-compiler');
 const transpile = require('vue-template-es2015-compiler');
+const gulp = require('gulp');
+const Vinyl = require('vinyl');
+
+console.log(gulp.src.toString());
 
 /**
  * compile template to:
@@ -125,7 +129,7 @@ module.exports = function () {
     }
 
     // 处理样式
-    let styles = [];
+    let styles = {};
     descriptor.styles.forEach(item => {
       if (!item.content) {
         return;
@@ -135,7 +139,27 @@ module.exports = function () {
       if (/^\s*$/.test(item.content)) {
         return;
       }
+
+      let style = styles[item.lang || 'css'];
+
+      if (!style) {
+        style = styles[item.lang || 'css'] = [];
+      }
+
+      style.push(item.content);
     });
+
+    for (let lang in styles) {
+      let style = styles[lang];
+      if (style.length) {
+
+        let styleFile = file.clone();
+        styleFile.contents = Buffer.from(style.join('\n'));
+        styleFile.extname = '.' + lang;
+
+        this.push(styleFile);
+      }
+    }
 
     file.contents = Buffer.from(codes.join('\n'));
     file.extname = '.js';
@@ -143,7 +167,6 @@ module.exports = function () {
     callback(null, file);
   }, callback => {
     // 
-    console.log(122);
     callback();
   });
 }

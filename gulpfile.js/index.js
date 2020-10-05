@@ -216,7 +216,7 @@ exports.js = js;
 exports.vue = function() {
   return src('src/**/*.vue', { sourcemaps: true })
     .pipe(gulpVue())
-    .pipe(dest('output', { sourcemaps: true }))
+    .pipe(dest('output'))
 };
 // exports.html = html;
 exports.default = parallel(/*html, css,*/ js, vue);
