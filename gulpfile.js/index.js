@@ -215,7 +215,9 @@ gulp.task('build', async () => {
 exports.js = js;
 exports.vue = function() {
   return src('src/**/*.vue', { sourcemaps: true })
-    .pipe(gulpVue())
+    .pipe(gulpVue({
+      runtime: false
+    }))
     .pipe(dest('output'))
 };
 // exports.html = html;
