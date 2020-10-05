@@ -4,6 +4,7 @@
  * sobird<i@sobird.me> at 2020/09/28 15:56:35 created.
  */
 
+const path = require('path');
 const gulp = require('gulp');
 const { src, dest, parallel, watch } = gulp;
 
@@ -13,6 +14,7 @@ var vueify = require('mix-vueify');
 const rollup = require('rollup');
 const rollupTypescript = require('rollup-plugin-typescript');
 const through2 = require('through2');
+const File = require('vinyl');
 
 const vueCompiler = require('vue-template-compiler')
 const vueEs6Compiler = require('vue-template-es2015-compiler');
@@ -49,16 +51,10 @@ function toFunction(code) {
   return vueEs6Compiler('function render () {' + code + '}')
 }
 
-function babelPluginTest(b) {
-  //console.log(b.types.CallExpression);
-//console.log(Object.keys(b.types));
-
-Object.keys(b.types).forEach(item => {
-  if(item.indexOf('require') > -1) {
-    console.log(item)
+function babelPluginTest(b, opts, cwd) {
+  if(!opts.file.deps) {
+    opts.file.deps = [];
   }
-});
-
   return {
     visitor: {
       Identifier: (path, state) => {
@@ -67,12 +63,14 @@ Object.keys(b.types).forEach(item => {
       CallExpression: function(path, state) {
         //console.log(Object.keys(path));
         if(path.node.callee.name == 'require') {
-          //console.log(path.node, state.filename);
+          //console.log(path.node);
         }
         
       },
       ImportDeclaration: (path, state) => {
-        path.node.source.value = path.node.source.value + "/test"
+        //path.node.source.value = path.node.source.value + "/test"
+
+        opts.file.deps.push(path.node.source.value);
       },
       VariableDeclarator: (path, state) => {
         //console.log(path.node.id);
@@ -83,8 +81,10 @@ Object.keys(b.types).forEach(item => {
 
 var Stream = require('stream');
 
+var lastFile = null;
+
 function vue() {
-  return src('src/components/BaiduMap.vue', { sourcemaps: true })
+  return src('src/**/BaiduMap.vue', { sourcemaps: true })
     .pipe((function() {
       
       var stream = new Stream.Transform({ objectMode: true });
@@ -129,8 +129,8 @@ function vue() {
               }
             ]],
             //babelrc: false,
-            plugins: [babelPluginTest, ["@babel/plugin-transform-runtime", {
-              corejs: 3, "helpers": true,
+            plugins: [[babelPluginTest, {file}], ["@babel/plugin-transform-runtime", {
+              corejs: 2, "helpers": true,
               "regenerator": true,
               "useESModules": false
             }]],
@@ -147,7 +147,7 @@ function vue() {
           // const { code, map } = await bundle.generate(outputOptions);
 
           //console.log(babelResult.code);
-          file.contents = Buffer.from(sfcDescriptor.script.content)
+          file.contents = Buffer.from(babelResult.code)
         }
 
 
@@ -157,13 +157,35 @@ function vue() {
       file.extname = '.js';
       cb(null, file);
     }))
-    .pipe(dest('output', { sourcemaps: true }))
-    .pipe(js())
-    .pipe(through2.obj(function (file, enc, cb) {
-      console.log(file.path);
+    
 
-      cb(null, file);
+    .pipe(through2.obj(function (file, enc, cb) {
+      console.log(file.deps);
+
+      this.push(file);
+      cb();
+    }, function(cb) {
+      console.log(1212);
+      cb();
     }))
+
+    .pipe(through2.obj(function (file, enc, cb) {
+      console.log(path.relative(file.base, file.path), file.path);
+      lastFile = file;
+
+      //this.push(file);
+      cb(null, {});
+    }, function(cb) {
+
+      this.push(new File({
+        path: 'test.js',
+        contents: Buffer.from('test')
+      }));
+      cb();
+    }))
+
+    .pipe(dest('output', { sourcemaps: true }))
+    
 }
 
 //watch('src/**/*.vue', vue);
