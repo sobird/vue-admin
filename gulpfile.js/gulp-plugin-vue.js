@@ -8,9 +8,6 @@ const through = require('through2');
 const compiler = require('vue-template-compiler');
 const transpile = require('vue-template-es2015-compiler');
 
-const babel = require('@babel/core');
-const presetenv = require('@babel/preset-env');
-
 /**
  * compile template to:
  * {
@@ -20,7 +17,7 @@ const presetenv = require('@babel/preset-env');
  * 
  * @param {*} template 
  */
-function compileTemplate (template) {
+function compileTemplate(template) {
   var compiled = compiler.compile(template)
   if (compiled.errors.length) {
     compiled.errors.forEach(function (msg) {
@@ -35,12 +32,12 @@ function compileTemplate (template) {
   }
 }
 
-function toFunction (code) {
+function toFunction(code) {
   return transpile('function render () {' + code + '}')
 }
 
 module.exports = function () {
-  return through.obj((file, encoding, callback) => {
+  return through.obj(function (file, encoding, callback) {
     // ignore empty files
     if (file.isNull()) {
       callback();
@@ -92,7 +89,7 @@ module.exports = function () {
     let descriptor = compiler.parseComponent(contents);
 
     // 处理脚本
-    if(descriptor.script) {
+    if (descriptor.script) {
       codes.push(descriptor.script.content);
     } else {
       codes.push('module.exports = {}');
@@ -121,7 +118,7 @@ module.exports = function () {
       let templated = compileTemplate(descriptor.template.content);
       //console.log(template);
 
-      if(templated) {
+      if (templated) {
         codes.push('__vue__options__.render = ' + templated.render + ';');
         codes.push('__vue__options__.staticRenderFns = ' + templated.staticRenderFns + ';');
       }
@@ -140,30 +137,13 @@ module.exports = function () {
       }
     });
 
-    let babelResult = babel.transform(codes.join('\n'), {
-      filename: file.path,
-      presets: [["@babel/preset-env",
-        {
-          //"useBuiltIns": "usage",
-          "targets": {
-            "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-          }
-        }
-      ]],
-      //babelrc: false,
-      plugins: [["@babel/plugin-transform-runtime", {
-        corejs: 2, "helpers": true,
-        "regenerator": true,
-        "useESModules": false
-      }]],
-    });
-
-    file.contents = Buffer.from(babelResult.code);
-
+    file.contents = Buffer.from(codes.join('\n'));
     file.extname = '.js';
+
     callback(null, file);
   }, callback => {
     // 
+    console.log(122);
     callback();
   });
 }
