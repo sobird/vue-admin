@@ -21,6 +21,9 @@ const vueEs6Compiler = require('vue-template-es2015-compiler');
 
 const babel = require('@babel/core');
 const presetenv = require('@babel/preset-env');
+
+const gulpVue = require('./gulp-plugin-vue');
+
 // var babel = require('babel-core');
 // var presetenv = require('babel-preset-es2015');
 
@@ -48,7 +51,10 @@ function js() {
 }
 
 function toFunction(code) {
-  return vueEs6Compiler('function render () {' + code + '}')
+  return babel.transform('function render () {' + code + '}', {
+    filename: 'file.ts',
+    presets: ["@babel/preset-env"],
+  })
 }
 
 function babelPluginTest(b, opts, cwd) {
@@ -113,7 +119,7 @@ function vue() {
             staticRenderFns: '[' + template.staticRenderFns.map(toFunction).join(',') + ']'
           };
 
-          //console.log(template);
+          console.log(template);
         }
 
         // 编译脚本
@@ -174,7 +180,7 @@ function vue() {
       lastFile = file;
 
       //this.push(file);
-      cb(null, {});
+      //cb(null, {});
     }, function(cb) {
 
       this.push(new File({
@@ -207,6 +213,10 @@ gulp.task('build', async () => {
 });
 
 exports.js = js;
-exports.vue = vue;
+exports.vue = function() {
+  return src('src/**/*.vue', { sourcemaps: true })
+    .pipe(gulpVue())
+    .pipe(dest('output2', { sourcemaps: true }))
+};
 // exports.html = html;
 exports.default = parallel(/*html, css,*/ js, vue);
