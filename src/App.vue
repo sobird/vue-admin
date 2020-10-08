@@ -52,7 +52,7 @@ body {
 </style>
 
 <style lang="less" scoped>
-.test {
+.test[test] {
   color: red;
 }
 </style>

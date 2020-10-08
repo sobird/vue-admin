@@ -1,5 +1,5 @@
 /**
- * gulp vue 插件
+ * gulp-plugin-vue 插件
  * 
  * sobird<i@sobird.me> at 2020/10/05 11:46:18 created.
  */
@@ -11,7 +11,7 @@ const crypto = require('crypto');
 
 const postcss = require('postcss');
 const selectorParser = require('postcss-selector-parser');
-const stripInlineComments= require('postcss-strip-inline-comments');
+const stripInlineComments = require('postcss-strip-inline-comments');
 const postscss = require('postcss-scss');
 
 const postcssVueScopeId = postcss.plugin('postcssVueScopeId', function (scopeId) {
@@ -19,7 +19,7 @@ const postcssVueScopeId = postcss.plugin('postcssVueScopeId', function (scopeId)
   return function (root, result) {
     root.walkComments(function (i) {
       if (i.raws.inline) i.remove();
-  });
+    });
 
     root.each(function rewriteSelector(node) {
       if (!node.selector) {
@@ -78,7 +78,7 @@ module.exports = function (options) {
   options = Object.assign({
     runtime: true
   }, options);
-  return through.obj( async function  (file, encoding, callback) {
+  return through.obj(async function (file, encoding, callback) {
     // ignore empty files
     if (file.isNull()) {
       callback();
@@ -182,14 +182,14 @@ module.exports = function (options) {
     }
 
     // async/await
-    for(let style of descriptor.styles) {
+    for (let style of descriptor.styles) {
       if (style.content && !/^\s*$/.test(style.content)) {
         let css = styles[style.lang || 'css'];
         if (!css) {
           css = styles[style.lang || 'css'] = [];
         }
         if (style.scoped) {
-          let styleRes = await postcss([postcssVueScopeId(scopeId)]).process(style.content, {from: undefined, parser: postscss});
+          let styleRes = await postcss([postcssVueScopeId(scopeId)]).process(style.content, { from: undefined, parser: postscss });
           style.content = styleRes.css;
         }
 

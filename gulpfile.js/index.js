@@ -24,6 +24,13 @@ const presetenv = require('@babel/preset-env');
 
 const gulpVue = require('./gulp-plugin-vue');
 
+var sass = require('gulp-sass');
+sass.compiler = require('sass');
+var gulpIf = require('gulp-if');
+
+const gulpPostcss = require('gulp-postcss');
+const precss = require('precss');
+
 // var babel = require('babel-core');
 // var presetenv = require('babel-preset-es2015');
 
@@ -218,6 +225,11 @@ exports.vue = function() {
     .pipe(gulpVue({
       runtime: false
     }))
+    .pipe(gulpIf(function(file) {
+      if(file.extname == ".scss") {
+        return true;
+      }
+    }, sass().on('error', sass.logError)))
     .pipe(dest('output'))
 };
 // exports.html = html;
