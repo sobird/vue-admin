@@ -5,23 +5,35 @@
 </template>
 
 <script type="text/javascript">
-import { mapActions } from 'vuex';
-import { userInfo } from '@/models/common';
+import vuex from 'vuex/dist/vuex.esm';
+//import { userInfo } from '@/models/common';
 
-export default {
-  created() {
-    userInfo().then(res => {
-      this.userInfo(res);
+import * as test from './assets/logo.png';
+import test1 from './assets/logo.png';
+
+
+console.log(vuex);
+console.log(test);
+console.log(test1);
+console.log(test2);
+
+class A  {
+  
+}
+export default function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
     });
-  },
+  } else {
+    obj[key] = value;
+  }
 
-  methods: {
-    ...mapActions([
-      // 将 `this.userInfo()` 映射为 `this.$store.dispatch('userInfo')`
-      'userInfo',
-    ]),
-  },
-};
+  return obj;
+}
 </script>
 
 <style lang="scss">
@@ -43,16 +55,11 @@ body {
   width: 100%;
   overflow-y: hidden;
 }
-.iconfont{
+.iconfont {
   font-size: 12px;
 }
-.el-input-group__append, .el-input-group__prepend {
+.el-input-group__append,
+.el-input-group__prepend {
   padding: 0 10px;
-}
-</style>
-
-<style lang="less" scoped>
-.test[test] {
-  color: red;
 }
 </style>

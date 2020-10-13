@@ -30,6 +30,10 @@ var gulpIf = require('gulp-if');
 
 const gulpPostcss = require('gulp-postcss');
 const precss = require('precss');
+const gulpBabel = require('gulp-babel');
+
+const isImage = require('is-image');
+const resolve = require('resolve');
 
 // var babel = require('babel-core');
 // var presetenv = require('babel-preset-es2015');
@@ -54,7 +58,15 @@ const precss = require('precss');
 
 function js() {
   return src('src/*.js', { sourcemaps: true })
-  .pipe(dest('output', { sourcemaps: true }));
+  .pipe(gulpBabel({
+    presets: ['@babel/env'],
+    plugins: [["@babel/plugin-transform-runtime", {
+      corejs: 2, "helpers": true,
+      "regenerator": true,
+      "useESModules": false
+    }]],
+}))
+  .pipe(dest('output'));
 }
 
 function toFunction(code) {
@@ -64,10 +76,12 @@ function toFunction(code) {
   })
 }
 
+let pth = path;
 function babelPluginTest(b, opts, cwd) {
   if(!opts.file.deps) {
     opts.file.deps = [];
   }
+  console.log(cwd)
   return {
     visitor: {
       Identifier: (path, state) => {
@@ -75,15 +89,33 @@ function babelPluginTest(b, opts, cwd) {
       },
       CallExpression: function(path, state) {
         //console.log(Object.keys(path));
+
+        // 兼容 import 和 require两种语法
         if(path.node.callee.name == 'require') {
-          //console.log(path.node);
+          let requireValue = path.node.arguments[0].value;
+
+          if(isImage(requireValue)) {
+
+            let rela = pth.resolve(pth.dirname(state.filename), requireValue);
+
+            console.log(pth.relative( state.cwd, rela));
+
+           // console.log(resolve.sync(pth.relative( state.cwd, rela)), 123);
+
+            //path.parent.arguments[0] = b.types.stringLiteral(requireValue);
+          }
+          
         }
         
       },
       ImportDeclaration: (path, state) => {
         //path.node.source.value = path.node.source.value + "/test"
+        let value = path.node.source.value;
 
-        opts.file.deps.push(path.node.source.value);
+        if(isImage(value)) {
+          console.log(value, 'ImportDeclaration');
+        }
+        //console.log(resolve.sync(path.node.source.value));
       },
       VariableDeclarator: (path, state) => {
         //console.log(path.node.id);
@@ -102,8 +134,6 @@ function vue() {
       
       var stream = new Stream.Transform({ objectMode: true });
       stream._transform = function(originalFile, unused, callback) {
-        console.log(originalFile)
-
         callback(null, originalFile);
       };
 
@@ -121,12 +151,11 @@ function vue() {
           let template = vueCompiler.compile(sfcDescriptor.template.content);
           //console.log(template);
 
-          template = {
-            render: toFunction(template.render),
-            staticRenderFns: '[' + template.staticRenderFns.map(toFunction).join(',') + ']'
-          };
+          // template = {
+          //   render: toFunction(template.render),
+          //   staticRenderFns: '[' + template.staticRenderFns.map(toFunction).join(',') + ']'
+          // };
 
-          console.log(template);
         }
 
         // 编译脚本
@@ -143,9 +172,12 @@ function vue() {
             ]],
             //babelrc: false,
             plugins: [[babelPluginTest, {file}], ["@babel/plugin-transform-runtime", {
-              corejs: 2, "helpers": true,
-              "regenerator": true,
-              "useESModules": false
+              "absoluteRuntime": false,
+              "corejs": false,
+              "helpers": true,
+              "regenerator": false,
+              "useESModules": true,
+              "version": "7.0.0-beta.0"
             }]],
           });
 
@@ -171,32 +203,6 @@ function vue() {
       cb(null, file);
     }))
     
-
-    .pipe(through2.obj(function (file, enc, cb) {
-      console.log(file.deps);
-
-      this.push(file);
-      cb();
-    }, function(cb) {
-      console.log(1212);
-      cb();
-    }))
-
-    .pipe(through2.obj(function (file, enc, cb) {
-      console.log(path.relative(file.base, file.path), file.path);
-      lastFile = file;
-
-      //this.push(file);
-      //cb(null, {});
-    }, function(cb) {
-
-      this.push(new File({
-        path: 'test.js',
-        contents: Buffer.from('test')
-      }));
-      cb();
-    }))
-
     .pipe(dest('output', { sourcemaps: true }))
     
 }
@@ -220,17 +226,12 @@ gulp.task('build', async () => {
 });
 
 exports.js = js;
-exports.vue = function() {
-  return src('src/**/*.vue', { sourcemaps: true })
-    .pipe(gulpVue({
-      runtime: false
-    }))
-    .pipe(gulpIf(function(file) {
-      if(file.extname == ".scss") {
-        return true;
-      }
-    }, sass().on('error', sass.logError)))
-    .pipe(dest('output'))
-};
+exports.vue = vue;
 // exports.html = html;
 exports.default = parallel(/*html, css,*/ js, vue);
+
+
+exports.img = function() {
+  return src('./src/**/*.{png,jp{,e}g,svg,gif,js}')
+  .pipe(dest('image'));
+}

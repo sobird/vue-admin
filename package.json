@@ -52,6 +52,7 @@
     "gulp-postcss": "^9.0.0",
     "gulp-sass": "^4.1.0",
     "gulp-vueify": "0.0.3",
+    "is-image": "^3.0.0",
     "lint-staged": "^9.5.0",
     "mix-vueify": "0.0.3",
     "postcss-scss": "^3.0.2",

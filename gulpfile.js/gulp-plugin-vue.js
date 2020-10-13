@@ -25,14 +25,18 @@ const postcssVueScopeId = postcss.plugin('postcssVueScopeId', function (scopeId)
       if (!node.selector) {
         // handle media queries
         if (node.type === 'atrule' && node.name === 'media') {
+          //console.log(node);
           node.each(rewriteSelector)
         }
         return
       }
+
       node.selector = selectorParser(function (selectors) {
         selectors.each(function (selector) {
           var node = null
           selector.each(function (n) {
+            
+
             if (n.type !== 'pseudo') {
               node = n;
             }
@@ -94,6 +98,7 @@ module.exports = function (options) {
     let contents = file.contents.toString();
 
     let codes = [];
+
     /**
      * SFCDescriptor
      * 

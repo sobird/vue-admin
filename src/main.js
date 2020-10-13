@@ -19,6 +19,10 @@ import '@/components';
 
 import App from './App.vue';
 
+import test from './assets/logo.png';
+
+console.log(App);
+
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI, {
