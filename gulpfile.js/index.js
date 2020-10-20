@@ -231,7 +231,22 @@ exports.vue = vue;
 exports.default = parallel(/*html, css,*/ js, vue);
 
 
-exports.img = function() {
-  return src('./src/**/*.{png,jp{,e}g,svg,gif,js}')
+exports.test = function() {
+  return src('./src/**/*.{png,jp{,e}g,svg,gif}')
+  .pipe(src('./src/**/*.{png,jp{,e}g,svg,gif}'))
+  .pipe(through2.obj(function(file, enc, callback) {
+
+    console.log(file.path, 1);
+
+this.push(file);
+this.push(file);
+    callback();
+  }))
+  .pipe(through2.obj(function(file, enc, callback) {
+    console.log(file.path, 2);
+
+    this.push(file);
+    callback();
+  }))
   .pipe(dest('image'));
 }
