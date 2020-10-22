@@ -13,7 +13,7 @@
         placeholder="由数字下划线或小写字母组成，总长不超过32个字符"
         @input="nameChange"
       ></el-input>
-      <span class="item-tip">
+      <span class="input-item-tip">
         <i class="el-icon-info"></i>
         应用名一旦申请不可修改，请确认后提交
       </span>
@@ -47,7 +47,7 @@
         placeholder="请填写域名"
         @input="nameChange"
       ></el-input>
-      <span class="item-tip">
+      <span class="input-item-tip">
         <i class="el-icon-info"></i>
         填写域名后，访问以上链接，应用将会跳转到该地址
       </span>
@@ -167,9 +167,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.item-tip {
-  color: #888;
-  font-size: 12px;
-}
-</style>

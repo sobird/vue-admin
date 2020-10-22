@@ -10,7 +10,9 @@ import Vue from 'vue';
 import LayoutViewHeader from './Layout/ViewHeader.vue';
 import Pagination from './Pagination.vue';
 import Sticky from './Sticky.vue';
+import MonacoEditor from './MonacoEditor.vue';
 
 Vue.component('LayoutViewHeader', LayoutViewHeader);
 Vue.component('Pagination', Pagination);
 Vue.component('Sticky', Sticky);
+Vue.component('MonacoEditor', MonacoEditor);

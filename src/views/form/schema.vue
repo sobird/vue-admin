@@ -8,7 +8,8 @@
   <div>
     <layout-view-header>
       Schema表单是根据
-      <a href="http://json-schema.org/" target="_blank">JSON Schema</a> 后端数据模型渲染出来的表单，可以由后端动态的控制表单输入项以及简单的控制部分UI。
+      <a href="http://json-schema.org/" target="_blank">JSON Schema</a>
+      后端数据模型渲染出来的表单，可以由后端动态的控制表单输入项以及简单的控制部分UI。
     </layout-view-header>
     <el-card shadow="never" style="border: none;">
       <el-row type="flex" :gutter="20">
@@ -23,10 +24,10 @@
           </el-form>
 
           <h2>数据模型/Model</h2>
-          <pre>{{formVmodel.vmodel}}</pre>
+          <pre>{{ formVmodel.vmodel }}</pre>
         </el-col>
-        <el-col :span="12">
-          <div ref="monaco" class="monaco" style="height: 600px; border: 1px solid #ccc"></div>
+        <el-col :span="12" style="height: 500px;">
+          <MonacoEditor v-if="formVmodel.schemaText" v-model="formVmodel.schemaText" @change="change" />
         </el-col>
       </el-row>
     </el-card>
@@ -34,8 +35,6 @@
 </template>
 
 <script>
-import * as monaco from 'monaco-editor';
-
 import { submitForm } from '@/models/common';
 import { schemaForm } from './model';
 import SchemaForm from './components/SchemaForm';
@@ -48,6 +47,7 @@ export default {
     return {
       formVmodel: {
         schema: {},
+        schemaText: '',
         vmodel: {},
         vrules: {},
       },
@@ -57,31 +57,18 @@ export default {
   mounted() {
     schemaForm().then(schema => {
       this.$set(this.formVmodel, 'schema', schema);
-
-      // 初始化代码编辑器
-      this.initMonacoEditor(schema);
+      this.$set(this.formVmodel, 'schemaText', JSON.stringify(schema, null, 2));
     });
   },
 
   methods: {
-    initMonacoEditor(content) {
-      let monacoEditor = monaco.editor.create(this.$refs.monaco, {
-        value: JSON.stringify(content, null, 2),
-        language: 'javascript',
-        //lineNumbers: "on",
-        // 禁用右键菜单
-        contextmenu: false,
-      });
-
-      monacoEditor.onDidChangeModelContent(event => {
-        let schema = monacoEditor.getValue();
-        try {
-          schema = JSON.parse(schema);
-          this.$set(this.formVmodel, 'schema', schema);
-        } catch (e) {
-          // todo
-        }
-      });
+    change(schema) {
+      try {
+        schema = JSON.parse(schema);
+        this.$set(this.formVmodel, 'schema', schema);
+      } catch (e) {
+        // todo
+      }
     },
 
     submitForm(formName) {

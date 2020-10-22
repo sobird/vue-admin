@@ -5,7 +5,10 @@
  * @version $Id$
 -->
 <template>
-  <div id="mix" :class="['mix', 'mix-with-aside', {'aside-collapse': $store.state.aside.collapse}]">
+  <div
+    id="mix"
+    :class="['mix', 'mix-with-aside', { 'aside-collapse': $store.state.aside.collapse }]"
+  >
     <layout-header>Vue Element Pro</layout-header>
 
     <div id="body">
@@ -74,16 +77,16 @@ ol {
 
 #body {
   height: calc(100% - 48px);
-}
 
-.main {
-  height: 100%;
-  margin-left: 200px;
-  transition: margin 0.3s;
-  overflow-y: auto;
-  background: #fff;
-  .main-view {
-    padding: 15px;
+  & > .main {
+    height: 100%;
+    margin-left: 200px;
+    transition: margin 0.3s;
+    overflow-y: auto;
+    background: #fff;
+    .main-view {
+      padding: 15px;
+    }
   }
 }
 
@@ -183,5 +186,11 @@ ol {
 }
 .el-cascader-node {
   padding-left: 10px;
+}
+
+.input-item-tip {
+  display: block;
+  color: #888;
+  font-size: 12px;
 }
 </style>

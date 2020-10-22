@@ -137,6 +137,15 @@ export default [
         }
       },
       {
+        path: "api",
+        name: "apiForm",
+        component: () => import("@/views/form/api.vue"),
+        meta: {
+          title: "接口配置表单",
+          icon: "form"
+        }
+      },
+      {
         path: "complex",
         name: "complexForm",
         component: () => import("@/views/form/complex.vue"),

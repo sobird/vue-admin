@@ -60,6 +60,9 @@
           <el-menu-item index="/form/schema">
             <span slot="title">Schema表单</span>
           </el-menu-item>
+          <el-menu-item index="/form/api">
+            <span slot="title">接口配置表单</span>
+          </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/component">
