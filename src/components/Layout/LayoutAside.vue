@@ -65,14 +65,14 @@
           </el-menu-item>
         </el-submenu>
 
-        <el-submenu index="/component">
+        <el-submenu index="/designer">
           <template slot="title">
-            <i class="iconfont icon-component"></i>
-            <span>组件</span>
+            <i class="iconfont icon-designer"></i>
+            <span>设计器</span>
           </template>
 
-          <el-menu-item index="/component/cascader">
-            <span slot="title">级联选择器</span>
+          <el-menu-item index="/designer/crud">
+            <span slot="title">CRUD表格</span>
           </el-menu-item>
         </el-submenu>
 

@@ -26,7 +26,7 @@ export default {
   },
 
   mounted() {
-    this.initMonacoEditor()
+    this.initMonacoEditor();
   },
 
   methods: {
@@ -46,8 +46,8 @@ export default {
         contextmenu: false,
         theme: 'vs-dark',
         scrollbar: {
-          alwaysConsumeMouseWheel: false
-        }
+          alwaysConsumeMouseWheel: false,
+        },
       };
 
       let options = Object.assign({}, defaultOptions, this.options);
@@ -70,14 +70,14 @@ export default {
 
 <style lang="scss">
 .monaco {
-  .monaco-editor{
+  .monaco-editor {
     border-radius: 3px;
   }
-  .overflow-guard{
+  .overflow-guard {
     border-radius: 3px;
   }
-  &>.vs {
-    border: 1px solid #DCDFE6;
+  & > .vs {
+    border: 1px solid #dcdfe6;
   }
 }
 </style>

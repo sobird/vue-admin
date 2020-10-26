@@ -7,7 +7,6 @@ import EntryWithAside from '@/components/Layout/EntryWithAside';
 import NavMenuRouter from './NavMenuRouter';
 
 const router = new Router({
-  test: [],
   routes: [
     {
       path: '/',

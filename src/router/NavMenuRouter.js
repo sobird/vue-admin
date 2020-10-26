@@ -159,24 +159,24 @@ export default [
 
   // 组件路由
   {
-    path: "/component",
+    path: "/designer",
     name: "component",
     component: EntryWithAside,
-    redirect: { name: "cascaderComponent" },
+    redirect: { name: "crudDesigner" },
     meta: {
-      title: "组件",
-      icon: "component"
+      title: "设计器",
+      icon: "designer"
     },
     children: [
-      // {
-      //   path: "cascader",
-      //   name: "cascaderComponent",
-      //   component: () => import("@/views/component/Cascader"),
-      //   meta: {
-      //     title: "省市级联选择",
-      //     icon: "component"
-      //   }
-      // }
+      {
+        path: "crud",
+        name: "crudDesigner",
+        component: () => import("@/views/designer/crud"),
+        meta: {
+          title: "crud表格",
+          icon: "designer"
+        }
+      }
     ]
   },
 
