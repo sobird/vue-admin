@@ -9,7 +9,7 @@
     <layout-view-header>
       拖拽功能基于
       <a href="https://github.com/SortableJS/Vue.Draggable" target="_blank">Vue.Draggable</a>
-      实现，下面演示来自官方示例代码。
+      实现，下面演示来自于官方示例代码。
 
       <el-tabs v-model="tabName" @tab-click="tabClick">
         <el-tab-pane label="简单拖拽" name="simpleDraggable"></el-tab-pane>
@@ -19,6 +19,9 @@
         <el-tab-pane label="Clone on Control" name="cloneOnControlDraggable"></el-tab-pane>
         <el-tab-pane label="手柄拖拽" name="handleDraggable"></el-tab-pane>
         <el-tab-pane label="Transition" name="transitionDraggable"></el-tab-pane>
+        <el-tab-pane label="Transitions" name="transitionsDraggable"></el-tab-pane>
+        <el-tab-pane label="表格拖拽" name="tableDraggable"></el-tab-pane>
+        <el-tab-pane label="表格列拖拽" name="tableColumnDraggable"></el-tab-pane>
       </el-tabs>
     </layout-view-header>
     <router-view :key="$store.state.viewkey"></router-view>

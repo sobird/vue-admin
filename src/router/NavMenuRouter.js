@@ -235,6 +235,33 @@ export default [
               title: "拖拽演示",
               icon: "draggable"
             }
+          },
+          {
+            path: "transitions",
+            name: "transitionsDraggable",
+            component: () => import("@/views/components/draggable/transitions"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "table",
+            name: "tableDraggable",
+            component: () => import("@/views/components/draggable/table"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "table-column",
+            name: "tableColumnDraggable",
+            component: () => import("@/views/components/draggable/table-column"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
           }
         ]
       }
