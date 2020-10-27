@@ -157,6 +157,45 @@ export default [
     ]
   },
 
+  // 组件
+  {
+    path: "/components",
+    name: "components",
+    component: EntryWithAside,
+    redirect: { name: "draggable" },
+    meta: {
+      title: "组件",
+      icon: "component"
+    },
+    children: [
+      {
+        path: "draggable",
+        name: "draggable",
+        component: () => import("@/views/components/draggable"),
+        children: [
+          {
+            path: "simple",
+            name: "simpleDraggable",
+            component: () => import("@/views/components/draggable/simple"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "two-lists",
+            name: "twoListsDraggable",
+            component: () => import("@/views/components/draggable/two-lists"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          }
+        ]
+      }
+    ]
+  },
+
   // 组件路由
   {
     path: "/designer",

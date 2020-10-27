@@ -23,6 +23,9 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    value: {
+      type: String,
+    }
   },
 
   mounted() {
@@ -31,7 +34,7 @@ export default {
 
   methods: {
     initMonacoEditor() {
-      const { value: content } = this.$attrs;
+      const { value: content } = this;
       const defaultOptions = {
         language: 'javascript',
         autoIndent: true,
@@ -65,6 +68,12 @@ export default {
       this.monacoEditor = monacoEditor;
     },
   },
+
+  watch: {
+    value(n, o) {
+      this.monacoEditor && n != o && this.monacoEditor.setValue(n);
+    }
+  }
 };
 </script>
 
