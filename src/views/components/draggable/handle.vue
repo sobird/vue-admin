@@ -6,7 +6,7 @@
 
 <template>
   <el-row :gutter="10">
-    <el-col :span="2">
+    <el-col :span="8">
       <el-button type="primary" @click="add">Add</el-button>
     </el-col>
 

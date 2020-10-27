@@ -18,6 +18,7 @@
         <el-tab-pane label="自定义克隆" name="customCloneDraggable"></el-tab-pane>
         <el-tab-pane label="Clone on Control" name="cloneOnControlDraggable"></el-tab-pane>
         <el-tab-pane label="手柄拖拽" name="handleDraggable"></el-tab-pane>
+        <el-tab-pane label="Transition" name="transitionDraggable"></el-tab-pane>
       </el-tabs>
     </layout-view-header>
     <router-view :key="$store.state.viewkey"></router-view>

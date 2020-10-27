@@ -226,6 +226,15 @@ export default [
               title: "拖拽演示",
               icon: "draggable"
             }
+          },
+          {
+            path: "transition",
+            name: "transitionDraggable",
+            component: () => import("@/views/components/draggable/transition"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
           }
         ]
       }
