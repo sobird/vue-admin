@@ -125,15 +125,17 @@ ol {
       display: none;
     }
   }
-  .aside {
-    width: 64px;
-  }
-  .main {
-    margin-left: 64px;
-  }
-  .hamburger {
-    .iconfont {
-      transform: rotateZ(-90deg);
+  #body {
+    .aside {
+      width: 64px;
+    }
+    .main {
+      margin-left: 64px;
+    }
+    .hamburger {
+      .iconfont {
+        transform: rotateZ(-90deg);
+      }
     }
   }
 }

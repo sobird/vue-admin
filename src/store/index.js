@@ -42,6 +42,7 @@ Vue.use(Vuex);
 // 组件中载入$cookie
 Vue.use(VueCookie);
 
+import nested from '@/views/components/draggable/components/nested-store';
 
 const store = new Vuex.Store({
   /**
@@ -216,7 +217,9 @@ const store = new Vuex.Store({
 
       // 嵌套module
       modules: {}
-    }
+    },
+
+    nested,
   }
 });
 

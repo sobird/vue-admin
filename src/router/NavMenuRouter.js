@@ -262,6 +262,69 @@ export default [
               title: "拖拽演示",
               icon: "draggable"
             }
+          },
+          {
+            path: "third-party",
+            name: "thirdPartyDraggable",
+            component: () => import("@/views/components/draggable/third-party"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "footerslot",
+            name: "footerslotDraggable",
+            component: () => import("@/views/components/draggable/footerslot"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "headerslot",
+            name: "headerslotDraggable",
+            component: () => import("@/views/components/draggable/headerslot"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "two-list-headerslots",
+            name: "two-list-headerslots",
+            component: () => import("@/views/components/draggable/two-list-headerslots"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "nested",
+            name: "nested",
+            component: () => import("@/views/components/draggable/nested"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "nested-with-vuex",
+            name: "nested-with-vuex",
+            component: () => import("@/views/components/draggable/nested-with-vuex"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "functional",
+            name: "functional",
+            component: () => import("@/views/components/draggable/functional"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
           }
         ]
       }

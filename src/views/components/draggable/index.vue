@@ -22,6 +22,13 @@
         <el-tab-pane label="Transitions" name="transitionsDraggable"></el-tab-pane>
         <el-tab-pane label="表格拖拽" name="tableDraggable"></el-tab-pane>
         <el-tab-pane label="表格列拖拽" name="tableColumnDraggable"></el-tab-pane>
+        <el-tab-pane label="第三方" name="thirdPartyDraggable"></el-tab-pane>
+        <el-tab-pane label="Footer slot" name="footerslotDraggable"></el-tab-pane>
+        <el-tab-pane label="Header slot" name="headerslotDraggable"></el-tab-pane>
+        <el-tab-pane label="Two-list-headerslots" name="two-list-headerslots"></el-tab-pane>
+        <el-tab-pane label="嵌套拖拽" name="nested"></el-tab-pane>
+        <el-tab-pane label="Nested (v-model & vuex)" name="nested-with-vuex"></el-tab-pane>
+        <el-tab-pane label="Functional third party" name="functional"></el-tab-pane>
       </el-tabs>
     </layout-view-header>
     <router-view :key="$store.state.viewkey"></router-view>
