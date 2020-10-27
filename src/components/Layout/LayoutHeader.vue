@@ -7,7 +7,6 @@
 
 <template>
   <header id="header">
-    <div class="container">
       <div :class="['header-brand', {'with-aside': withAside}]">
         <a href="/" title="Vue-Element-Pro">
           <span class="logo"></span>
@@ -66,7 +65,6 @@
           </el-col>
         </el-row>
       </div>
-    </div>
   </header>
 </template>
 
@@ -124,14 +122,12 @@ export default {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   position: relative;
   z-index: 100;
-  .container {
-    padding: 0 20px;
+  padding: 0 20px;
     display: flex;
     flex-direction: row;
     flex-basis: auto;
     box-sizing: border-box;
     //background: linear-gradient(135deg,#8f75da 0,#727cf5 60%);
-  }
 }
 
 .logo {
@@ -149,7 +145,7 @@ export default {
   height: 48px;
   line-height: 48px;
   margin-left: -20px;
-  width: 184px;
+  width: 200px;
   overflow: hidden;
   padding-left: 16px;
   color: #fff;

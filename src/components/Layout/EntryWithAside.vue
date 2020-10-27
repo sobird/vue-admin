@@ -53,6 +53,11 @@ a {
   color: #2c3e50;
   text-decoration: none;
 }
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
 h1,
 h2,
 h3,
