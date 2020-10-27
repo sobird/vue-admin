@@ -190,6 +190,42 @@ export default [
               title: "拖拽演示",
               icon: "draggable"
             }
+          },
+          {
+            path: "clone",
+            name: "cloneDraggable",
+            component: () => import("@/views/components/draggable/clone"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "custom-clone",
+            name: "customCloneDraggable",
+            component: () => import("@/views/components/draggable/custom-clone"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "clone-on-control",
+            name: "cloneOnControlDraggable",
+            component: () => import("@/views/components/draggable/clone-on-control"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
+          },
+          {
+            path: "handle",
+            name: "handleDraggable",
+            component: () => import("@/views/components/draggable/handle"),
+            meta: {
+              title: "拖拽演示",
+              icon: "draggable"
+            }
           }
         ]
       }

@@ -14,8 +14,10 @@
       <el-tabs v-model="tabName" @tab-click="tabClick">
         <el-tab-pane label="简单拖拽" name="simpleDraggable"></el-tab-pane>
         <el-tab-pane label="两列拖拽" name="twoListsDraggable"></el-tab-pane>
-        <el-tab-pane label="克隆拖拽" name="clone"></el-tab-pane>
-        <el-tab-pane label="自定义克隆" name="custom-clone"></el-tab-pane>
+        <el-tab-pane label="克隆拖拽" name="cloneDraggable"></el-tab-pane>
+        <el-tab-pane label="自定义克隆" name="customCloneDraggable"></el-tab-pane>
+        <el-tab-pane label="Clone on Control" name="cloneOnControlDraggable"></el-tab-pane>
+        <el-tab-pane label="手柄拖拽" name="handleDraggable"></el-tab-pane>
       </el-tabs>
     </layout-view-header>
     <router-view :key="$store.state.viewkey"></router-view>
@@ -56,10 +58,9 @@ export default {
       border: 1px dashed #409eff;
     }
   }
-}
-
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
+  .ghost {
+    opacity: 0.5;
+    background: #c8ebfb;
+  }
 }
 </style>
