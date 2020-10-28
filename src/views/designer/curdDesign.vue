@@ -71,17 +71,41 @@
                     <span>查询条件</span>
                   </div>
 
-                  <el-row :gutter="10" style="margin-bottom: 20px;">
+                  <draggable
+                    tag="el-row"
+                    class="dragArea list-group"
+                    :list="list2"
+                    group="people"
+                    @change="log"
+                  >
+                    <el-col :span="4" v-for="(element, index) in list2" :key="index">
+                      <schema-form
+                        v-model="queryModel[element.fieldName]"
+                        :schema="element.schema"
+                      />
+                    </el-col>
+                  </draggable>
+
+                  <!-- <el-row :gutter="10" style="margin-bottom: 20px;">
                     <el-col :span="4">
-                      <el-input clearable placeholder="请输入风险点名称"></el-input>
+                      <el-input
+                        v-model="queryModel.name"
+                        clearable
+                        placeholder="请输入风险点名称"
+                      ></el-input>
                     </el-col>
                     <el-col :span="4">
-                      <el-select clearable style="width: 100%;" placeholder="请选择性别">
+                      <el-select
+                        v-model="queryModel.age"
+                        clearable
+                        style="width: 100%;"
+                        placeholder="请选择性别"
+                      >
                         <el-option label="男" value="1"></el-option>
                         <el-option label="女" value="0"></el-option>
                       </el-select>
                     </el-col>
-                  </el-row>
+                  </el-row> -->
                 </el-card>
 
                 <el-row :gutter="10">
@@ -119,7 +143,99 @@
           </el-tabs>
         </div>
       </main>
-      <aside class="design-aside"></aside>
+      <aside class="design-aside">
+        <el-tabs type="border-card">
+          <el-tab-pane label="属性配置">
+            <div class="com-card">
+              <i class="iconfont icon-excel"></i>
+              <div class="card-content">
+                <div class="card-title">CURD表格</div>
+                <div class="card-desc">具有增删改查功能的表格组件</div>
+              </div>
+            </div>
+
+            <el-form
+              ref="basicForm"
+              :model="formModel"
+              :rules="formRules"
+              label-width="90px"
+              label-position="top"
+            >
+              <el-form-item label="查询条件">
+                <draggable
+                  class="dragArea list-group"
+                  :list="draggableList"
+                  :group="{ name: 'people', pull: 'clone', put: false }"
+                  :clone="clone"
+                  @change="log"
+                >
+                  <div class="list-group-item" v-for="element in draggableList" :key="element.id">
+                    {{ element.name }}
+                  </div>
+                </draggable>
+              </el-form-item>
+
+              <el-form-item label="请求方法" prop="method">
+                <el-radio-group v-model="formModel.method">
+                  <el-radio-button label="GET">GET</el-radio-button>
+                  <el-radio-button label="POST">POST</el-radio-button>
+                  <el-radio-button label="DELETE">DELETE</el-radio-button>
+                  <el-radio-button label="PUT">PUT</el-radio-button>
+                </el-radio-group>
+              </el-form-item>
+
+              <el-form-item label="接口地址" prop="url">
+                <el-input clearable v-model="formModel.url" placeholder="https://"></el-input>
+              </el-form-item>
+
+              <el-form-item label="请求格式" prop="format">
+                <el-radio-group v-model="formModel.format">
+                  <el-radio-button label="application/json">JSON</el-radio-button>
+                  <el-radio-button label="multipart/form-data">FormData</el-radio-button>
+                  <el-radio-button label="application/x-www-form-urlencoded">Form</el-radio-button>
+                </el-radio-group>
+
+                <span class="input-item-tip">
+                  <i class="el-icon-info"></i>
+                  发送体格式为：{{ formModel.format }}，当发送内容中存在文件时会自动使用 form-data
+                  格式。
+                </span>
+              </el-form-item>
+
+              <el-form-item label="请求拦截器" prop="desc">
+                <div style="height: 200px;">
+                  <MonacoEditor
+                    v-model="formModel.interceptors.request"
+                    :options="{ theme: 'vs' }"
+                  />
+                </div>
+              </el-form-item>
+              <el-form-item label="响应拦截器" prop="desc">
+                <div style="height: 200px;">
+                  <MonacoEditor
+                    v-model="formModel.interceptors.response"
+                    :options="{ theme: 'vs' }"
+                  />
+                </div>
+              </el-form-item>
+
+              <el-form-item>
+                <el-button type="primary" @click="submitForm('basicForm')">提交</el-button>
+                <el-button
+                  @click="
+                    () => {
+                      $refs.basicForm.resetFields();
+                    }
+                  "
+                >
+                  取消
+                </el-button>
+              </el-form-item>
+            </el-form>
+          </el-tab-pane>
+          <el-tab-pane label="样式配置">配置管理</el-tab-pane>
+        </el-tabs>
+      </aside>
     </div>
   </div>
 </template>
@@ -127,13 +243,115 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import { queryCurdData, saveEmployee, deleteEmployee } from './model';
+import draggable from 'vuedraggable';
+
+import SchemaForm from '@/views/form/components/SchemaForm';
 
 export default {
+  components: {
+    draggable,
+    SchemaForm,
+  },
   data() {
     return {
+      draggableList: [
+        {
+          name: 'ID',
+          id: 1,
+          schema: {
+            type: 'text',
+            placeholder: '请输入员工ID',
+          },
+        },
+        {
+          name: '员工名称',
+          id: 2,
+          fieldName: 'name',
+          schema: {
+            type: 'text',
+            placeholder: '请输入员工姓名',
+          },
+        },
+        {
+          name: '员工年龄',
+          fieldName: 'age',
+          id: 3,
+          schema: {
+            type: 'text',
+            placeholder: '请输入员工年龄',
+          },
+        },
+        {
+          name: '员工性别',
+          fieldName: 'gender',
+          id: 4,
+          schema: {
+            type: 'select',
+            placeholder: '请选择员工性别',
+            enum: [
+              {
+                label: '男',
+                value: '1',
+              },
+              {
+                label: '女',
+                value: '0',
+              },
+            ],
+          },
+        },
+        {
+          name: '创建时间',
+          fieldName: 'createdAt',
+          id: 5,
+          schema: {
+            type: 'date',
+            placeholder: '请选择创建时间',
+          },
+        },
+      ],
+      list2: [
+        {
+          name: '员工名称',
+          id: 2,
+          fieldName: 'name',
+          schema: {
+            type: 'text',
+            placeholder: '请输入员工姓名',
+          },
+        },
+        {
+          name: '员工年龄',
+          fieldName: 'age',
+          id: 3,
+          schema: {
+            type: 'text',
+            placeholder: '请输入员工年龄',
+          },
+        },
+      ],
+
       value1: '',
       activeName: 'frist',
       riskPagerModel: {},
+
+      queryModel: {
+        name: '',
+        age: '',
+      },
+
+      formModel: {
+        method: 'GET',
+        url: '',
+        format: 'application/json',
+        interceptors: {
+          request: `request => {\n  return request;\n}`,
+          response: 'response => {\n  return response;\n}',
+        },
+      },
+      formRules: {
+        url: [{ required: true, message: '请输入接口地址', trigger: 'blur' }],
+      },
     };
   },
   computed: {
@@ -155,11 +373,45 @@ export default {
 
     setting() {},
     handleClick() {},
+
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          submitForm(this.formModel).then(res => {});
+        } else {
+          return false;
+        }
+      });
+    },
+
+    clone(data) {
+      return data;
+    },
+    log: function(evt) {
+      console.log(evt);
+    },
   },
 };
 </script>
 
 <style lang="scss">
+// 组件类型简短介绍
+.com-card {
+  display: flex;
+  border-bottom: 1px solid #e2e4e7;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  .iconfont {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  .card-content {
+    font-size: 14px;
+    .card-title {
+      margin-bottom: 10px;
+    }
+  }
+}
 .design-body {
   height: calc(100% - 48px);
   display: flex;
@@ -263,6 +515,41 @@ div:not(* > .com-hover) {
   }
   .el-switch__label {
     color: #fff;
+  }
+}
+
+.dragArea{
+  margin-left: -5px;
+    margin-right: -5px;
+    margin-bottom: 20px;
+    .el-col{
+          padding-left: 5px;
+    padding-right: 5px;
+    }
+    .sortable-ghost{
+      width: 16.66667%;
+      float: left;
+    box-sizing: border-box;
+    }
+}
+.list-group {
+  .list-group-item {
+    border-radius: 3px;
+    cursor: move;
+    padding: 5px 10px;
+    margin: 5px 0;
+    color: #333;
+    border: 1px solid #f4f6fc;
+    background: #f4f6fc;
+
+    &:hover {
+      color: #409eff;
+      border: 1px dashed #409eff;
+    }
+  }
+  .ghost {
+    opacity: 0.5;
+    background: #c8ebfb;
   }
 }
 </style>

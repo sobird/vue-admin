@@ -33,7 +33,7 @@ export default {
   },
 
   methods: {
-    initMonacoEditor() {
+    async initMonacoEditor() {
       const { value: content } = this;
       const defaultOptions = {
         language: 'javascript',
@@ -55,6 +55,8 @@ export default {
 
       let options = Object.assign({}, defaultOptions, this.options);
       options.value = content;
+
+      await this.$nextTick();
 
       let monacoEditor = monaco.editor.create(this.$refs.monaco, options);
 
