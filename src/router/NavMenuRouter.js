@@ -333,7 +333,7 @@ export default [
 
   // 组件路由
   {
-    path: '/designer1',
+    path: '/designer',
     name: 'component',
     component: EntryWithAside,
     redirect: { name: 'curdTable' },
