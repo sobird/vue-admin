@@ -15,7 +15,7 @@
           @click="
             () => {
               $router.push({
-                name: 'applyApp',
+                name: 'curdDesign',
               });
             }
           "

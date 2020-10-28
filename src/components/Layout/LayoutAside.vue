@@ -82,7 +82,7 @@
             <span>设计器</span>
           </template>
 
-          <el-menu-item index="/designer/crud">
+          <el-menu-item index="/designer/curd">
             <span slot="title">CRUD表格</span>
           </el-menu-item>
         </el-submenu>
