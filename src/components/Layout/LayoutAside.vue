@@ -74,6 +74,9 @@
           <el-menu-item index="/components/draggable/simple">
             <span slot="title">拖拽组件</span>
           </el-menu-item>
+          <el-menu-item index="/components/openWindow">
+            <span slot="title">打开新窗口</span>
+          </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/designer">

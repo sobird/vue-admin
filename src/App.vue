@@ -1,6 +1,7 @@
 <template>
   <div id="app" :class="$route.name">
     <router-view />
+    <Browser />
   </div>
 </template>
 

@@ -64,7 +64,12 @@ const store = new Vuex.Store({
       collapse: VueCookie.get("asideStatus") == 1 ? true : false
     },
     // 账户登录相关state
-    userinfo: {}
+    userinfo: {},
+    // 内置的虚拟浏览器state
+    browser: {
+      url: '',
+      visible: false
+    }
   },
   /**
    * Getter
@@ -83,7 +88,8 @@ const store = new Vuex.Store({
     aside: function(state) {
       return state.aside;
     },
-    userinfo: state => state.userinfo
+    userinfo: state => state.userinfo,
+    browser: state => state.browser,
   },
 
   /**
@@ -126,6 +132,9 @@ const store = new Vuex.Store({
     },
     [types.USERINFO]: (state, payload) => {
       state.userinfo = payload;
+    },
+    [types.BROWSER]: (state, payload) => {
+      state.browser = payload;
     }
   },
 
@@ -163,6 +172,9 @@ const store = new Vuex.Store({
     // 设置用户信息
     userInfo({ commit }, payload) {
       commit(types.USERINFO, payload);
+    },
+    browser({ commit }, payload) {
+      commit(types.BROWSER, payload)
     }
   },
 

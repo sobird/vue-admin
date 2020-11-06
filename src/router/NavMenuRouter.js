@@ -328,6 +328,15 @@ export default [
           },
         ],
       },
+      {
+        path: 'openWindow',
+        name: 'openWindow',
+        component: () => import('@/views/components/openWindow'),
+        meta: {
+          title: '打开新窗口',
+          icon: 'open-window',
+        },
+      },
     ],
   },
 

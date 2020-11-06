@@ -17,3 +17,6 @@ export const REFRESH_ROUTE_VIEW = "REFRESH_ROUTE_VIEW";
 // 设置用户信息
 export const USERINFO = "USERINFO";
 
+// 设置虚拟浏览器信息
+export const BROWSER = "BROWSER";
+
