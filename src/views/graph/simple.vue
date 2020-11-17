@@ -11,7 +11,7 @@
       <a href="https://gojs.net/latest/samples/index.html">官方站点</a>
     </layout-view-header>
 
-    <remote-script src="/static/gojs/go.js" @load="onLoad"></remote-script>
+    <remote-script v-if="!go" src="/static/gojs/go.js" @load="onLoad"></remote-script>
     <div ref="diagram" class="diagram"></div>
   </div>
 </template>
@@ -21,7 +21,9 @@ import { simple } from './model';
 
 export default {
   data() {
-    return {};
+    return {
+      go: null,
+    };
   },
   props: {
     nodeDataArray: {
@@ -40,6 +42,8 @@ export default {
   methods: {
     onLoad() {
       this.modelPromise.then(data => {
+        this.go = go;
+
         this.initDiagram(go, data);
       });
     },
@@ -197,12 +201,12 @@ export default {
             go.Panel,
             'Horizontal',
             { stretch: go.GraphObject.Horizontal, background: 'transparent' },
-            $(go.Picture, {
-              margin: new go.Margin(0, 0, 0, 10),
-              width: 15,
-              height: 15,
-              //source: require("../assets/user.png")
-            }),
+            // $(go.Picture, {
+            //   margin: new go.Margin(0, 0, 0, 10),
+            //   width: 15,
+            //   height: 15,
+            //   //source: require("../assets/user.png")
+            // }),
 
             $(
               go.TextBlock,

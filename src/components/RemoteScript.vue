@@ -5,9 +5,23 @@
 -->
 
 <script>
+let srcMap = new Map();
+
 export default {
   render: function(createElement) {
-    var self = this;
+    let self = this;
+    const src = this.src;
+
+    // 已经加载过的src，禁止再去加载
+    if(srcMap.has(src)) {
+      this.$nextTick(() => {
+        self.$emit('load');
+      })
+      return null;
+    } else {
+      srcMap.set(src, true);
+    }
+
     return createElement('script', {
       attrs: {
         type: 'text/javascript',
