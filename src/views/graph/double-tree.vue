@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { simple } from './model';
+import { doubleTree } from './model';
 
 export default {
   data() {
@@ -37,17 +37,11 @@ export default {
   },
 
   mounted() {
-    this.modelPromise = simple();
+    doubleTree().then(data => {
+      this.initDiagram(go, data);
+    });
   },
   methods: {
-    onLoad() {
-      this.modelPromise.then(data => {
-        this.go = go;
-
-        this.initDiagram(go, data);
-      });
-    },
-
     // 渲染/初始化 gojs 图表
     initDiagram(go, data) {
       const $ = go.GraphObject.make;
@@ -56,21 +50,24 @@ export default {
       const diagram = $(go.Diagram, $diagram, {
         initialContentAlignment: go.Spot.TopLeft,
         'toolManager.mouseWheelBehavior': go.ToolManager.WheelNone,
+        'animationManager.isEnabled': false,
         allowMove: false,
         allowDrop: false,
         //allowSelect: false,
         //isReadOnly: true,
 
-        layout: $(go.TreeLayout, {
-          angle: 0,
-          layerSpacing: 60,
-          nodeSpacing: 50,
-
-          // 节点对齐 
-          alignment: go.TreeLayout.AlignmentStart,
-          //setsPortSpot: false,
-          //setsChildPortSpot: false
+        layout: $(DoubleTreeLayout, {
+          directionFunction: function(n) {
+            return n.data && n.data.dir !== 'left';
+          },
         }),
+
+        //
+        InitialLayoutCompleted: function(e) {
+          var dia = e.diagram;
+          // add height for horizontal scrollbar
+          dia.div.style.height = dia.documentBounds.height + 'px';
+        },
       });
 
       diagram.nodeTemplate = this.nodeTemplate(go);
@@ -95,19 +92,7 @@ export default {
         $(go.Shape, { toArrow: 'Boomerang', fill: '#C0C4CC', stroke: null })
       );
 
-      diagram.model = $(go.GraphLinksModel, {
-        //copiesArrays: true,
-        copiesArrayObjects: true,
-        nodeDataArray: data.nodes,
-        linkDataArray: data.links,
-      });
-
-      // 
-      setTimeout(() => {
-        const height = $diagram.childNodes[1].childNodes[0].clientHeight;
-        $diagram.style.height = height + 'px';
-        diagram.requestUpdate();
-      }, 0);
+      diagram.model = new go.TreeModel(data);
 
       $diagram.childNodes[0].focus = function() {};
     },
@@ -155,67 +140,33 @@ export default {
           $(
             go.Panel,
             'Vertical',
-            $(
-              go.TextBlock,
-              {
-                margin: new go.Margin(5, 5),
-                textAlign: 'center',
-                stroke: '#409eff',
-                font: '14px sans-serif',
-                cursor: 'pointer',
-              },
-              {
-                click: (e, node) => {
-                  let address = node.part.data.address;
-                  window.open(address, '_blank');
-                },
-              },
-              new go.Binding('text', 'service')
-            ),
+            // $(
+            //   go.TextBlock,
+            //   {
+            //     margin: new go.Margin(5, 5),
+            //     textAlign: 'center',
+            //     stroke: '#409eff',
+            //     font: '14px sans-serif',
+            //     cursor: 'pointer',
+            //   },
+            //   {
+            //     click: (e, node) => {
+            //       let address = node.part.data.address;
+            //       window.open(address, '_blank');
+            //     },
+            //   },
+            //   new go.Binding('text', 'service')
+            // ),
 
             $(
               go.TextBlock,
               {
-                margin: new go.Margin(2, 5),
+                margin: new go.Margin(10, 10),
                 textAlign: 'center',
                 stroke: '#666',
                 font: '14px sans-serif',
               },
-              new go.Binding('text', 'text')
-            )
-          )
-        ),
-
-        $(
-          go.Panel,
-          'Vertical',
-          $(go.TextBlock, {
-            margin: 5,
-            //font: 'bold 14px sans-serif',
-            //opacity: 0.75,
-            stroke: '#C0C4CC',
-            text: '|',
-          }),
-
-          $(
-            go.Panel,
-            'Horizontal',
-            { stretch: go.GraphObject.Horizontal, background: 'transparent' },
-            // $(go.Picture, {
-            //   margin: new go.Margin(0, 0, 0, 10),
-            //   width: 15,
-            //   height: 15,
-            //   //source: require("../assets/user.png")
-            // }),
-
-            $(
-              go.TextBlock,
-              {
-                //font: 'bold 14px sans-serif',
-                //opacity: 0.75,
-                stroke: '#404040',
-              },
-              new go.Binding('text', 'users')
+              new go.Binding('text', 'key')
             )
           )
         )

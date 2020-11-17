@@ -12,3 +12,11 @@ export function simple(data) {
     message: '',
   });
 }
+
+
+export function doubleTree(data) {
+  return axios.get('/graph/doubleTree.json', {
+    params: data,
+    message: '',
+  });
+}
