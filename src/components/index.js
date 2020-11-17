@@ -12,11 +12,13 @@ import Pagination from './Pagination.vue';
 import Sticky from './Sticky.vue';
 import MonacoEditor from './MonacoEditor.vue';
 import Browser from './Browser.vue';
+import RemoteScript from './RemoteScript.vue';
 
 Vue.component('LayoutViewHeader', LayoutViewHeader);
 Vue.component('Pagination', Pagination);
 Vue.component('Sticky', Sticky);
 Vue.component('MonacoEditor', MonacoEditor);
+Vue.component('RemoteScript', RemoteScript);
 
 // 内置虚拟浏览器组件，通过iframe打开第三方网站
 Vue.component('Browser', Browser);

@@ -390,4 +390,21 @@ export default [
       },
     ],
   },
+
+  // 图表
+  {
+    path: '/graph',
+    name: 'graph',
+    component: EntryWithAside,
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/graph/simple.vue'),
+        meta: {
+          title: '简单图表',
+          icon: 'fa fa-product-hunt',
+        },
+      },
+    ],
+  },
 ];
