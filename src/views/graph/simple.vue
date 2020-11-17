@@ -11,7 +11,7 @@
       <a href="https://gojs.net/latest/samples/index.html">官方站点</a>
     </layout-view-header>
 
-    <remote-script src="https://unpkg.com/gojs@2.1.29/release/go.js" @load="onLoad"></remote-script>
+    <remote-script src="/static/gojs/go.js" @load="onLoad"></remote-script>
     <div ref="diagram" class="diagram"></div>
   </div>
 </template>

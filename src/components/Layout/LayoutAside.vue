@@ -79,6 +79,17 @@
           </el-menu-item>
         </el-submenu>
 
+        <el-submenu index="/graph">
+          <template slot="title">
+            <i class="iconfont icon-graph"></i>
+            <span>图表</span>
+          </template>
+
+          <el-menu-item index="/graph">
+            <span slot="title">简单图表</span>
+          </el-menu-item>
+        </el-submenu>
+
         <el-submenu index="/designer">
           <template slot="title">
             <i class="iconfont icon-designer"></i>
