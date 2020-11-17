@@ -88,6 +88,9 @@
           <el-menu-item index="/graph">
             <span slot="title">简单图表</span>
           </el-menu-item>
+          <el-menu-item index="/graph/double-tree">
+            <span slot="title">双树图表</span>
+          </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/designer">

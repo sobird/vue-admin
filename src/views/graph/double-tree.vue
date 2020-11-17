@@ -1,13 +1,14 @@
 <!--
- - simple.vue
+ - double-tree.vue
+ - 双树图表
  - 
- - sobird<i@sobird.me> at 2020/11/17 15:04:13 created.
+ - sobird<i@sobird.me> at 2020/11/17 18:22:11 created.
 -->
 
 <template>
   <div>
     <layout-view-header>
-      使用GoJS来渲染一个简单的图表，更多示例，请访问
+      使用GoJS来渲染一个双树图表，更多示例，请访问
       <a href="https://gojs.net/latest/samples/index.html">官方站点</a>
     </layout-view-header>
 
@@ -36,11 +37,17 @@ export default {
   },
 
   mounted() {
-    simple().then(data => {
-      this.initDiagram(go, data);
-    });
+    this.modelPromise = simple();
   },
   methods: {
+    onLoad() {
+      this.modelPromise.then(data => {
+        this.go = go;
+
+        this.initDiagram(go, data);
+      });
+    },
+
     // 渲染/初始化 gojs 图表
     initDiagram(go, data) {
       const $ = go.GraphObject.make;
@@ -59,7 +66,7 @@ export default {
           layerSpacing: 60,
           nodeSpacing: 50,
 
-          // 节点对齐
+          // 节点对齐 
           alignment: go.TreeLayout.AlignmentStart,
           //setsPortSpot: false,
           //setsChildPortSpot: false
@@ -72,11 +79,11 @@ export default {
 
         { routing: go.Link.AvoidsNodes, corner: 5 },
 
-        new go.Binding('fromSpot', 'fromSpot', function (d) {
+        new go.Binding('fromSpot', 'fromSpot', function(d) {
           return spotConverter(d);
         }),
 
-        new go.Binding('toSpot', 'toSpot', function (d) {
+        new go.Binding('toSpot', 'toSpot', function(d) {
           return spotConverter(d);
         }),
 
@@ -95,14 +102,14 @@ export default {
         linkDataArray: data.links,
       });
 
-      //
+      // 
       setTimeout(() => {
         const height = $diagram.childNodes[1].childNodes[0].clientHeight;
         $diagram.style.height = height + 'px';
         diagram.requestUpdate();
       }, 0);
 
-      $diagram.childNodes[0].focus = function () {};
+      $diagram.childNodes[0].focus = function() {};
     },
 
     // 节点模板

@@ -402,7 +402,15 @@ export default [
         component: () => import('@/views/graph/simple.vue'),
         meta: {
           title: '简单图表',
-          icon: 'fa fa-product-hunt',
+          icon: 'graph',
+        },
+      },
+      {
+        path: 'double-tree',
+        component: () => import('@/views/graph/double-tree.vue'),
+        meta: {
+          title: '双树图表',
+          icon: 'graph',
         },
       },
     ],
