@@ -32,19 +32,18 @@
  * @version $Id$
  */
 
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from "vuex";
 import * as types from "./mutation-types";
 import VueCookie from "@/utils/cookie";
 
-Vue.use(Vuex);
+// Vue.use(Vuex);
 
-// 组件中载入$cookie
-Vue.use(VueCookie);
+// // 组件中载入$cookie
+// Vue.use(VueCookie);
 
 import nested from '@/views/components/draggable/components/nested-store';
 
-const store = new Vuex.Store({
+const store = createStore({
   /**
    * State
    *

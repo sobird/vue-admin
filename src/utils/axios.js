@@ -14,7 +14,7 @@
 import axios from "axios";
 import store from "@/store";
 import querystring from "querystring";
-import { Message } from "element-ui";
+import { ElMessage as Message } from "element-plus";
 import { remove } from "lodash";
 import crypto from "crypto";
 

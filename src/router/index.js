@@ -1,12 +1,9 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-
-Vue.use(Router);
+import { createRouter, createWebHashHistory} from 'vue-router';
 
 import EntryWithAside from '@/components/Layout/EntryWithAside';
 import NavMenuRouter from './NavMenuRouter';
 
-const router = new Router({
+const router = createRouter({
   routes: [
     {
       path: '/',
@@ -23,7 +20,7 @@ const router = new Router({
 
     // 404错误页
     {
-      path: '*',
+      path: '/:catchAll(.*)',
       meta: {
         //title: 'Not Found'
       },
@@ -40,6 +37,7 @@ const router = new Router({
       ],
     },
   ],
+  history: createWebHashHistory(),
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
@@ -53,15 +51,15 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-const originalPush = Router.prototype.push;
-Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err);
-};
+// const originalPush = Router.prototype.push;
+// Router.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err);
+// };
 
 // 方便操作router query
-Vue.prototype.$query = function(query) {
-  this.$router.push({ query: Object.assign({}, this.$route.query, query) });
-  return this.$route.query;
-};
+// Vue.prototype.$query = function(query) {
+//   this.$router.push({ query: Object.assign({}, this.$route.query, query) });
+//   return this.$route.query;
+// };
 
 export default router;
