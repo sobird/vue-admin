@@ -122,7 +122,7 @@ ol {
 // 侧边栏折叠时 样式
 .aside-collapse {
   .header-brand {
-    width: 48px;
+    width: 64px;
     .logo {
       display: inline-block;
     }
