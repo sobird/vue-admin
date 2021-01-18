@@ -43,5 +43,5 @@ installComponents(app);
 
 app.use(router);
 app.use(store);
-app.use(ElementPlus, { locale });
-app.mount('#app');
+app.use(ElementPlus, { size: 'mini', locale });
+app.mount('#app', false);
