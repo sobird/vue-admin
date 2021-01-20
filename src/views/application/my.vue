@@ -7,7 +7,7 @@
 <template>
   <div>
     <layout-view-header>
-      <template slot="action">
+      <template v-slot:action>
         <el-button
           type="primary"
           size="mini"
@@ -29,17 +29,12 @@
     <el-table :data="appPaginationModel.items" style="width: 100%">
       <el-table-column prop="name" label="应用名称"></el-table-column>
       <el-table-column prop="title" label="应用中文名"></el-table-column>
-
       <el-table-column prop="teamId" label="所属团队"></el-table-column>
-
       <el-table-column prop="accessLabel" label="访问权限"></el-table-column>
-
       <el-table-column prop="owner" label="负责人"></el-table-column>
-
       <el-table-column prop="statusLabel" label="状态" width="100"></el-table-column>
-
       <el-table-column label="操作" width="100">
-        <template slot-scope="scope">
+        <template v-slot:default="scope">
           <el-button
             type="text"
             @click="
@@ -56,7 +51,7 @@
             修改
           </el-button>
 
-          <el-button @click="projectDelete(scope.row.id)" type="text">移交</el-button>
+          <el-button @click="projectDelete(scope.row.id)" type="text">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -117,7 +112,7 @@ export default {
     },
 
     projectDelete(id) {
-      this.$confirm('确定要删除该项目吗？', '提示信息')
+      this.$confirm('确定要删除该应用吗？', '提示信息')
         .then(res => {
           projectDelete({
             id,
