@@ -51,7 +51,7 @@
             修改
           </el-button>
 
-          <el-button @click="projectDelete(scope.row.id)" type="text">删除</el-button>
+          <el-button @click="delApp(scope.row.id)" type="text">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -61,7 +61,7 @@
 </template>
 
 <script type="text/javascript">
-import { myApp } from './model';
+import { myApp, delApp } from './model';
 
 export default {
   data() {
@@ -111,35 +111,16 @@ export default {
       });
     },
 
-    projectDelete(id) {
+    delApp(id) {
       this.$confirm('确定要删除该应用吗？', '提示信息')
         .then(res => {
-          projectDelete({
+          delApp({
             id,
           }).then(res => {
             this.$store.dispatch('refreshRouteView');
           });
         })
         .catch(res => {});
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          let pro = Promise.resolve();
-          if (this.projectFormType == 'create') {
-            pro = projectCreate(this.projectFormModel);
-          } else {
-            pro = projectUpdate(this.projectFormModel);
-          }
-
-          pro.then(res => {
-            this.$store.dispatch('refreshRouteView');
-            this.projectFormVisible = false;
-          });
-        } else {
-          return false;
-        }
-      });
     },
   },
 };
