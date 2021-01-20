@@ -16,6 +16,8 @@ export default {
     });
   },
 
+  mounted() {},
+
   methods: {
     ...mapActions([
       // 将 `this.userInfo()` 映射为 `this.$store.dispatch('userInfo')`
@@ -44,10 +46,11 @@ body {
   width: 100%;
   overflow-y: hidden;
 }
-.iconfont{
+.iconfont {
   font-size: 12px;
 }
-.el-input-group__append, .el-input-group__prepend {
+.el-input-group__append,
+.el-input-group__prepend {
   padding: 0 10px;
 }
 </style>
