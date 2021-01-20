@@ -16,11 +16,9 @@ import locale from "element-plus/lib/locale/lang/zh-cn";
 // import i18n from './lang';
 import router from './router';
 import store from './store';
-import installComponents from  '@/components';
+import installComponents from '@/components';
 
 import App from './App.vue';
-
-
 
 // Vue.use(ElementUI, {
 //   size: 'mini', // set element-ui default size
@@ -29,13 +27,11 @@ import App from './App.vue';
 //   i18n: (key, value) => i18n.t(key, value)
 // });
 
-
-
 const app = createApp(App);
 app.config.productionTip = false;
 
 // 定义一个全局指令
-app.directive('view-title', function(el, binding) {
+app.directive('view-title', function (el, binding) {
   document.title = binding.value || 'Vue Element Pro';
 });
 

@@ -84,7 +84,7 @@ const store = createStore({
    * mapGetters 可以将store中的getter映射到局部计算属性
    */
   getters: {
-    aside: function(state) {
+    aside: function (state) {
       return state.aside;
     },
     userinfo: state => state.userinfo,
@@ -111,7 +111,7 @@ const store = createStore({
     [types.REFRESH_ROUTE_VIEW]: state => {
       state.routerViewKey = +new Date();
     },
-    
+
     [types.TOGGLE_ASIDE]: state => {
       if (state.aside.collapse) {
         VueCookie.set("asideStatus", 0);
