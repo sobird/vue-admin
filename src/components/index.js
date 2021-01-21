@@ -36,7 +36,6 @@ export default app => {
     if (url == '') {
       return;
     }
-    console.log(name);
     switch (name) {
       case '_drawer':
         var urlReg = new RegExp(/(\w+):\/\//);
@@ -54,5 +53,11 @@ export default app => {
         window.open(url, name, specs, replace);
     }
   }
+
+  // 方便操作router query
+  app.config.globalProperties.$query = function (query) {
+    this.$router.push({ query: Object.assign({}, this.$route.query, query) });
+    return this.$route.query;
+  };
 };
 

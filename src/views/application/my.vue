@@ -72,30 +72,6 @@ export default {
         pn: 1,
         items: [],
       },
-      projectList: [],
-
-      projectFormVisible: false,
-      projectFormType: 'create',
-
-      projectFormModel: {
-        name: '',
-        description: '',
-      },
-      projectFormRules: {
-        name: [
-          { required: true, message: '请输入项目名称', trigger: 'blur' },
-          {
-            min: 1,
-            max: 20,
-            message: '长度在 1 到 20 个字符',
-            trigger: 'blur',
-          },
-          {
-            pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+$/,
-            message: '不允许输入空格等特殊符号',
-          },
-        ],
-      },
     };
   },
   mounted() {

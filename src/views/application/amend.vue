@@ -26,16 +26,16 @@ export default {
   },
   data() {
     return {
-        vmodel: {}
+      vmodel: {},
     };
   },
 
-  mounted(){
-      const { query } = this.$route;
+  mounted() {
+    const { query } = this.$route;
 
-      queryApp(query).then(res => {
-          this.vmodel = res;
-      });
+    queryApp(query).then(res => {
+      this.vmodel = res;
+    });
   },
 
   methods: {
