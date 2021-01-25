@@ -1,0 +1,17 @@
+{
+  "code": 0,
+  "message": "OK",
+  "data": [
+    { "key": "Root" },
+    { "key": "Left1", "parent": "Root", "dir": "left" },
+    { "key": "Left2", "parent": "Root", "dir": "left" },
+    { "key": "Left3", "parent": "Root", "dir": "left" },
+    { "key": "Left4", "parent": "Root", "dir": "left" },
+
+    { "key": "Right1", "parent": "Root", "dir": "right" },
+    { "key": "Right2", "parent": "Root", "dir": "right" },
+    { "key": "Right3", "parent": "Root", "dir": "right" },
+    { "key": "Right4", "parent": "Root", "dir": "right" },
+    { "key": "Right5", "parent": "Root", "dir": "right" }
+  ]
+}

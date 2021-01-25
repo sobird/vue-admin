@@ -1,0 +1,23 @@
+{
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "pt": 73,
+        "pn": 1,
+        "ps": 20,
+        "items": [
+            {
+                "id": 1,
+                "name": "one",
+                "title": "信息管理系统",
+                "description": "信息管理与信息系统描述信息",
+                "access": "PUBLIC",
+                "accessLabel": "公开",
+                "ctime": "2019-3-1",
+                "status": "1",
+                "statusLabel": "已认证",
+                "owner": "yangjunlong"
+            }
+        ]
+    }
+}

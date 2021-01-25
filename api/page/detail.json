@@ -1,0 +1,16 @@
+{
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "id": 1,
+        "name": "one",
+        "title": "员工列表",
+        "path": "/staff",
+        "appDomain": "one",
+        "description": "用来展示员工列表的管理系统页面",
+        "ctime": "2019-3-1",
+        "status": "1",
+        "statusLabel": "已认证",
+        "creater": "yangjunlong"
+    }
+}
