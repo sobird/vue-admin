@@ -11,26 +11,28 @@
       <a href="http://json-schema.org/" target="_blank">JSON Schema</a>
       后端数据模型渲染出来的表单，可以由后端动态的控制表单输入项以及简单的控制部分UI。
     </layout-view-header>
-    <el-card shadow="never" style="border: none;">
-      <el-row type="flex" :gutter="20">
-        <el-col :span="12">
-          <el-form ref="schemaForm" :model="formVmodel" label-width="100px">
-            <schema-form v-model="formVmodel.vmodel" :schema="formVmodel.schema" />
+    <el-row type="flex" :gutter="20">
+      <el-col :span="12">
+        <el-form ref="schemaForm" :model="formVmodel" label-width="100px">
+          <schema-form v-model="formVmodel.vmodel" :schema="formVmodel.schema" />
 
-            <el-form-item>
-              <el-button type="primary" @click="submitForm('schemaForm')">提交</el-button>
-              <el-button @click="$refs.schemaForm.resetFields()">重置</el-button>
-            </el-form-item>
-          </el-form>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('schemaForm')">提交</el-button>
+            <el-button @click="$refs.schemaForm.resetFields()">重置</el-button>
+          </el-form-item>
+        </el-form>
 
-          <h2>数据模型/Model</h2>
-          <pre>{{ formVmodel.vmodel }}</pre>
-        </el-col>
-        <el-col :span="12" style="height: 500px;">
-          <MonacoEditor v-if="formVmodel.schemaText" v-model="formVmodel.schemaText" @change="change" />
-        </el-col>
-      </el-row>
-    </el-card>
+        <h2>数据模型/Model</h2>
+        <pre>{{ formVmodel.vmodel }}</pre>
+      </el-col>
+      <el-col :span="12" style="height: 500px;">
+        <MonacoEditor
+          v-if="formVmodel.schemaText"
+          v-model="formVmodel.schemaText"
+          @change="change"
+        />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -56,8 +58,8 @@ export default {
 
   mounted() {
     schemaForm().then(schema => {
-      this.$set(this.formVmodel, 'schema', schema);
-      this.$set(this.formVmodel, 'schemaText', JSON.stringify(schema, null, 2));
+      this.formVmodel.schema = schema;
+      this.formVmodel.schemaText = JSON.stringify(schema, null, 2);
     });
   },
 

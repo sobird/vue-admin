@@ -20,6 +20,8 @@ export default {
   mounted() {
     let { type } = this.$attrs.schema || {};
     this.typeChange(type);
+
+    console.log(this.$attrs);
   },
 
   methods: {
@@ -48,7 +50,7 @@ export default {
     },
 
     change(value) {
-      this.$emit("input", value);
+      this.$emit("update:modelValue", value);
     }
   },
 

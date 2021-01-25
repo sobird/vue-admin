@@ -54,9 +54,9 @@ export default {
   },
 
   mounted() {
-    // 默认，先从$attrs.value中读取数据模型
-    if (this.$attrs.value) {
-      this.vmodel = this.$attrs.value;
+    // 默认，先从$attrs.modelValue中读取数据模型
+    if (this.$attrs.modelValue) {
+      this.vmodel = this.$attrs.modelValue;
     }
   },
 
@@ -95,8 +95,8 @@ export default {
     vmodel: function(newVal, oldVal) {
       this.$emit("change", newVal);
     },
-    "$attrs.value": function(n, o) {
-      this.vmodel = this.$attrs.value;
+    "$attrs.modelValue": function(n, o) {
+      this.vmodel = this.$attrs.modelValue;
     }
   }
 };
