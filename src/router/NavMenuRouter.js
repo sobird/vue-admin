@@ -367,17 +367,6 @@ export default [
     ],
   },
 
-  // CURD表格设计
-  {
-    path: '/design/curd',
-    name: 'design-curd',
-    component: () => import('@/views/designer/curdDesign'),
-    meta: {
-      title: 'CURD表格设计',
-      icon: 'design',
-    }
-  },
-
   // 我的项目
   {
     path: '/project',

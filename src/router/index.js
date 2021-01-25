@@ -23,6 +23,17 @@ const router = createRouter({
       }
     },
 
+    // CURD表格设计
+  {
+    path: '/design/curd',
+    name: 'design-curd',
+    component: () => import('@/views/designer/curdDesign'),
+    meta: {
+      title: 'CURD表格设计',
+      icon: 'design',
+    }
+  },
+
     // 404错误页
     {
       path: '/:catchAll(.*)',

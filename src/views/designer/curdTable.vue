@@ -71,8 +71,8 @@
       <el-table-column prop="createdBy" label="创建人"></el-table-column>
 
       <el-table-column label="操作" width="auto">
-        <template slot-scope="scope">
-          <el-button type="text">查看</el-button>
+        <template v-slot:default="scope">
+          <el-button type="text" @click="designEmployee(scope.row)"><i class="iconfont icon-design"></i> 设计</el-button>
           <el-button type="text" @click="updateEmployee(scope.row)">编辑</el-button>
           <el-button type="text" @click="deleteEmployee(scope.row)">删除</el-button>
         </template>
@@ -83,7 +83,7 @@
 
     <el-dialog
       :title="(dialogMode == 'create' ? '新增' : '编辑') + '员工信息'"
-      :visible.sync="dialogVisible"
+      v-model="dialogVisible"
     >
       <el-form ref="employeeForm" :model="employeeModel" :rules="employeeRules" label-position="top">
         <el-form-item label="员工姓名" prop="name">
@@ -91,7 +91,7 @@
         </el-form-item>
 
         <el-form-item prop="age" label="年龄">
-          <template slot="label">
+          <template #label>
             年龄
             <el-tooltip class="item" effect="dark" content="这是员工年龄" placement="top">
               <i class="el-icon-info"></i>
@@ -123,7 +123,7 @@
         </el-form-item>
       </el-form>
 
-      <template slot="footer">
+      <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button
           type="primary"
@@ -180,6 +180,13 @@ export default {
     createEmployee() {
       this.dialogVisible = true;
       this.dialogMode = 'create';
+    },
+
+    // 进入表格设计器
+    designEmployee(row) {
+      this.$router.push({
+        name: 'design-curd'
+      });
     },
 
     // 编辑员工信息

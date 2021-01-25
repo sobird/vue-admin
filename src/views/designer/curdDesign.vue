@@ -46,9 +46,9 @@
                       </li>
                     </ul>
                   </div>
-                  <span class="avatar" slot="reference">
+                  <template class="avatar" #reference>
                     {{ userinfo.realname && userinfo.realname.substr(0, 1).toUpperCase() }}
-                  </span>
+                  </template>
                 </el-popover>
               </li>
             </ul>
@@ -126,7 +126,7 @@
                   <el-table-column prop="createdBy" label="创建人"></el-table-column>
 
                   <el-table-column label="操作" width="auto">
-                    <template slot-scope="scope">
+                    <template v-slot:default="scope">
                       <el-button type="text">查看</el-button>
                       <el-button type="text" @click="updateEmployee(scope.row)">编辑</el-button>
                       <el-button type="text" @click="deleteEmployee(scope.row)">删除</el-button>
