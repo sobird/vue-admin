@@ -67,9 +67,9 @@
                 <h3>员工信息列表</h3>
 
                 <el-card style="margin-bottom: 10px;" shadow="“never">
-                  <div slot="header" class="clearfix">
+                  <template #header class="clearfix">
                     <span>查询条件</span>
-                  </div>
+                  </template>
 
                   <draggable
                     tag="el-row"
@@ -78,12 +78,14 @@
                     group="people"
                     @change="log"
                   >
-                    <el-col :span="4" v-for="(element, index) in list2" :key="index">
-                      <schema-form
-                        v-model="queryModel[element.fieldName]"
-                        :schema="element.schema"
-                      />
-                    </el-col>
+                    <template #item="{ element, index }">
+                      <el-col :span="4" :key="index">
+                        <schema-form
+                          v-model="queryModel[element.fieldName]"
+                          :schema="element.schema"
+                        />
+                      </el-col>
+                    </template>
                   </draggable>
 
                   <!-- <el-row :gutter="10" style="margin-bottom: 20px;">
@@ -169,9 +171,11 @@
                   :clone="clone"
                   @change="log"
                 >
-                  <div class="list-group-item" v-for="element in draggableList" :key="element.id">
+                <template #item="{ element }">
+                  <div class="list-group-item" :key="element.id">
                     {{ element.name }}
                   </div>
+                </template>
                 </draggable>
               </el-form-item>
 
@@ -470,7 +474,7 @@ export default {
 }
 
 div:not(* > .com-hover) {
-  color: red;
+  //color: red;
 }
 
 #header {
@@ -518,19 +522,19 @@ div:not(* > .com-hover) {
   }
 }
 
-.dragArea{
+.dragArea {
   margin-left: -5px;
-    margin-right: -5px;
-    margin-bottom: 20px;
-    .el-col{
-          padding-left: 5px;
+  margin-right: -5px;
+  margin-bottom: 20px;
+  .el-col {
+    padding-left: 5px;
     padding-right: 5px;
-    }
-    .sortable-ghost{
-      width: 16.66667%;
-      float: left;
+  }
+  .sortable-ghost {
+    width: 16.66667%;
+    float: left;
     box-sizing: border-box;
-    }
+  }
 }
 .list-group {
   .list-group-item {
