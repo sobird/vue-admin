@@ -12,9 +12,11 @@
       <table class="el-table el-table-striped">
         <thead class="thead-dark">
           <draggable v-model="headers" tag="tr">
-            <th v-for="header in headers" :key="header" scope="col">
-              {{ header }}
-            </th>
+            <template #item="{ element: header }">
+              <th scope="col">
+                {{ header }}
+              </th>
+            </template>
           </draggable>
         </thead>
         <tbody>
@@ -74,6 +76,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

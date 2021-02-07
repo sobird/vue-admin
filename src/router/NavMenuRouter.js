@@ -4,15 +4,19 @@
  * sobird<i@sobird.me> at 2020/06/01 16:30:54 created.
  */
 
-import EntryWithAside from '@/components/Layout/EntryWithAside';
+import EmptyRouterView from '@/components/Layout/EmptyRouterView';
 
 export default [
-  // 应用管理
   {
-    path: '/application',
+    path: '',
+    // 路由懒加载
+    component: () => import('@/views/Home.vue'),
+  },
+  { // 应用管理
+    path: 'application',
     name: 'application',
-    component: EntryWithAside,
-    redirect: { name: 'basicForm' },
+    component: EmptyRouterView,
+    redirect: { name: 'myApp' },
     meta: {
       title: '应用管理',
       icon: 'application',
@@ -52,7 +56,7 @@ export default [
   {
     path: '/page',
     name: 'page',
-    component: EntryWithAside,
+    component: EmptyRouterView,
     redirect: { name: 'myPage' },
     meta: {
       title: '页面管理',
@@ -93,7 +97,7 @@ export default [
   {
     path: '/form',
     name: 'form',
-    component: EntryWithAside,
+    component: EmptyRouterView,
     redirect: { name: 'basicForm' },
     meta: {
       title: '表单页',
@@ -161,7 +165,7 @@ export default [
   {
     path: '/components',
     name: 'components',
-    component: EntryWithAside,
+    component: EmptyRouterView,
     redirect: { name: 'draggable' },
     meta: {
       title: '组件',
@@ -344,7 +348,7 @@ export default [
   {
     path: '/designer',
     name: 'component',
-    component: EntryWithAside,
+    component: EmptyRouterView,
     redirect: { name: 'curdTable' },
     meta: {
       title: '设计器',
@@ -363,22 +367,11 @@ export default [
     ],
   },
 
-  // CURD表格设计
-  {
-    path: '/design/curd',
-    name: 'design-curd',
-    component: () => import('@/views/designer/curdDesign'),
-    meta: {
-      title: 'CURD表格设计',
-      icon: 'design',
-    }
-  },
-
   // 我的项目
   {
     path: '/project',
     name: 'project',
-    component: EntryWithAside,
+    component: EmptyRouterView,
     children: [
       {
         path: '',
@@ -395,7 +388,7 @@ export default [
   {
     path: '/graph',
     name: 'graph',
-    component: EntryWithAside,
+    component: EmptyRouterView,
     children: [
       {
         path: '',

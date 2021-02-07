@@ -32,19 +32,18 @@
  * @version $Id$
  */
 
-import Vue from "vue";
-import Vuex from "vuex";
+import { createStore } from "vuex";
 import * as types from "./mutation-types";
 import VueCookie from "@/utils/cookie";
 
-Vue.use(Vuex);
+// Vue.use(Vuex);
 
-// 组件中载入$cookie
-Vue.use(VueCookie);
+// // 组件中载入$cookie
+// Vue.use(VueCookie);
 
 import nested from '@/views/components/draggable/components/nested-store';
 
-const store = new Vuex.Store({
+const store = createStore({
   /**
    * State
    *
@@ -85,7 +84,7 @@ const store = new Vuex.Store({
    * mapGetters 可以将store中的getter映射到局部计算属性
    */
   getters: {
-    aside: function(state) {
+    aside: function (state) {
       return state.aside;
     },
     userinfo: state => state.userinfo,
@@ -112,7 +111,7 @@ const store = new Vuex.Store({
     [types.REFRESH_ROUTE_VIEW]: state => {
       state.routerViewKey = +new Date();
     },
-    
+
     [types.TOGGLE_ASIDE]: state => {
       if (state.aside.collapse) {
         VueCookie.set("asideStatus", 0);

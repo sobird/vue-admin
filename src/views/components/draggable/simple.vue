@@ -25,15 +25,18 @@
         tag="ul"
         :list="list"
         :disabled="!enabled"
+        item-key="name"
         class="list-group"
         ghost-class="ghost"
         :move="checkMove"
         @start="dragging = true"
         @end="dragging = false"
       >
-        <li class="list-group-item" v-for="element in list" :key="element.name">
-          {{ element.name }}
-        </li>
+        <template #item="{ element }">
+          <li class="list-group-item" :class="{ 'not-draggable': !enabled }" :key="element.name">
+            {{ element.name }}
+          </li>
+        </template>
       </draggable>
     </el-col>
 
@@ -89,5 +92,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

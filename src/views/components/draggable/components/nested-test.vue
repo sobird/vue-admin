@@ -1,4 +1,3 @@
-
 <template>
   <draggable
     v-bind="dragOptions"
@@ -7,11 +6,14 @@
     :list="list"
     :value="value"
     @input="emitter"
+    item-key="id"
   >
-    <div class="item-group" :key="el.id" v-for="el in realValue">
-      <div class="item">{{ el.name }}</div>
-      <nested-test class="item-sub" :list="el.elements" />
-    </div>
+    <template #item="{ element }">
+      <div class="item-group" :key="element.id">
+        <div class="item">{{ element.name }}</div>
+        <nested-test class="item-sub" :list="element.elements" />
+      </div>
+    </template>
   </draggable>
 </template>
 

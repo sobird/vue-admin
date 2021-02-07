@@ -10,7 +10,6 @@
       <h3>Draggable with footer</h3>
 
       <draggable
-        tag="transition-group"
         :componentData="componentData"
         :list="list"
         class="list-group"
@@ -18,21 +17,25 @@
         :animation="100"
         @start="dragging = true"
         @end="dragging = false"
+        item-key="name"
       >
-        <div class="list-group-item item" v-for="element in list" :key="element.name">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item item" :key="element.name">
+            {{ element.name }}
+          </div>
+        </template>
 
-        <div
-          slot="footer"
-          class="btn-group list-group-item"
-          role="group"
-          aria-label="Basic example"
-          key="footer"
-        >
-          <el-button type="primary" @click="add">Add</el-button>
-          <el-button @click="replace">Replace</el-button>
-        </div>
+        <template #footer>
+          <div
+            class="btn-group list-group-item"
+            role="group"
+            aria-label="Basic example"
+            key="footer"
+          >
+            <el-button type="primary" @click="add">Add</el-button>
+            <el-button @click="replace">Replace</el-button>
+          </div>
+        </template>
       </draggable>
     </el-col>
 

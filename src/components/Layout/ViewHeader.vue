@@ -8,7 +8,6 @@
 <template>
   <div class="view-header">
     <Breadcrumb v-if="breadcrumb" style="margin-bottom: 20px;" />
-
     <slot name="header">
       <el-row type="flex">
         <el-col :span="8">
@@ -48,10 +47,8 @@ export default {
 
   computed: {
     lastcrumb() {
-      let matched = this.$route.matched.filter(item => {
-        return (item.title = item.meta.title);
-      });
-      return matched[matched.length - 1].meta;
+      const { meta } = this.$route;
+      return meta;
     },
   },
 

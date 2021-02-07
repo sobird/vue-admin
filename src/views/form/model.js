@@ -7,8 +7,8 @@
 import axios from "@/utils/axios";
 
 export function schemaForm(data = {}) {
-    return axios.get("/schema/form.json", {
-      params: data,
-      message: ""
-    });
-  }
+  return axios.get("/schema/form.json", {
+    params: data,
+    message: ""
+  });
+}

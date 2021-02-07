@@ -17,19 +17,18 @@
         draggable=".item"
         group="a"
       >
-        <div class="list-group-item item" v-for="element in list" :key="element.name">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item item" :key="element.name">
+            {{ element.name }}
+          </div>
+        </template>
 
-        <div
-          slot="header"
-          class="btn-group list-group-item"
-          role="group"
-          aria-label="Basic example"
-        >
-          <el-button type="primary" @click="add">Add</el-button>
-          <el-button @click="replace">Replace</el-button>
-        </div>
+        <template #footer>
+          <div class="btn-group list-group-item" role="group" aria-label="Basic example">
+            <el-button type="primary" @click="add">Add</el-button>
+            <el-button @click="replace">Replace</el-button>
+          </div>
+        </template>
       </draggable>
     </el-col>
 
@@ -37,19 +36,18 @@
       <h3>Second draggable with header</h3>
 
       <draggable :list="list2" class="list-group" draggable=".item" group="a">
-        <div class="list-group-item item" v-for="element in list2" :key="element.name">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item item" :key="element.name">
+            {{ element.name }}
+          </div>
+        </template>
 
-        <div
-          slot="header"
-          class="btn-group list-group-item"
-          role="group"
-          aria-label="Basic example"
-        >
-          <el-button type="primary" @click="add2">Add</el-button>
-          <el-button @click="replace2">Replace</el-button>
-        </div>
+        <template #header>
+          <div class="btn-group list-group-item" role="group" aria-label="Basic example">
+            <el-button type="primary" @click="add2">Add</el-button>
+            <el-button @click="replace2">Replace</el-button>
+          </div>
+        </template>
       </draggable>
     </el-col>
 

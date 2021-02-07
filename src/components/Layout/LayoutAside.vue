@@ -17,96 +17,96 @@
         active-text-color="rgba(240, 130, 76, 0.8)"
       >
         <el-submenu index="0">
-          <template slot="title">
+          <template #title>
             <i class="iconfont icon-dashboard"></i>
             <span>控制台</span>
           </template>
 
           <el-menu-item index="/">
-            <span slot="title">分析页</span>
+            分析页
           </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/application">
-          <template slot="title">
+          <template #title>
             <i class="iconfont icon-application"></i>
             <span>应用管理</span>
           </template>
 
           <el-menu-item index="/application/my">
-            <span slot="title">我的应用</span>
+            我的应用
           </el-menu-item>
 
           <el-menu-item index="/page/my">
-            <span slot="title">我的页面</span>
+            我的页面
           </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/form">
-          <template slot="title">
+          <template #title>
             <i class="iconfont icon-form"></i>
             <span>表单页</span>
           </template>
 
           <el-menu-item index="/form">
-            <span slot="title">基础表单</span>
+            基础表单
           </el-menu-item>
           <el-menu-item index="/form/step">
-            <span slot="title">分步表单</span>
+            分步表单
           </el-menu-item>
           <el-menu-item index="/form/advanced">
-            <span slot="title">高级表单</span>
+            高级表单
           </el-menu-item>
           <el-menu-item index="/form/schema">
-            <span slot="title">Schema表单</span>
+            Schema表单
           </el-menu-item>
           <el-menu-item index="/form/api">
-            <span slot="title">接口配置表单</span>
+            接口配置表单
           </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/components">
-          <template slot="title">
+          <template #title>
             <i class="iconfont icon-component"></i>
             <span>组件</span>
           </template>
 
           <el-menu-item index="/components/draggable/simple">
-            <span slot="title">拖拽组件</span>
+            拖拽组件
           </el-menu-item>
           <el-menu-item index="/components/openWindow">
-            <span slot="title">打开新窗口</span>
+            打开新窗口
           </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/graph">
-          <template slot="title">
+          <template #title>
             <i class="iconfont icon-graph"></i>
             <span>图表</span>
           </template>
 
           <el-menu-item index="/graph">
-            <span slot="title">简单图表</span>
+            简单图表
           </el-menu-item>
           <el-menu-item index="/graph/double-tree">
-            <span slot="title">双树图表</span>
+            双树图表
           </el-menu-item>
         </el-submenu>
 
         <el-submenu index="/designer">
-          <template slot="title">
+          <template #title>
             <i class="iconfont icon-designer"></i>
             <span>设计器</span>
           </template>
 
           <el-menu-item index="/designer/curd">
-            <span slot="title">CRUD表格</span>
+            CRUD表格
           </el-menu-item>
         </el-submenu>
 
         <el-menu-item index="/project">
           <i class="iconfont icon-product-hunt"></i>
-          <span slot="title">我的项目</span>
+          我的项目
         </el-menu-item>
       </el-menu>
     </el-scrollbar>

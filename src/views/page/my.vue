@@ -7,7 +7,7 @@
 <template>
   <div>
     <layout-view-header>
-      <template slot="action">
+      <template v-slot:action>
         <el-button
           type="primary"
           size="mini"
@@ -68,7 +68,7 @@
       <el-table-column prop="statusLabel" label="状态" width="100"></el-table-column>
 
       <el-table-column label="操作" width="120">
-        <template slot-scope="scope">
+        <template v-slot:default="scope">
           <el-button
             type="text"
             @click="
@@ -86,7 +86,7 @@
             修改
           </el-button>
 
-          <el-button @click="projectDelete(scope.row.id)" type="text">
+          <el-button @click="designPage(scope.row.id)" type="text">
             <i class="iconfont icon-design"></i>
             设计
           </el-button>
@@ -122,6 +122,38 @@ export default {
       appOptions: [],
     };
   },
+
+  /**
+   * 在渲染该组件的对应路由被 confirm 前调用
+   * 不！能！获取组件实例 `this`，因为当守卫执行前，组件实例还没被创建
+   */
+  beforeRouteEnter (to, from, next) {
+    
+    next();
+  },
+
+  /**
+   * 在当前路由改变，但是该组件被复用时调用
+   * 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+   * 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+   * 可以访问组件实例 `this`
+   */
+  beforeRouteUpdate (to, from, next) {
+    console.log(arguments);
+
+    next();
+  },
+
+  /**
+   * 导航离开该组件的对应路由时调用
+   * 以访问组件实例 `this`
+   */
+  beforeRouteLeave (to, from, next) {
+    console.log(arguments);
+
+    next();
+  },
+
   created() {
     this.debounceNameChange = debounce(value => {
       this.nameChange(value);
@@ -159,6 +191,12 @@ export default {
     appChange(appDomain) {
       this.$query({ appDomain });
     },
+
+    designPage(pageId) {
+      this.$router.push({
+        name: 'curdTable',
+      });
+    }
   },
 
   watch: {

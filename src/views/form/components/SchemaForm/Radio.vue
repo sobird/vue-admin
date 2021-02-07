@@ -19,7 +19,7 @@
 export default {
   data() {
     return {
-      vmodel: this.$attrs.value
+      vmodel: this.$attrs.modelValue
     };
   },
   props: {
@@ -31,8 +31,8 @@ export default {
   mounted() {},
   methods: {},
   watch: {
-    "$attrs.value": function(n, o) {
-      this.vmodel = this.$attrs.value;
+    "$attrs.modelValue": function(n, o) {
+      this.vmodel = this.$attrs.modelValue;
     }
   }
 };

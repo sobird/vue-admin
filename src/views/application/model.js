@@ -19,6 +19,18 @@ export function myApp(data = {}) {
 }
 
 /**
+ * 删除应用
+ * 
+ * @param {Object} data 
+ */
+export function delApp(data = {}) {
+  return axios.post("/submit.json", {
+    params: data,
+    message: ""
+  });
+}
+
+/**
  * 申请应用
  * 
  * @param {Object} data 

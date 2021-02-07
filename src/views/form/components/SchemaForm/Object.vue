@@ -13,9 +13,9 @@
       </template>
       <template v-else>
         <el-form-item>
-          <template slot="label">
+          <template #label>
             <el-tooltip class="item" effect="dark" placement="top">
-              <template slot="content">{{item.title}}</template>
+              <template #content>{{item.title}}</template>
               <span>{{item.title}}</span>
             </el-tooltip>
           </template>
@@ -63,8 +63,8 @@ export default {
       }
     }
 
-    // 默认，先从$attrs.value中读取数据模型
-    this.vmodel = this.$attrs.value || vmodel;
+    // 默认，先从$attrs.modelValue中读取数据模型
+    this.vmodel = this.$attrs.modelValue || vmodel;
   },
   mounted() {},
 
@@ -73,8 +73,8 @@ export default {
       this.$emit("change", newVal);
     },
 
-    "$attrs.value": function(n, o) {
-      this.vmodel = this.$attrs.value;
+    "$attrs.modelValue": function(n, o) {
+      this.vmodel = this.$attrs.modelValue;
     }
   }
 };

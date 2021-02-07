@@ -25,15 +25,15 @@
 
         <el-form-item label="房屋户型" prop="bedRoomNum">
           <el-input clearable class="short-ipt" v-model="advancedFormModel.bedRoomNum">
-            <template slot="append">室</template>
+            <template #append>室</template>
           </el-input>
 
           <el-input class="short-ipt" v-model="advancedFormModel.livingRoomNum">
-            <template slot="append">厅</template>
+            <template #append>厅</template>
           </el-input>
 
           <el-input class="short-ipt" v-model="advancedFormModel.toiletNum">
-            <template slot="append">卫</template>
+            <template #append>卫</template>
           </el-input>
 
           <el-input
@@ -41,31 +41,29 @@
             class="short-ipt"
             v-model="advancedFormModel.totalArea"
           >
-            <template slot="append">平米</template>
+            <template #append>平米</template>
           </el-input>
         </el-form-item>
         <el-form-item label="楼层" prop="houseFloor">
           <el-input class="short-ipt" v-model="advancedFormModel.houseFloor">
-            <template slot="prepend">第</template>
-            <template slot="append">层</template>
+            <template #prepend>第</template>
+            <template #append>层</template>
           </el-input>
 
           <el-input class="short-ipt" v-model="advancedFormModel.totalFloor">
-            <template slot="prepend">共</template>
-            <template slot="append">层</template>
+            <template #prepend>共</template>
+            <template #append>层</template>
           </el-input>
         </el-form-item>
 
         <el-form-item v-if="advancedFormModel.rentType == 2" label="出租间" prop="delivery">
           <el-input class="short-ipt" v-model="advancedFormModel.rentRoomArea">
-            <template slot="append">平米</template>
+            <template #append>平米</template>
           </el-input>
           <el-select v-model="advancedFormModel.rentRoomArea" placeholder="请选择卧室类型">
-            <el-option
-              v-for="item in bedroomTypeOptions"
-              :key="item.value"
-              :value="item.value"
-            >{{item.label}}</el-option>
+            <el-option v-for="item in bedroomTypeOptions" :key="item.value" :value="item.value">
+              {{ item.label }}
+            </el-option>
           </el-select>
 
           <el-select v-model="advancedFormModel.faceToType" placeholder="请选择卧室朝向">
@@ -80,11 +78,9 @@
 
         <el-form-item label="房屋标签">
           <el-checkbox-group v-model="advancedFormModel.featureTag">
-            <el-checkbox
-              v-for="item in houseFeatureOptions"
-              :key="item.value"
-              :label="item.value"
-            >{{item.label}}</el-checkbox>
+            <el-checkbox v-for="item in houseFeatureOptions" :key="item.value" :label="item.value">
+              {{ item.label }}
+            </el-checkbox>
           </el-checkbox-group>
         </el-form-item>
         <el-form-item label="房屋配置" prop="houseAllocations">
@@ -111,7 +107,7 @@
 
         <el-form-item label="租金" prop="monthRent">
           <el-input class="short-ipt" v-model="advancedFormModel.monthRent">
-            <template slot="append">元/月</template>
+            <template #append>元/月</template>
           </el-input>
         </el-form-item>
 
@@ -138,7 +134,11 @@
         </el-form-item>
 
         <el-form-item label="详细地址">
-          <el-input placeholder="请填写详细地址" style="width: 500px;" v-model="advancedFormModel.address"></el-input>
+          <el-input
+            placeholder="请填写详细地址"
+            style="width: 500px;"
+            v-model="advancedFormModel.address"
+          ></el-input>
         </el-form-item>
 
         <el-form-item label="位置标注">
@@ -148,7 +148,7 @@
         <el-form-item label="房间描述">
           <el-input
             type="textarea"
-            :autosize="{ minRows: 3, maxRows: 5}"
+            :autosize="{ minRows: 3, maxRows: 5 }"
             maxlength="200"
             show-word-limit
             placeholder="请输入房屋的情况介绍"
@@ -166,24 +166,22 @@
 
         <el-form-item label="同款房间" prop="totalNum">
           <el-input class="short-ipt" v-model="advancedFormModel.totalNum">
-            <template slot="append">间</template>
+            <template #append>间</template>
           </el-input>
         </el-form-item>
 
         <el-form-item label="不租给" prop="refuseTenants">
           <el-checkbox-group v-model="advancedFormModel.refuseTenants">
-            <el-checkbox
-              v-for="item in refuseTenantOptions"
-              :key="item.value"
-              :label="item.value"
-            >{{item.label}}</el-checkbox>
+            <el-checkbox v-for="item in refuseTenantOptions" :key="item.value" :label="item.value">
+              {{ item.label }}
+            </el-checkbox>
           </el-checkbox-group>
         </el-form-item>
 
         <el-form-item label="房屋照片" prop="totalNum">
           <el-upload action="#" list-type="picture-card" :auto-upload="false">
-            <i slot="default" class="iconfont icon-upload-picture"></i>
-            <div slot="file" slot-scope="{file}">
+            <i class="iconfont icon-upload-picture"></i>
+            <template #file="{file}">
               <img class="el-upload-list__item-thumbnail" :src="file.url" alt />
               <span class="el-upload-list__item-actions">
                 <span class="el-upload-list__item-preview" @click="previewPicture(file)">
@@ -197,19 +195,25 @@
                   <i class="el-icon-delete"></i>
                 </span>
               </span>
-            </div>
+            </template>
           </el-upload>
 
-          <el-dialog :visible.sync="previewPictureVisible">
+          <el-dialog v-model="previewPictureVisible">
             <img width="100%" :src="previewPictureUrl" alt />
           </el-dialog>
         </el-form-item>
 
         <el-form-item>
           <el-button type="primary" @click="submitForm('advancedForm')">立即发布</el-button>
-          <el-button @click="() => {
-            $refs.advancedForm.resetFields();
-          }">取消</el-button>
+          <el-button
+            @click="
+              () => {
+                $refs.advancedForm.resetFields();
+              }
+            "
+          >
+            取消
+          </el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -217,8 +221,8 @@
 </template>
 
 <script>
-import CitySelect from "@/components/CitySelect";
-import BaiduMap from "@/components/BaiduMap";
+import CitySelect from '@/components/CitySelect';
+import BaiduMap from '@/components/BaiduMap';
 import {
   bedroomTypeOptions,
   bedroomFaceOptions,
@@ -226,13 +230,13 @@ import {
   houseFeatureOptions,
   houseServiceOptions,
   refuseTenantOptions,
-  submitForm
-} from "@/models/common";
+  submitForm,
+} from '@/models/common';
 
 export default {
   components: {
     CitySelect,
-    BaiduMap
+    BaiduMap,
   },
   data() {
     return {
@@ -240,23 +244,23 @@ export default {
         // 出租方式
         rentType: 1,
         // 室
-        bedRoomNum: "",
+        bedRoomNum: '',
         // 厅
-        livingRoomNum: "",
+        livingRoomNum: '',
         // 卫
-        toiletNum: "",
+        toiletNum: '',
         // 房屋面积
-        totalArea: "",
+        totalArea: '',
         // 卧室面积
-        rentRoomArea: "",
+        rentRoomArea: '',
         // 卧室类型
-        bedRoomType: "",
+        bedRoomType: '',
         // 卧室朝向
-        faceToType: "",
+        faceToType: '',
         // 楼层
-        houseFloor: "",
+        houseFloor: '',
         // 总楼层
-        totalFloor: "",
+        totalFloor: '',
         // 房屋标签
         featureTag: [],
         // 房屋配置
@@ -264,44 +268,40 @@ export default {
         // 配套服务
         houseServices: [],
         // 月租金
-        monthRent: "",
+        monthRent: '',
         // 起租日期
         rentStartDate: false,
         // 所属城市
         cityCode: [],
         // 小区名称
-        districtName: "",
+        districtName: '',
         // 房屋坐标
         coords: {},
         // 房屋描述
-        aroundDesc: "",
+        aroundDesc: '',
         // 房管员
-        agent: "",
+        agent: '',
         // 同款房间
-        totalNum: "",
+        totalNum: '',
         // 哪些租客不租
-        refuseTenants: []
+        refuseTenants: [],
       },
       advancedFormRules: {
         name: [
-          { required: true, message: "请输入活动名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: '请输入活动名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
         ],
-        bedRoomNum: [
-          { required: true, message: "请填房屋卧室数量", trigger: "blur" }
-        ],
-        houseFloor: [
-          { required: true, message: "请填写房屋所在楼层", trigger: "blur" }
-        ],
+        bedRoomNum: [{ required: true, message: '请填房屋卧室数量', trigger: 'blur' }],
+        houseFloor: [{ required: true, message: '请填写房屋所在楼层', trigger: 'blur' }],
 
         houseAllocations: [
           {
-            type: "array",
+            type: 'array',
             required: true,
-            message: "请至少选择一个房屋配置",
-            trigger: "change"
-          }
-        ]
+            message: '请至少选择一个房屋配置',
+            trigger: 'change',
+          },
+        ],
       },
       // 卧室类型
       bedroomTypeOptions,
@@ -318,15 +318,14 @@ export default {
 
       // 上传图片
       previewPictureVisible: false,
-      previewPictureUrl: ""
+      previewPictureUrl: '',
     };
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          submitForm(this.advancedFormModel).then(res => {
-          });
+          submitForm(this.advancedFormModel).then(res => {});
         } else {
           return false;
         }
@@ -342,8 +341,8 @@ export default {
     // 删除上传图片
     removePicture(file) {
       //
-    }
-  }
+    },
+  },
 };
 </script>
 

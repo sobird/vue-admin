@@ -45,7 +45,7 @@ export default {
   methods: {
     tabClick(tab) {
       this.$router.push({
-        name: tab.name,
+        name: tab.paneName,
       });
     },
   },

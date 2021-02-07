@@ -5,45 +5,42 @@
 -->
 
 <template>
-  <div class="browser">
-    <el-drawer :visible.sync="browser.visible" size="80%">
-      <template slot="title">
-        <div class="address-bar">
-          <el-input
-            ref="address"
-            :value="address"
-            placeholder="请输入内容"
-            @focus="addressbarFocus"
-          ></el-input>
-        </div>
-      </template>
+  <teleport to="body">
+    <div class="browser">
+      <el-drawer v-model="browser.visible" size="80%">
+        <template #title>
+          <div class="address-bar">
+            <el-input
+              ref="address"
+              :value="address"
+              placeholder="请输入内容"
+              @focus="addressbarFocus"
+            ></el-input>
+          </div>
+        </template>
 
-      <div v-loading="loading" class="iframe-wrapper">
-        <iframe
-          ref="browser"
-          data-v-e3143afe=""
-          :src="browser.url"
-          @load="onload"
-        ></iframe>
-      </div>
-    </el-drawer>
-  </div>
+        <div v-loading="loading" class="iframe-wrapper">
+          <iframe ref="browser" data-v-e3143afe="" :src="browser.url" @load="onload"></iframe>
+        </div>
+      </el-drawer>
+    </div>
+  </teleport>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
       visible: false,
       loading: true,
-      address: ''
+      address: '',
     };
   },
 
   computed: {
-    ...mapGetters(["browser"])
+    ...mapGetters(['browser']),
   },
 
   mounted() {
@@ -67,16 +64,16 @@ export default {
         // todo 跨域报错
         console.log(e);
       }
-    }
+    },
   },
 
   watch: {
-    "browser.url": function(n, o) {
-      if(n !== o) {
+    'browser.url': function(n, o) {
+      if (n !== o) {
         this.address = n;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

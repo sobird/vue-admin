@@ -1,29 +1,42 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+/**
+ * @see https://next.router.vuejs.org/guide/migration/index.html
+ * 
+ * sobird<i@sobird.me> at 2020/11/18 11:33:00 created.
+ */
 
-Vue.use(Router);
+import { createRouter, createWebHashHistory} from 'vue-router';
 
+// 带有侧边栏导航的入口组件
 import EntryWithAside from '@/components/Layout/EntryWithAside';
 import NavMenuRouter from './NavMenuRouter';
 
-const router = new Router({
+const router = createRouter({
   routes: [
+    // default root route
     {
       path: '/',
-      name: 'home',
+      name: 'Layout',
       component: EntryWithAside,
-      children: [
-        {
-          path: '',
-          component: () => import('@/views/Home.vue'),
-        },
-      ],
+      children: NavMenuRouter,
+      meta: {
+        title: '首页'
+      }
     },
-    ...NavMenuRouter,
+
+    // CURD表格设计
+  {
+    path: '/design/curd',
+    name: 'design-curd',
+    component: () => import('@/views/designer/curdDesign'),
+    meta: {
+      title: 'CURD表格设计',
+      icon: 'design',
+    }
+  },
 
     // 404错误页
     {
-      path: '*',
+      path: '/:catchAll(.*)',
       meta: {
         //title: 'Not Found'
       },
@@ -40,6 +53,14 @@ const router = new Router({
       ],
     },
   ],
+  history: createWebHashHistory(),
+  /**
+   * 滚动行为
+   * 
+   * @param {Route} to 
+   * @param {Route} from 
+   * @param {Object} savedPosition 
+   */
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
@@ -49,19 +70,27 @@ const router = new Router({
   },
 });
 
+/**
+ * 全局前置守卫
+ * 当一个导航触发时，全局前置守卫按照创建顺序调用。守卫是异步解析执行，此时导航在所有守卫 resolve 完之前一直处于 等待中
+ * 
+ * @params {Route} to 即将要进入的目标 路由对象
+ * @params {Route} from 当前导航正要离开的路由
+ * @params {Function} next 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
+ */
 router.beforeEach((to, from, next) => {
   next();
 });
 
-const originalPush = Router.prototype.push;
-Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err => err);
-};
+// const originalPush = Router.prototype.push;
+// Router.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err);
+// };
 
 // 方便操作router query
-Vue.prototype.$query = function(query) {
-  this.$router.push({ query: Object.assign({}, this.$route.query, query) });
-  return this.$route.query;
-};
+// Vue.prototype.$query = function(query) {
+//   this.$router.push({ query: Object.assign({}, this.$route.query, query) });
+//   return this.$route.query;
+// };
 
 export default router;

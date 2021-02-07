@@ -5,19 +5,21 @@
 -->
 
 <template>
-  <el-popover placement="bottom-start" popper-class="popper-env" width="100" trigger="hover">
+  <el-popover placement="bottom-start" popper-class="popper-env" :width="100" trigger="hover">
     <ul>
       <li v-for="(item, index) in envs" :key="index">
-        <a :href="item.url + '#' + $route.fullPath">{{item.label}}/{{item.value}}</a>
+        <a :href="item.url + '#' + $route.fullPath">{{ item.label }}/{{ item.value }}</a>
       </li>
     </ul>
-    <div class="environment" slot="reference">
-      <div class="env-tag" :class="env.value">
-        <span class="env-tag-cn">{{env.label}}</span>
-        <span class="env-tag-en">{{env.value}}</span>
+    <template #reference>
+      <div class="environment">
+        <div class="env-tag" :class="env.value">
+          <span class="env-tag-cn">{{ env.label }}</span>
+          <span class="env-tag-en">{{ env.value }}</span>
+        </div>
+        <i class="el-icon-arrow-down el-icon--right"></i>
       </div>
-      <i class="el-icon-arrow-down el-icon--right"></i>
-    </div>
+    </template>
   </el-popover>
 </template>
 

@@ -23,7 +23,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    value: {
+    modelValue: {
       type: String,
     }
   },
@@ -34,7 +34,8 @@ export default {
 
   methods: {
     async initMonacoEditor() {
-      const { value: content } = this;
+      const { modelValue: content } = this;
+
       const defaultOptions = {
         language: 'javascript',
         autoIndent: true,
@@ -57,22 +58,19 @@ export default {
       options.value = content;
 
       await this.$nextTick();
-
       let monacoEditor = monaco.editor.create(this.$refs.monaco, options);
-
       monacoEditor.onDidChangeModelContent(event => {
         let value = monacoEditor.getValue();
 
-        this.$emit('input', value);
+        this.$emit('update:modelValue', value);
         this.$emit('change', value);
       });
-
       this.monacoEditor = monacoEditor;
     },
   },
 
   watch: {
-    value(n, o) {
+    modelValue(n, o) {
       this.monacoEditor && n != o && this.monacoEditor.setValue(n);
     }
   }

@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import capitalize from "lodash/capitalize";
 
 export default {
@@ -28,27 +29,30 @@ export default {
         return;
       }
       type = capitalize(type);
+      let component = null;
 
       switch (type) {
         case "Object":
-          this.component = () => import("./" + type + ".vue");
+          component = () => import("./" + type + ".vue");
           break;
         case "Array":
-          this.component = () => import("./" + type + ".vue");
+          component = () => import("./" + type + ".vue");
           break;
         case "Select":
-          this.component = () => import("./" + type + ".vue");
+          component = () => import("./" + type + ".vue");
           break;
         case "Radio":
-          this.component = () => import("./" + type + ".vue");
+          component = () => import("./" + type + ".vue");
           break;
         default:
-          this.component = () => import("./Text.vue");
+          component = () => import("./Text.vue");
       }
+
+      this.component = defineAsyncComponent(component);
     },
 
     change(value) {
-      this.$emit("input", value);
+      this.$emit("update:modelValue", value);
     }
   },
 
