@@ -86,7 +86,7 @@
             修改
           </el-button>
 
-          <el-button @click="projectDelete(scope.row.id)" type="text">
+          <el-button @click="designPage(scope.row.id)" type="text">
             <i class="iconfont icon-design"></i>
             设计
           </el-button>
@@ -191,6 +191,12 @@ export default {
     appChange(appDomain) {
       this.$query({ appDomain });
     },
+
+    designPage(pageId) {
+      this.$router.push({
+        name: 'curdTable',
+      });
+    }
   },
 
   watch: {

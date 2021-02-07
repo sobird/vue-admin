@@ -70,7 +70,7 @@ export default {
   },
 
   watch: {
-    value(n, o) {
+    modelValue(n, o) {
       this.monacoEditor && n != o && this.monacoEditor.setValue(n);
     }
   }
