@@ -16,14 +16,19 @@
       <h3>Transition</h3>
       <draggable
         class="list-group"
-        tag="ul"
+        tag="transition-group"
+        :component-data="{
+          tag: 'ul',
+          type: 'transition-group',
+          name: !drag ? 'flip-list' : null,
+        }"
         v-model="list"
         v-bind="dragOptions"
         @start="drag = true"
         @end="drag = false"
       >
-        <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-          <li class="list-group-item" v-for="element in list" :key="element.order">
+        <template #item="{ element }">
+          <li class="list-group-item" :key="element.order">
             <i
               :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
               @click="element.fixed = !element.fixed"
@@ -31,7 +36,7 @@
             ></i>
             {{ element.name }}
           </li>
-        </transition-group>
+        </template>
       </draggable>
     </el-col>
 

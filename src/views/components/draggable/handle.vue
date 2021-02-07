@@ -13,16 +13,18 @@
     <el-col :span="8">
       <h3>Draggable {{ draggingInfo }}</h3>
 
-      <draggable tag="ul" :list="list" class="list-group" handle=".handle">
-        <li class="list-group-item" v-for="(element, idx) in list" :key="element.name">
-          <i class="iconfont icon-bars handle"></i>
+      <draggable tag="ul" :list="list" class="list-group" handle=".handle" item-key="name">
+        <template #item="{ element }">
+          <li class="list-group-item" :key="element.name">
+            <i class="iconfont icon-bars handle"></i>
 
-          <span class="text">{{ element.name }}</span>
+            <span class="text">{{ element.name }}</span>
 
-          <input type="text" class="form-control" v-model="element.text" />
+            <input type="text" class="form-control" v-model="element.text" />
 
-          <i class="el-icon-close close" @click="removeAt(idx)"></i>
-        </li>
+            <i class="el-icon-close close" @click="removeAt(idx)"></i>
+          </li>
+        </template>
       </draggable>
     </el-col>
 

@@ -9,18 +9,22 @@
     <el-col :span="6">
       <h3>Draggable 1</h3>
       <draggable class="list-group" :list="list1" group="people" @change="log">
-        <div class="list-group-item" v-for="(element, index) in list1" :key="element.name">
+        <template #item="{ element, index }">
+        <div class="list-group-item" :key="element.name">
           {{ element.name }} {{ index }}
         </div>
+        </template>
       </draggable>
     </el-col>
 
     <el-col :span="6">
       <h3>Draggable 2</h3>
       <draggable class="list-group" :list="list2" group="people" @change="log">
-        <div class="list-group-item" v-for="(element, index) in list2" :key="element.name">
+        <template #item="{ element, index }">
+        <div class="list-group-item" :key="element.name">
           {{ element.name }} {{ index }}
         </div>
+        </template>
       </draggable>
     </el-col>
 

@@ -14,22 +14,26 @@
         :list="list1"
         :group="{ name: 'people', pull: 'clone', put: false }"
         @change="log"
+        item-key="name"
       >
-        <div class="list-group-item" v-for="element in list1" :key="element.name">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item" :key="element.name">
+            {{ element.name }}
+          </div>
+        </template>
       </draggable>
     </el-col>
 
     <el-col :span="6">
       <h3>Draggable 2</h3>
       <draggable class="dragArea list-group" :list="list2" group="people" @change="log">
-        <div class="list-group-item" v-for="element in list2" :key="element.name">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item" :key="element.name">
+            {{ element.name }}
+          </div>
+        </template>
       </draggable>
     </el-col>
-
     <el-col :span="6">
       <MonacoEditor v-model="listText1" style="height: 400px;" />
     </el-col>

@@ -14,10 +14,13 @@
         :group="{ name: 'people', pull: 'clone', put: false }"
         :clone="cloneDog"
         @change="log"
+        item-key="id"
       >
-        <div class="list-group-item" v-for="element in list1" :key="element.id">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item" :key="element.id">
+            {{ element.name }}
+          </div>
+        </template>
       </draggable>
     </el-col>
 
@@ -28,10 +31,13 @@
         :list="list2"
         group="people"
         @change="log"
+        item-key="id"
       >
-        <div class="list-group-item" v-for="element in list2" :key="element.id">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item" :key="element.id">
+            {{ element.name }}
+          </div>
+        </template>
       </draggable>
     </el-col>
 
@@ -46,28 +52,28 @@
 </template>
 
 <script>
-import draggable from "vuedraggable";
+import draggable from 'vuedraggable';
 let idGlobal = 8;
 export default {
-  name: "custom-clone",
-  display: "Custom Clone",
+  name: 'custom-clone',
+  display: 'Custom Clone',
   order: 3,
   components: {
-    draggable
+    draggable,
   },
   data() {
     return {
       list1: [
-        { name: "dog 1", id: 1 },
-        { name: "dog 2", id: 2 },
-        { name: "dog 3", id: 3 },
-        { name: "dog 4", id: 4 }
+        { name: 'dog 1', id: 1 },
+        { name: 'dog 2', id: 2 },
+        { name: 'dog 3', id: 3 },
+        { name: 'dog 4', id: 4 },
       ],
       list2: [
-        { name: "cat 5", id: 5 },
-        { name: "cat 6", id: 6 },
-        { name: "cat 7", id: 7 }
-      ]
+        { name: 'cat 5', id: 5 },
+        { name: 'cat 6', id: 6 },
+        { name: 'cat 7', id: 7 },
+      ],
     };
   },
   computed: {
@@ -91,10 +97,10 @@ export default {
     cloneDog({ id }) {
       return {
         id: idGlobal++,
-        name: `cat ${id}`
+        name: `cat ${id}`,
       };
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped></style>

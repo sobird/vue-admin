@@ -15,20 +15,20 @@
         draggable=".item"
         @start="dragging = true"
         @end="dragging = false"
+        item-key="name"
       >
-        <div class="list-group-item item" v-for="element in list" :key="element.name">
-          {{ element.name }}
-        </div>
+        <template #item="{ element }">
+          <div class="list-group-item item" :key="element.name">
+            {{ element.name }}
+          </div>
+        </template>
 
-        <div
-          slot="header"
-          class="btn-group list-group-item"
-          role="group"
-          aria-label="Basic example"
-        >
-          <el-button type="primary" @click="add">Add</el-button>
-          <el-button @click="replace">Replace</el-button>
-        </div>
+        <template #header>
+          <div class="btn-group list-group-item" role="group" aria-label="Basic example">
+            <el-button type="primary" @click="add">Add</el-button>
+            <el-button @click="replace">Replace</el-button>
+          </div>
+        </template>
       </draggable>
     </el-col>
 
