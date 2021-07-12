@@ -333,6 +333,15 @@ export default [
         ],
       },
       {
+        path: 'hot-spots',
+        name: 'hotSpots',
+        component: () => import('@/views/components/HotSpots'),
+        meta: {
+          title: '热区组件',
+          icon: 'hot-spots',
+        },
+      },
+      {
         path: 'openWindow',
         name: 'openWindow',
         component: () => import('@/views/components/openWindow'),

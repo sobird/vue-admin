@@ -7,7 +7,7 @@
 <template>
   <div>
     <layout-view-header>
-      打开新窗口，既可以通过window.open的方式在新标签下打开新窗口，可以通过iframe嵌入的方式，将第三方页面嵌入到当前页面。
+      打开新窗口，既可以通过window.open的方式在新标签下打开新窗口，也可以通过iframe嵌入的方式，将第三方页面嵌入到当前页面。
     </layout-view-header>
 
     <el-button type="primary" @click="openDrawer">抽屉模式打开网页</el-button>

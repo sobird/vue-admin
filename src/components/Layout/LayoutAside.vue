@@ -74,6 +74,9 @@
           <el-menu-item index="/components/draggable/simple">
             拖拽组件
           </el-menu-item>
+          <el-menu-item index="/components/hot-spots">
+            热区组件
+          </el-menu-item>
           <el-menu-item index="/components/openWindow">
             打开新窗口
           </el-menu-item>
