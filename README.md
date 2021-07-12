@@ -8,12 +8,16 @@
 <p align="center">基于Vue3.X的后台管理系统框架</p>
 <p align="center"><a href="https://sobird.github.io/vue-admin/">预览</a></p>
 
-## 快速开始
+## 安装依赖
 ```
-// 安装依赖
 npm i
-
-// 启动项目
-npm start
 ```
 
+## 启动项目
+npm start
+
+## 编译项目
+npm run build
+
+## 发布项目
+npm run release

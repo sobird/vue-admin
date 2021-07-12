@@ -5,6 +5,7 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "release": "sh release.sh",
     "lint": "vue-cli-service lint",
     "local": "vue-cli-service build --mode development"
   },
